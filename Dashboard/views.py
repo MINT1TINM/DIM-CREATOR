@@ -172,7 +172,7 @@ def shelf(request):
             if request.POST.get('delete_id'):
                 delete_id = request.POST["delete_id"]
                 ware = Warehouse.objects.get(workid = delete_id)
-                shutil.rmtree(r'/media/Warehouse/%s'%delete_id)
+                shutil.rmtree(r'./media/Warehouse/%s'%delete_id)
                 ware.delete()
             return HttpResponseRedirect('../Dashboard/shelf.html')
         else:
