@@ -1,0 +1,50 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav.html' %}
+
+<link href="../static/front/css/shortcodes/login.css" rel="stylesheet">
+
+<section class="section-padding banner-wrapper login-alt banner-8 fullscreen-banner">
+    <div class="container">
+
+        <div class="login-wrapper">
+          <div class="card-wrapper"></div>
+          <div class="card-wrapper">
+            <h1 class="title">登录</h1>
+            <form role="form" method="post" action="/User/login.html">
+                {% csrf_token %}
+              <div class="input-container">
+                <input type="text" id="username" name="username" required="required" class="form-control" autocomplete="off" />
+                <label for="username">用户名</label>
+                <div class="bar"></div>
+              </div>
+              <div class="input-container">
+                <input type="password" id="password" name="password" required="required" class="form-control" autocomplete="off" />
+                <label for="password">密码</label>
+                <div class="bar"></div>
+              </div>
+              <div class="button-container">
+                <button type="submit" class="btn btn-lg btn-block waves-effect waves-light">登录</button>
+              </div>
+              <div class="footer"><a href="#">忘记密码？</a></div>
+            </form>
+          </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- Javascript Libraries -->
+
+<!-- jQuery -->
+
+{% endblock %}

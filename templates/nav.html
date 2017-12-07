@@ -1,0 +1,63 @@
+<!--
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                <span class="sr-only">菜单导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button> 
+            <a class="navbar-brand" href="#"><span>面向智慧商圈的多源数据采集与综合分析系统</span></a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ request.session.username }}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+
+                        <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> 注销登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+-->
+
+        <header id="header">
+            <div class="logo">
+                        <a href="/Dashboard/index.html" class="hidden-xs">
+                            <h1>{{request.session.username}} 的</h1>
+                            <small>小黑屋</small>
+                        </a>
+                        <i class="logo__trigger zmdi zmdi-menu" data-mae-action="block-open" data-mae-target="#navigation"></i>
+            </div>
+            <ul class="top-menu">
+                <li class="top-menu__trigger hidden-lg hidden-md">
+                    <a href=""><i class="zmdi zmdi-search"></i></a>
+                </li>
+
+                <li class="top-menu__profile dropdown">
+                    <a data-toggle="dropdown" href="">
+                        <img src="../media/User/{{ request.session.id }}/head.jpg" alt="">
+                    </a>
+
+                    <ul class="dropdown-menu pull-right dropdown-menu--icon">
+
+                        <li>
+                            <a href="/User/profile.html"><i class="zmdi zmdi-account-box"></i>{{request.session.username}}</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/"><i class="zmdi zmdi-time-restore"></i>注销</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="top-search">
+                <input type="text" class="top-search__input" placeholder="在仓库中搜索已有项">
+                <i class="zmdi zmdi-search top-search__reset"></i>
+            </form>
+        </header>

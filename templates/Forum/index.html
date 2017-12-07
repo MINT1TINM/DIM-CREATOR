@@ -1,0 +1,100 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav.html' %}
+        <!--page title start-->
+        <section class="page-title page-title-center cover-2 padding-top-220 padding-bottom-120 overlay purple-5 fixed-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="white-text font-40 text-bold">创意者们的社区</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--page title end-->
+    
+
+
+        <!-- blog section start -->
+        <section class="blog-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                      <div class="posts-content default-blog">
+
+                        <article class="post-wrapper">
+
+                          <div class="thumb-wrapper">
+                            <img src="../static/front/img/blog/blog-1.jpg" class="img-responsive" alt="" >
+
+                            <div class="entry-header">
+                              <span class="posted-in">
+                                <a href="#">Technology</a>
+                              </span>
+
+                              <h2 class="entry-title"><a href="#">CTC to showcase technology solutions at Sea Air Space Exposition</a></h2>
+
+                            </div><!-- .entry-header -->
+
+                            <div class="author-thumb waves-effect waves-light">
+                              <a href="#"><img src="../static/front/img/blog/author.jpg" alt=""></a>                
+                            </div>
+
+                            <span class="post-comments-number">
+                              <i class="fa fa-comments"></i><a href="#">25</a>
+                            </span>
+
+                          </div><!-- .post-thumb -->
+
+
+                          <div class="entry-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                          </div><!-- .entry-content -->
+
+                        </article><!-- /.post-wrapper -->
+
+
+
+                        <ul class="pagination post-pagination text-center mt-50">
+                          <li><a href="#." class="waves-effect waves-light"><i class="fa fa-angle-left"></i></a></li>
+                          <li><span class="current waves-effect waves-light">1</span></li>
+                          <li><a href="#." class="waves-effect waves-light">2</a></li>
+                          <li><a href="#." class="waves-effect waves-light"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+
+                      </div><!-- /.posts-content -->
+                    </div><!-- /.col-md-8 -->
+
+                    <div class="col-md-4">
+                      <div class="tt-sidebar-wrapper" role="complementary">
+                          <div class="widget widget_search">
+                            <form role="search" method="get" class="search-form">
+                              <input type="text" class="form-control" value="" name="s" id="s" placeholder="搜索内容">
+                              <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                          </div><!-- /.widget_search -->
+
+                          <a class="waves-effect waves-light btn btn-primary btn-lg btn-block"><i class="fa fa-plus"></i> 发帖</a>
+
+
+
+                          <div class="widget widget_categories" style="margin-top:20px;">
+                            <h3 class="widget-title">分类</h3>   
+                            <ul>
+                              <li><a href="#">更新日志</a></li>
+                            </ul>
+                          </div><!-- /.widget_categories -->
+
+
+        
+                      </div><!-- /.tt-sidebar-wrapper -->
+                    </div><!-- /.col-md-4 -->
+
+                  </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section>
+        <!-- blog section end -->
+
+
+{% endblock %}

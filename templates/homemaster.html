@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
+        
+        <!-- Material Icons CSS -->
+        <link href="../static/front/fonts/iconfont/material-icons.css" rel="stylesheet">
+        <!-- FontAwesome CSS -->
+        <link href="../static/front/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- magnific-popup -->
+        <link href="../static/front/magnific-popup/magnific-popup.css" rel="stylesheet">
+        <!-- materialize -->
+        <link href="../static/front/materialize/css/materialize.min.css" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="../static/front/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- shortcodes -->
+        <link href="../static/front/css/shortcodes/shortcodes.css" rel="stylesheet">
+        <!-- Main Style CSS -->
+        <link href="../static/front/css/style.css" rel="stylesheet">
+        <!-- Creative CSS -->
+        <link href="../static/front/css/skins/creative.css" rel="stylesheet">
+        <script src="../static/front/js/jquery-2.1.3.min.js"></script>
+        
+
+    <title>{% block title %}DIM CREATOR{% endblock %}</title>
+</head>
+<body id="top" >
+
+
+
+    {% block content %}
+        <div>这里是默认内容，所有继承自这个模板的，如果不覆盖就显示这里的默认内容。</div>
+    {% endblock %}
+
+
+    <footer class="footer footer-one">
+            
+        <div class="secondary-footer brand-bg darken-2">
+            <div class="container">
+                <a href="#top" class="page-scroll btn-floating btn-large pink back-top waves-effect waves-light" data-section="#top" style="margin-right:20px;">
+                    <i class="material-icons">&#xE316;</i>
+                </a>
+                <span class="copy-text">                    
+                    Copyright &copy; {% now "Y" %} DIM CREATOR                    
+                </span>
+            </div><!-- /.container -->
+        </div><!-- /.secondary-footer -->
+    </footer>
+                    <!-- Preloader -->
+        <div id="preloader">
+                <div class="preloader-position"> 
+                  <img src="../static/front/img/logo-colored.png" alt="logo" >
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Preloader -->  
+      
+        <script src="../static/front/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../static/front/materialize/js/materialize.min.js"></script>
+        <script src="../static/front/js/jquery.easing.min.js"></script>
+        <script src="../static/front/js/jquery.inview.min.js"></script>
+        <script src="../static/front/js/menuzord.js"></script>
+        <script src="../static/front/js/equalheight.js"></script>
+        <script src="../static/front/js/imagesloaded.js"></script>
+        <script src="../static/front/js/jquery.stellar.min.js"></script>
+        <script src="../static/front/js/jquery.countTo.min.js"></script>
+        <script src="../static/front/js/jquery.shuffle.min.js"></script>
+        <script src="../static/front/js/masonry.pkgd.min.js"></script>
+        <script src="../static/front/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/front/js/scripts.js"></script>
+</body>
+</html>

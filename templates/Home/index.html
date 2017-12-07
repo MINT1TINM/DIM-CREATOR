@@ -1,0 +1,188 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav.html' %}
+
+        <!--page title start-->
+        <section class="page-title page-title-center cover-2 padding-top-220 padding-bottom-120 overlay purple-5 fixed-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text font-40 text-bold">维度 · 创意者</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--page title end-->
+
+        <section class="section-padding">
+          <div class="container">
+
+            <div class="text-center mb-80">
+                <h2 class="section-title text-uppercase">创造&查看3D内容，无论你在何处</h2>
+            </div>
+
+            <div class="row no-gutter">
+                <div class="col-md-3 col-sm-6">
+                    <div class="featured-box border-right text-center hover brand-hover">
+                      <div class="featured-wrapper">
+                        <div class="intro-header">
+                            <i class="material-icons brand-icon">&#xE53B;</i>
+                            <h2>跨平台</h2>
+                        </div>
+
+                        <div class="content">
+                          <p>支持一切移动设备或台式电脑在线查看、编辑</p>
+                        </div>
+                      </div><!-- /.featured-wrapper -->
+                    </div><!-- /.featured-box  -->
+                </div><!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="featured-box border-right text-center hover brand-hover">
+                      <div class="featured-wrapper">
+                        <div class="intro-header">
+                            <i class="material-icons brand-icon">&#xE2C3;</i>
+                            <h2>一步上传</h2>
+                        </div>
+
+                        <div class="content">
+                          <p>一键即可上传模型文件，DIM CREATOR将会自动读取与渲染。</p>
+                        </div>
+                      </div><!-- /.featured-wrapper -->
+                    </div><!-- /.featured-box  -->
+                </div><!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="featured-box border-right text-center hover brand-hover">
+                      <div class="featured-wrapper">
+                        <div class="intro-header">
+                            <i class="material-icons brand-icon">&#xE429;</i>
+                            <h2>自定义</h2>
+                        </div>
+
+                        <div class="content">
+                          <p>内置的编辑器使你能够在上传模型之后，继续添加材质，灯光。</p>
+                        </div>
+                      </div><!-- /.featured-wrapper -->
+                    </div><!-- /.featured-box  -->
+                </div><!-- /.col-md-3 -->                  
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="featured-box text-center hover brand-hover">
+                      <div class="featured-wrapper">
+                        <div class="intro-header">
+                            <i class="material-icons brand-icon">&#xE80D;</i>
+                            <h2>轻松分享</h2>
+                        </div>
+
+                        <div class="content">
+                          <p>添加至货架的模型将会自动生成一个二维码，扫描即可查看模型。</p>
+                        </div>
+                      </div><!-- /.featured-wrapper -->
+                    </div><!-- /.featured-box  -->
+                </div><!-- /.col-md-3 -->
+
+            </div><!-- /.row -->
+          </div><!-- /.container -->
+      </section>
+
+        <section class="section-padding gray-bg">
+            <div class="container">
+              <div class="text-center mb-80">
+                <h2 class="section-title text-uppercase">最新发布</h2>
+              </div>
+
+
+              <div class="portfolio-container text-center">
+
+                  <div class="portfolio portfolio-with-title col-5 gutter mtb-50">
+
+                    {%  for item in ware %}
+                        <!-- item -->
+                      <div class="portfolio-item"> 
+                        <div class="portfolio-wrapper">
+
+                          <div class="thumb">
+                              <div class="bg-overlay"></div>
+                              <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+
+                              <div class="portfolio-intro">
+                                <div class="action-btn">
+                                    <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                </div>
+                              </div>
+
+                          </div>
+
+                          <div class="portfolio-title">
+                              <h4></a>{{item.title}}</h4>
+                              <p><a href="#">{{item.username.username}}</a> </p>
+                          </div>
+
+                        </div><!-- /.portfolio-wrapper -->
+                      </div><!-- /.portfolio-item -->
+                    <!-- item -->
+                    
+                    {% endfor %}
+
+              </div><!-- portfolio-container -->
+              <div class="load-more-button text-center">
+                <a href="/Home/collection.html" class="waves-effect waves-light btn mt-30"> <i class="fa fa-arrow-right"></i> 更多创意项目</a>
+              </div>
+            </div><!-- /.container -->
+        </section>
+
+        <section class="section-padding list-news">
+          <div class="container">
+
+            <div class="text-center mb-80">
+                <h2 class="section-title text-uppercase">最近新闻</h2>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                  <article class="post-wrapper list-article">
+
+                    <div class="hover-overlay brand-bg"></div>
+
+                    <div class="thumb-wrapper waves-effect waves-block waves-light">
+                      <a href="#"><img src="assets/img/blog/blog-20.jpg" class="img-responsive" alt="" ></a>
+                    </div><!-- .post-thumb -->
+
+                    <div class="blog-content">
+                      <header class="entry-header-wrapper">
+                        <div class="entry-header">
+                          <h2 class="entry-title"><a href="#">Ideas That Moved Us in 2015</a></h2>
+
+                          <div class="entry-meta">
+                              <ul class="list-inline">
+                                  <li>
+                                      <i class="fa fa-user"></i> <a href="#">TrendyTheme</a>
+                                  </li>
+                                  <li>
+                                      <i class="fa fa-clock-o"></i> <a href="#">Jan 15, 2016</a>
+                                  </li>
+                              </ul>
+                          </div><!-- .entry-meta -->
+                        </div><!-- /.entry-header -->
+                      </header><!-- /.entry-header-wrapper -->
+
+                      <div class="entry-content">
+                        <p>Maecenas varius finibus orci vel dignissim. Nam posuere, magna pellentesque accumsan tincidunt, libero lorem convallis lectus</p>
+                      </div><!-- .entry-content -->
+                    </div>
+
+                  </article><!-- /.post-wrapper -->
+              </div><!-- /.col-md-6 -->
+
+
+            </div><!-- /.row -->
+
+          </div><!-- /.container -->
+      </section>
+      <!-- List News End -->
+
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<header class="content__header">
+    <h1>仓库</h1>
+</header>
+<div class="card">
+    
+    <div class="card__header card__header--highlight">
+            <h2>共有 {{count}} 个项目</h2>
+            <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#myModal"><i class="zmdi zmdi-plus"></i></button>
+    </div>
+
+    <div class="card__body">
+
+            <div class="lightbox photos">
+                {%  for item in ware %}
+                <a href="/Dashboard/ware.html?workid={{item.workid}}">
+                <div data-src="../media/Warehouse/{{item.title}}/jpg.jpg" class="col-md-4 col-sm-4 col-xs-6 animated zoomIn">
+                    <div class="lightbox__item p-item">
+                        <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="" />
+                    </div>
+                </div>
+                </a>
+                {%  endfor %} 
+            </div>
+    </div>
+
+</div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <h4 class="modal-title">添加新项目</h4>
+                </div>
+               <!--  <input type="text" id="delete_id" name="delete_id" style="display:none"> -->
+                <div class="modal-body">
+                    <form class="edit-event__form" role="form" method="POST" action="" enctype="multipart/form-data"> 
+                            {% csrf_token %}
+                        
+                        
+                        <h5 class="modal-title">填写项目名称</h5>
+                        <br>
+                        <div class="form-group form-group--light ">
+                            <input type="text" name="title" id="title" class="form-control" placeholder="项目名称">
+                            <i class="form-group__bar"></i>
+                        </div>
+
+                        <h5 class="modal-title">上传模型文件 （.obj 格式）</h5>
+                        <br>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <span class="btn btn-default btn-file">
+                                <span class="fileinput-new">选择文件</span>
+                                <span class="fileinput-exists">修改</span>
+                                <input type="file" name="obj" class="form-control">
+                            </span>
+                            <span class="fileinput-filename"></span>
+                            <a href="#" class="fileinput__close fileinput-exists" data-dismiss="fileinput">
+                                <i class="zmdi zmdi-close-circle"></i>
+                            </a>
+                        </div>
+                    <!--
+                        <h5 class="modal-title">上传材质文件 （.mtl 格式）</h5>
+                        <br>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileinput-new">选择文件</span>
+                                    <span class="fileinput-exists">修改</span>
+                                    <input type="file" name="mtl" id="mtl" class="form-control">
+                                </span>
+                                <span class="fileinput-filename"></span>
+                                <a href="#" class="fileinput__close fileinput-exists" data-dismiss="fileinput">
+                                    <i class="zmdi zmdi-close-circle"></i>
+                                </a>
+                        </div>
+                    -->                        
+                        
+                        <h5 class="modal-title">上传封面 （.jpg 格式）</h5>
+                        <br>                        
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-preview" data-trigger="fileinput" style="line-height: 150px;"></div>
+    
+                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</a>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileinput-new">选择图片</span>
+                                    <span class="fileinput-exists">修改</span>
+                                    <input type="file" name="jpg" id="jpg" class="form-control">
+                                </span>
+                        </div>
+                        <div class="modal-footer" id="modal-footer">
+                            <button id="close" type="button" class="btn btn-link" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-link" name="delete_Button">添加</button>
+                        </div>
+                        
+                    </form>
+
+                 </div>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+
+
+
+
+{% endblock %}

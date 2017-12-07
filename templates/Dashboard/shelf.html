@@ -1,0 +1,125 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<header class="content__header">
+    <h1>货架</h1>
+</header>
+    
+<div class="card">
+        <div class="card__header card__header--highlight">
+                <h2> {{count}} 个项目已上架</h2>
+                
+        </div>
+
+        <div class="card__body">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th data-column-id="title">项目名称</th>
+                        <th data-column-id="commandsa" style="width: 90px">状态</th>
+                        <th data-column-id="commands">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in ware %}
+                    <tr>
+                        <td>{{item.title}}</td>
+
+                        {% ifequal item.status 0 %}
+                            <td><i class="zmdi zmdi-close-circle" style="color:#ef5350"></i> 未上架</td>
+                        {% else %}
+                            <td><i class="zmdi zmdi-check-circle" style="color:#4caf50"></i> 已上架</td>
+                        {% endifequal %}
+
+                        <td>
+                            {% ifequal item.status 0 %}
+                                <a data-toggle="modal" href="#modal-up" class="btn btn-default btn--icon-text"  type="submit" onclick="up_id.value = {{item.workid}}"><i class="zmdi zmdi-upload"></i> 上架</a>
+                            {% else %}
+                                <a data-toggle="modal" href="#modal-down" class="btn btn-default btn--icon-text"  type="submit" onclick="down_id.value = {{item.workid}}"><i class="zmdi zmdi-download"></i> 下架</a>
+                            {% endifequal %}
+                            <a data-toggle="modal" href="#modal-delete" class="btn btn-danger btn--icon-text"  type="submit" onclick="delete_id.value = {{item.workid}}"><i class="zmdi zmdi-close"></i> 删除</a>
+                            
+                        </td>
+                        
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<form class="form-horizontal" role="form" method="POST" action=""> 
+{% csrf_token %}
+    <div class="modal fade" id="modal-up">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="zmdi zmdi-alert-circle" style="color:#ffa000"></i>  确认上架吗？</h4>
+                </div>
+                
+                    <input type="text" id="up_id" name="up_id" style="display:none">
+                            
+                <div class="modal-body">
+                    所有人都将看到你的作品。
+                </div>
+                <div class="modal-footer" style="padding: 0 30px 20px">
+                    <button class="btn btn-link" type="submit">上架</button>
+                    <button  class="btn btn-link" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form-horizontal" role="form" method="POST" action=""> 
+    {% csrf_token %}
+    <div class="modal fade" id="modal-down">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <i class="zmdi zmdi-alert-circle" style="color:#ffa000"></i> 确认下架吗？</h4>
+                </div>
+                
+                <input type="text" id="down_id" name="down_id" style="display:none">
+                          
+
+                <div class="modal-body">
+                    只有你能看见这件作品。
+                </div>
+                <div class="modal-footer" style="padding: 0 30px 20px">
+                    <button type="submit" class="btn btn-link">下架</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form-horizontal" role="form" method="POST" action=""> 
+    {% csrf_token %}
+    <div class="modal fade" id="modal-delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="zmdi zmdi-close-circle" style="color:#ef5350"></i>  确认删除吗？</h4>
+                </div>
+                <input type="text" id="delete_id" name="delete_id" style="display:none">
+                
+                <div class="modal-body">
+                    此操作无法恢复！
+                </div>
+                <div class="modal-footer" style="padding: 0 30px 20px">
+                    <button type="submit" class="btn btn-danger">删除</button>
+                    <button type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+{% endblock %}

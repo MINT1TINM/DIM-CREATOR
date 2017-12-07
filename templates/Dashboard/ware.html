@@ -1,0 +1,86 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<header class="content__header">
+    <h1>{{title}}</h1>
+        
+</header>
+<div class="col-sm-12">
+    <div class="card animated fadeInUpBig">
+        <div class="card__header card__header--highlight">
+                <h2>创建日期： {{opendate}}</h2>
+                <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#"><i class="zmdi zmdi-edit"></i></button>
+                
+        </div>
+        <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{workid}}"></iframe>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card animated fadeInUpBig">
+        <div class="card__header card__header--highlight">
+            <h2>项目名称</h2>
+            
+        </div>
+
+        <div class="card__body">
+                
+            <p>{{title}}</p>
+
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="card animated fadeInUpBig">
+        <div class="card__header card__header--highlight">
+            <h2>项目简介</h2>
+            <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#editDescription" ><i class="zmdi zmdi-edit"></i></button>
+            
+        </div>
+
+        <div class="card__body">
+                {% ifequal description NULL %}
+                        <p>未填写简介（可能导致商品难以被发现）</p>
+                {% else %}                        
+                        <p>{{description}}</p>
+                {% endifequal %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editDescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                    
+            <div class="modal-header">
+                <h4 class="modal-title">项目简介</h4>
+            </div>
+                       <!--  <input type="text" id="delete_id" name="delete_id" style="display:none"> -->
+            <div class="modal-body">
+                <form class="edit-event__form" role="form" method="POST" action="" enctype="multipart/form-data"> 
+                                    {% csrf_token %}                                
+                                
+                    <div class="form-group form-group--light ">
+                        <textarea class="form-control textarea-autosize"  name="description" id="description" style="overflow: hidden; word-wrap: break-word; height: 38px;">{{description}}</textarea>
+                        <i class="form-group__bar"></i>
+                    </div>
+        
+                    <div class="modal-footer" id="modal-footer">
+                        <button id="close" type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-link" name="delete_Button">确定</button>
+                    </div>
+                                
+                </form>
+        
+            </div>
+        
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+        
+    
+{% endblock %}

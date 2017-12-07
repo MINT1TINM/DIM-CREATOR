@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../dataEngine/DataEngine/.idea/DataEngine.iml" filepath="$PROJECT_DIR$/../../dataEngine/DataEngine/.idea/DataEngine.iml" />
+      <module fileurl="file://J:/code/Python20162/.idea/Python20162.iml" filepath="J:/code/Python20162/.idea/Python20162.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DIMCREATOR.iml" filepath="$PROJECT_DIR$/.idea/DIMCREATOR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../XTK/XTK/.idea/XTK.iml" filepath="$PROJECT_DIR$/../../XTK/XTK/.idea/XTK.iml" />
+      <module fileurl="file://J:/code/.idea/code.iml" filepath="J:/code/.idea/code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../piclass/.idea/piclass.iml" filepath="$PROJECT_DIR$/../../piclass/.idea/piclass.iml" />
+      <module fileurl="file://J:/code/京东数据/.idea/京东数据.iml" filepath="J:/code/京东数据/.idea/京东数据.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,207 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav2.html' %}
+
+        <!--page title start-->
+<section class="page-title ptb-50 hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ware.title}}</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="/Home/collection.html"  style="color:grey">陈列</a></li>
+                        <li class="active">详情</li>
+                    </ol>
+                </div>
+        </div>
+    </div>
+</section>
+
+<div class="visible-xs" style="margin-top: 46px">
+    <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 160px) ;border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
+</div>  
+    
+
+<section class="blog-section section-padding" style="padding-top:40px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="posts-content single-post">
+
+                    <article class="post-wrapper">
+
+                      <header class="entry-header-wrapper clearfix">
+
+                        <div class="author-thumb waves-effect waves-light">
+                          <a href="#"><img src="../../media/User/{{ware.username.id}}/head.jpg" alt=""></a>                
+                        </div>
+                        
+                        <div class="entry-header">
+                          <h2 class="entry-title">{{ware.title}}</h2>
+
+                          <div class="entry-meta">
+                              <ul class="list-inline">
+                                  <li>
+                                      <i class="fa fa-user"></i><a href="#">{{ware.username.username}}</a>
+                                      &nbsp;&nbsp;
+                                      <button class="btn btn-primary" style="padding: 1px 7px; height: 30px" > + 关注 </button>
+                                  </li>
+
+                                  <li>
+                                      <i class="fa fa-clock-o"></i><a href="#">{{ware.opendate}}</a>
+                                  </li>
+
+
+                              </ul>
+                          </div><!-- .entry-meta -->
+                          
+                        </div>
+
+                      </header><!-- /.entry-header-wrapper -->
+                      <div class="embed-responsive embed-responsive-4by3 hidden-xs" >
+                            <iframe class="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
+                        </div>  
+                    </br>
+                       {% if ware.description != "NULL" %} 
+                      <div class="entry-content">
+                        <h3>简介</h3>
+                        <p>{{ware.description}}</p>
+                      </div>
+                      {% endif %}
+                      <footer class="entry-footer">
+                            <div class="post-tags">
+                              <span class="tags-links">
+                                <i class="fa fa-tags"></i><a href="#">{{ware.type}}</a>
+                              </span>
+                            </div>
+                        <ul class="list-inline right share-post">
+                            
+                            <li>
+                                <i class="fa fa-eye"></i><span>  {{ware.view}}</span>
+                            </li>
+
+                            <li style="display: none">
+                                <form role="form" method="POST" action="">
+                                        {% csrf_token %}
+                                    <a style="color:#ed145b"><i class="fa fa-heart"></i><span>  {{ware.like}}</span></a>
+                                </form>
+                                
+                            </li>
+
+                            <li>
+                                
+                                <a style="color: #03a9f4"><i class="fa fa-share"></i><span>  {{ware.share}}</span></a>
+                                
+                            </li>
+
+                        </ul>
+                      </footer>
+
+                    </article><!-- /.post-wrapper -->
+
+
+                    <div class="comments-wrapper"  style="margin-top: 100px ">
+                        <h2>{{comment_count}}条评论</h2>
+                            {% if request.session.username %}
+                            <div class="comments-tab">
+                      
+                                <div class="comment-respond">
+                      
+                                    <form action="" method="post" id="commentform" novalidate="" role="form">
+                                        {% csrf_token %}
+                      
+                                        <div class="form-group comment-form-comment">
+                                            <textarea class="form-control" id="comment" name="comment" placeholder="填写评论" rows="8" aria-required="true"></textarea>
+                                        </div>
+                      
+                                        <div class="form-submit">
+                                            <button class="btn btn-lg pink waves-effect waves-light" name="submit" type="submit" id="submit" value="">评论</button>
+                                        </div>
+                                    </form>
+                      
+                                </div>
+                                                  
+                            </div><!-- /.comments-tab -->
+                            {% endif %}
+                            <ul class="media-list comment-list mt-30">
+                                    {% for item in comment %}
+                                      <!-- Comment Item start-->
+                                    <li class="media">
+        
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img class="avatar" src="../../media/User/{{item.username.id}}/head.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="comment-info">
+                                                <h4 class="author-name">{{item.username.username}}</h4>
+        
+                                                <div class="comment-meta">
+                                                    {{item.time}}
+                                                </div>
+                                            </div>
+        
+                                            <p>{{item.content}}</p>
+        
+                                        </div>
+                                    </li>
+                                      <!-- End Comment Item -->
+        
+                                      {% endfor %}
+        
+                            </ul>
+                      
+                      
+                        </div>
+
+
+
+
+
+
+
+
+
+                  </div><!-- /.posts-content -->
+                </div><!-- /.col-md-8 -->
+
+                <div class="col-md-4">
+                  <div class="tt-sidebar-wrapper" role="complementary">
+
+
+
+                      <div class="widget widget_tt_author_widget">
+
+                        <div class="author-info-wrapper">
+
+                            <div class="author-cover">
+                                <img src="../static/front/img/blog/author-large-thumb.jpg" alt="">
+                            </div>
+
+                            <div class="author-avatar">
+                                <img src="../../media/User/{{ware.username.id}}/head.jpg" alt="">
+
+                                <h2>{{ware.username.username}}</h2>
+                                <span>{{ware.username.job}}</span>
+                            </div>
+
+                            <p>{{ware.username.description}}</p>
+
+                        </div> <!-- /author-info-wrapper -->
+                      </div><!-- /.widget_tt_author_widget -->
+
+
+
+    
+                  </div><!-- /.tt-sidebar-wrapper -->
+                </div><!-- /.col-md-4 -->
+
+              </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+
+
+
+{% endblock %}

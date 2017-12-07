@@ -1,0 +1,44 @@
+        <!--header start-->
+        <header id="header" class="tt-nav nav-border-bottom">
+                
+                            <div class="header-sticky light-header">
+                
+                                <div class="container">
+                
+                
+                
+                                    <div id="materialize-menu" class="menuzord">
+                
+                                        <!--logo start-->
+                                        <a href="index.html" class="logo-brand">
+                                            <img class="logo-dark" src="../static/front/img/logo.png" alt=""/>
+                                        </a>
+                                        <!--logo end-->
+                
+                                        <!-- menu start-->
+                                        <ul class="menuzord-menu pull-right ">
+                                            <li><a href="/Home/index.html">主页</a></li>
+                                            <li><a href="/Home/collection.html">陈列</a></li>
+                                            <li><a href="/Home/explore.html">探索</a></li>
+                                            <li><a href="/Forum/index.html">社区</a></li>
+                                            <li><a href="/Home/about.html">关于</a></li>
+                                            
+                                            {% if request.session.username %}
+                                                <li><a href="javascript:void(0)">{{request.session.username}}</a>
+                                                    <ul class="dropdown" style="right: 0px; display: none;">
+                                                        <li><a href="/Dashboard/index.html">小黑屋</a></li>
+                                                        <li><a href="/">注销</a></li>
+                                                    </ul>
+                                                </li>
+                                            {% else %}
+                                                <li><a href="/User/login.html">登录</a></li>
+                                            {% endif %}
+                                        </ul>
+                                        <!-- menu end-->
+                
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        <!--header end-->

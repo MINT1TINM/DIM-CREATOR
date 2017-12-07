@@ -1,0 +1,78 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav.html' %}
+
+        <!--page title start-->
+        <section class="page-title page-title-center cover-2 padding-top-220 padding-bottom-120 overlay purple-5 fixed-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text font-40 text-bold">创意者们的陈列室</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--page title end-->
+
+
+        <section class="section-padding" style="padding-top: 50px">
+            <div class="container">
+
+
+
+              <div class="portfolio-container text-center">
+                <ul class="portfolio-filter brand-filter">
+                    <li class="active waves-effect waves-light" data-group="全部">全部</li>
+                    <li class=" waves-effect waves-light" data-group="家居">家居</li>
+                    <li class=" waves-effect waves-light" data-group="电子">电子</li>
+                    <li class=" waves-effect waves-light" data-group="机械">机械</li>
+                    
+                    
+                </ul>
+                
+                  <div class="portfolio portfolio-with-title col-5 gutter mtb-50">
+
+                    {%  for item in ware %}
+                        <!-- item -->
+                      <div class="portfolio-item" data-groups='["全部", "{{item.type}}"]'> 
+                        <div class="portfolio-wrapper">
+
+                          <div class="thumb">
+                              <div class="bg-overlay"></div>
+                              <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+
+                              <div class="portfolio-intro">
+                                <div class="action-btn">
+                                    <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                </div>
+                              </div>
+
+                          </div>
+
+                          <div class="portfolio-title">
+                            <h4></a>{{item.title}}</h4>
+                            <p><a href="#">{{item.username.username}}</a> </p>
+                            <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
+                          </div>
+
+                        </div><!-- /.portfolio-wrapper -->
+                      </div><!-- /.portfolio-item -->
+                    <!-- item -->
+                    
+                    {% endfor %}
+
+
+
+
+
+
+
+              </div><!-- portfolio-container -->
+
+            </div><!-- /.container -->
+        </section>
+
+
+
+{% endblock %}
