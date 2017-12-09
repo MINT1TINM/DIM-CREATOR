@@ -13,7 +13,9 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DIMCREATOR.settings")
-abspath = os.path.dirname(__file__)
-sys.path.append(abspath)
-os.chdir(abspath)
+
+#abspath = os.path.dirname(__file__)
+#sys.path.append(abspath)
+#os.chdir(abspath)
+
 application = get_wsgi_application()
