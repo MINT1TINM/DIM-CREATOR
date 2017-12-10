@@ -16,9 +16,9 @@
             <div class="lightbox photos">
                 {%  for item in ware %}
                 <a href="/Dashboard/ware.html?workid={{item.workid}}">
-                <div data-src="../media/Warehouse/{{item.title}}/jpg.jpg" class="col-md-4 col-sm-4 col-xs-6 animated zoomIn">
+                <div data-src="../media/Warehouse/{{item.title}}/jpg.jpg" class="col-md-2 col-sm-4 col-xs-6 animated zoomIn">
                     <div class="lightbox__item p-item">
-                        <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="" />
+                        <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="{{item.title}}" />
                     </div>
                 </div>
                 </a>

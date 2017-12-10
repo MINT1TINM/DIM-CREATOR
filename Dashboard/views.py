@@ -4,22 +4,38 @@ import json
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from models import *
+from Home.models import *
 from DIMCREATOR.public_function import *
 import collections
 import datetime
 import os
 import shutil
+from django.core.paginator import Paginator
+
 import qrcode  #二维码模块 pip install qrcode
 from PIL import Image  #图像处理 pip install pillow
 Image.LOAD_TRUNCATED_IMAGES = True
 
 def index(request):
-    date = datetime.datetime.now()
-    date1 = date + datetime.timedelta(days=-1)
-    date2 = date + datetime.timedelta(days=-8)
-    now = str(date1.year) + '/' + str(date1.month) + '/' + str(date1.day)
-    past = str(date2.year) + '/' + str(date2.month) + '/' + str(date2.day)
-    return render(request, "Dashboard/index.html",{"now":now, "past":past})
+    if "username" not in request.session:            
+        return render(request, 'User/login.html')
+    else:   
+        date = datetime.datetime.now()
+        date1 = date + datetime.timedelta(days=-1)
+        date2 = date + datetime.timedelta(days=-8)
+        now = str(date1.year) + '/' + str(date1.month) + '/' + str(date1.day)
+        past = str(date2.year) + '/' + str(date2.month) + '/' + str(date2.day)
+
+        viewcal = View_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
+        likecal = Like_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
+        sharecal = Share_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
+
+        ware = Warehouse.objects.filter( username = request.session["username"] , status=1 ).order_by('view') 
+        paginator=Paginator(ware, 5) 
+        page = request.GET.get('page','1')
+        most_view_ware = paginator.page(page)
+
+        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal, "most_view_ware":most_view_ware})
 
 def warehouse(request):
 

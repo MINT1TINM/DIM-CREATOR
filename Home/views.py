@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerEr
 
 from Dashboard.models import Warehouse
 from User.models import User
-from Home.models import Comment
+from models import *
 
 from DIMCREATOR.public_function import *
 import collections
@@ -29,16 +29,27 @@ def collection(request):
 def collectionsingle(request):
     workid = request.GET["workid"]
     ware = Warehouse.objects.get(workid=workid)
-    comment = Comment.objects.filter( workid = workid ).order_by('-id')
+    comment = Comment_Product.objects.filter( workid = workid ).order_by('-id')
     comment_count = comment.count()
     ware.view +=1
     ware.save()
+
+    if "username" not in request.session:            
+        View_Product.objects.create(
+            username = 'Tourist',
+            workid = Warehouse.objects.get(workid = workid),
+        )
+    else: 
+        View_Product.objects.create(
+            username = User.objects.get(username = request.session["username"]).username,
+            workid = Warehouse.objects.get(workid = workid),
+        )
 
     if ware.status == 1:
         if request.method == "POST":
             content = request.POST["comment"]
             time = datetime.datetime.now()  
-            Comment.objects.create(
+            Comment_Product.objects.create(
                 username = User.objects.get(username = request.session["username"]),
                 content = content,
                 time = str(time.year) + '/' + str(time.month) + '/' + str(time.day),
@@ -47,9 +58,25 @@ def collectionsingle(request):
 
             return HttpResponseRedirect('/Home/collection-single.html?workid=%s'%workid)
         else:
+
             return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count})
     else:
         HttpResponseServerError()
+
+def like(request):
+    workid = request.GET["workid"]
+    if "username" not in request.session:            
+        Like_Product.objects.create(
+            username = 'Tourist',
+            workid = Warehouse.objects.get(workid = workid),
+        )
+    else: 
+        Like_Product.objects.create(
+            username = User.objects.get(username = request.session["username"]),
+            workid = Warehouse.objects.get(workid = workid),
+        )
+
+    return JsonResponse(ret) 
 
 def explore(request):
     return render(request, "Home/explore.html")

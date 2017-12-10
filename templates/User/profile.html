@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
 
 {% block content %}
-<section id="content">
+
     <div class="content--boxed-sm">
         <header class="content__header">
             <h1>{{user.username}} </h1>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="card__body p-t-0">
-                <div class="form-group ">
+                <div class="form-group">
                         <label>电话</label>
                     <input type="text" class="form-control input-mask" name="phone" id="phone" value="{{user.phone}}">
 
@@ -57,5 +57,5 @@
             </div>
         </form>    
     </div>
-</section>
+    <script src="../static/back/vendors/bower_components/autosize/dist/autosize.min.js"></script>
 {% endblock %}

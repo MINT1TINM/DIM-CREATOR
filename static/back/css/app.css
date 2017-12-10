@@ -1688,8 +1688,7 @@ pre code {
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0;
 }
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   float: left;
@@ -2344,7 +2343,7 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-  padding: 15px;
+  padding: 15px 0;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #30414a;
@@ -5335,6 +5334,12 @@ a.badge:focus {
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
+.list-group h5{
+  font-size: 14px;
+}
+.list-group__heading{
+  font-size: 15px;
+}
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -6296,7 +6301,9 @@ button.close {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px;
+  margin-top: 60%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .modal-content {
   position: relative;
@@ -7822,15 +7829,29 @@ select.form-control {
 .list-group--light .list-group__text {
   color: #4a606d;
 }
-.list-group-item {
-  border: 0;
-  margin: 0;
-  padding: 15px 30px;
-  -webkit-transition: background-color;
-  -o-transition: background-color;
-  transition: background-color;
-  -webkit-transition-duration: 300ms;
-  transition-duration: 300ms;
+@media (min-width:768px){
+  .list-group-item {
+    border: 0;
+    margin: 0;
+    padding: 15px 32px;
+    -webkit-transition: background-color;
+    -o-transition: background-color;
+    transition: background-color;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+}
+@media (max-width:768px){
+  .list-group-item {
+    border: 0;
+    margin: 0;
+    padding: 15px;
+    -webkit-transition: background-color;
+    -o-transition: background-color;
+    transition: background-color;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
 }
 .list-group__heading,
 .list-group__text {
@@ -7843,7 +7864,7 @@ select.form-control {
 }
 .list-group__text {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(177, 188, 192, 0.47);
   margin-top: 4px;
 }
@@ -8474,7 +8495,7 @@ p {
 }
 @media (max-width: 767px) {
   #main {
-    padding: 0 15px 30px;
+    padding: 0;
   }
 }
 .content--boxed {
@@ -8752,7 +8773,7 @@ p {
 }
 @media (max-width: 767px) {
   #header {
-    padding: 15px 25px;
+    padding: 15px 20px 0 20px;
   }
 }
 @media (min-width: 767px) {
@@ -9056,7 +9077,7 @@ p {
 }
 @media (max-width: 1279px) {
   #navigation {
-    padding-top: 70px;
+    padding-top: 80px;
     -webkit-transform: translate3d(-320px, 0, 0);
     transform: translate3d(-320px, 0, 0);
     position: fixed;
@@ -9089,7 +9110,7 @@ p {
 @media (max-width: 1279px) {
   .navigation__header {
     display: block;
-    height: 70px;
+    height: 80px;
     background-color: #1e2a31;
     position: absolute;
     top: 0;
@@ -9106,7 +9127,7 @@ p {
     border-radius: 50%;
     text-align: center;
     line-height: 41px;
-    margin: 15px 30px 0;
+    margin: 22px 15px 0;
     cursor: pointer;
   }
 }
@@ -9127,13 +9148,13 @@ p {
   color: #edeff0;
 }
 .navigation__menu ul > li > a {
-  padding: 16px 25px 16px 75px;
+  padding: 16px 25px 16px 60px;
   display: block;
   position: relative;
 }
 .navigation__menu ul > li > a > i {
   position: absolute;
-  left: 35px;
+  left: 20px;
   font-size: 22px;
   top: 2px;
   width: 25px;
@@ -9352,10 +9373,10 @@ p {
 }
 @media (max-width: 767px) {
   .card__header{
-    padding: 25px 27px;
+    padding: 25px 15px;
   }
   .card__body {
-    padding: 25px 27px;
+    padding: 25px 15px;
   }
 }
 .card__header {
@@ -9365,15 +9386,16 @@ p {
 .card__header h2 {
   margin: 0;
   line-height: 100%;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   color: #b4bfc3;
 }
+
 .card__header h2 small {
   display: block;
   margin-top: 8px;
   line-height: 160%;
-  font-size: 12px;
+  font-size: 15px;
   color: rgba(177, 188, 192, 0.47);
 }
 .card__header .btn--float {
@@ -10760,7 +10782,7 @@ p {
   line-height: 39px;
 }
 .view-more {
-  font-size: 12px;
+  font-size: 13px;
   padding: 15px 0 25px;
   display: block;
   color: #8a9ba1;
@@ -10826,8 +10848,9 @@ p {
  * Used for Heading outside the Cards.
  */
 .content__header {
-  margin-left: 30px;
+  margin-left: 15px;
   margin-bottom: 25px;
+  margin-top: -15px;
   position: relative;
 }
 

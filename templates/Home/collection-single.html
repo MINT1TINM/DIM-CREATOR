@@ -81,11 +81,11 @@
                                 <i class="fa fa-eye"></i><span>  {{ware.view}}</span>
                             </li>
 
-                            <li style="display: none">
-                                <form role="form" method="POST" action="">
-                                        {% csrf_token %}
-                                    <a style="color:#ed145b"><i class="fa fa-heart"></i><span>  {{ware.like}}</span></a>
-                                </form>
+                            <li>
+
+
+                                <a style="color:#ed145b" onclick="like()"><i class="fa fa-heart"></i><span>  {{ware.like}}</span></a>
+
                                 
                             </li>
 
@@ -202,6 +202,16 @@
         </div><!-- /.container -->
     </section>
 
+    <script type="text/javascript">
+        function like(){
+            $.ajax({
+                type:'POST',
+                url:'/Home/like',
+                dataType:'json',
 
+            });
+            
+        }
+    </script>
 
 {% endblock %}

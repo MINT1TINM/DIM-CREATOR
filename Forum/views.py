@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from Dashboard.models import Warehouse
 from User.models import User
-from Home.models import Comment
+from Home.models import *
 
 from DIMCREATOR.public_function import *
 import collections
