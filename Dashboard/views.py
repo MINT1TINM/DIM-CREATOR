@@ -12,7 +12,6 @@ import os
 import shutil
 from django.core.paginator import Paginator
 
-import qrcode  #二维码模块 pip install qrcode
 from PIL import Image  #图像处理 pip install pillow
 Image.LOAD_TRUNCATED_IMAGES = True
 

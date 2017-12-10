@@ -97,10 +97,10 @@ Login Form
 .card-wrapper .title {
   position: relative;
   z-index: 1;
-  border-left: 5px solid #03a9f4;
+  border-left: 5px solid  #664FA3;
   margin: 0 0 35px;
   padding: 10px 0 10px 50px;
-  color: #03a9f4;
+  color:  #664FA3;
   font-size: 32px;
   font-weight: 500;
   text-transform: uppercase;
@@ -160,7 +160,7 @@ Login Form
 .card-wrapper .input-container .bar:after {
   content: '';
   position: absolute;
-  background: #03a9f4;
+  background:  #664FA3;
   width: 0;
   height: 2px;
   -webkit-transition: .2s ease;
@@ -190,7 +190,7 @@ Login Form
   transition: .3s ease;
 }
 .card-wrapper .footer a:hover {
-  color: #03a9f4;
+  color:  #664FA3;
 }
 .card-wrapper.alt {
   position: absolute;

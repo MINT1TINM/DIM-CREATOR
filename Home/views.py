@@ -15,6 +15,10 @@ import os
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+import qrcode  #二维码模块 pip install qrcode
+from PIL import Image  #图像处理 pip install pillow
+Image.LOAD_TRUNCATED_IMAGES = True
+
 def index(request):
     ware = Warehouse.objects.filter( status = 1 ).order_by('-workid')       
     paginator=Paginator(ware, 6) 

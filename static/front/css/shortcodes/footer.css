@@ -67,7 +67,7 @@ Social Link Widget
 }
 
 .social-link li a i:hover {
-    color: #03a9f4 ;
+    color:  #664FA3 ;
     background: #fff;
 }
 
@@ -76,7 +76,7 @@ Social Link Widget
 }
 .social-link.dark li a i:hover {
     color: #fff ;
-    background: #03a9f4;
+    background:  #664FA3;
 }
 
 
@@ -378,7 +378,7 @@ Footer 5
 }
 .footer-five .social-link li a i:hover {
     color: #fff;
-    background: #03a9f4;
+    background:  #664FA3;
 }
 
 
@@ -405,7 +405,7 @@ Footer 5
     color: #898989;
 }
 .footer-five .copy-text a {
-    color: #03a9f4;
+    color:  #664FA3;
 }
 
 .footer-five .secondary-footer ul {
@@ -422,7 +422,7 @@ Footer 5
     text-transform: capitalize;
 }
 .footer-five .secondary-footer ul li a:hover {
-    color: #03a9f4;
+    color:  #664FA3;
 }
 
 @media screen and (max-width: 991px) {

@@ -30,8 +30,8 @@ input[type=tel]:focus:not([readonly]),
 input[type=number]:focus:not([readonly]), 
 input[type=search]:focus:not([readonly]), 
 textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #03a9f4;
-    box-shadow: 0 1px 0 0 #03a9f4; 
+    border-bottom: 1px solid  #664FA3;
+    box-shadow: 0 1px 0 0  #664FA3; 
 }
 
 input[type=text]:focus:not([readonly]) + label, 
@@ -45,7 +45,7 @@ input[type=tel]:focus:not([readonly]) + label,
 input[type=number]:focus:not([readonly]) + label, 
 input[type=search]:focus:not([readonly]) + label, 
 textarea.materialize-textarea:focus:not([readonly]) + label {
-    color: #03a9f4 !important; 
+    color:  #664FA3 !important; 
 }
 
 textarea.materialize-textarea {

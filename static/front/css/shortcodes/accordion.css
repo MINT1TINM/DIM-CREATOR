@@ -25,7 +25,7 @@ Feature Accordion
 
 /*color change*/
 .feature-accordion.brand-accordion .panel-title a{
-    background-color: #03a9f4;
+    background-color:  #664FA3;
 }
 .feature-accordion.pink-accordion .panel-title a{
     background-color: #ed145b;
@@ -112,13 +112,13 @@ Flat Accordion
 }
 .flat-accordion .panel-title a{
     display: block;
-    color: #03a9f4;
+    color:  #664FA3;
     padding: 10px 0;
 }
 
 /*color change*/
 .flat-accordion.brand-accordion .panel-title a{
-    color: #03a9f4;
+    color:  #664FA3;
 }
 .flat-accordion.pink-accordion .panel-title a{
     color: #ed145b;
