@@ -83,7 +83,7 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 	// for reset
 	this.target0 = this.target.clone();
 	this.position0 = this.object.position.clone();
-	this.zoom0 = this.object.zoom;
+
 
 	//
 	// public methods

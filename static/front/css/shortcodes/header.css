@@ -54,22 +54,22 @@ Top Bar
 .menuzord .menuzord-menu>li.active>a>i,
 .menuzord .menuzord-menu>li:hover>a,
 .menuzord .menuzord-menu>li:hover>a>i{
-    color:  #664FA3 !important;
+    color:  rgb(159, 124, 253) !important;
 }
 
 .nav-border-bottom .menuzord .menuzord-menu>li.active>a,
 .nav-border-bottom .menuzord .menuzord-menu>li:hover>a {
-    border-bottom: 3px solid  #664FA3;
+    border-bottom: 3px solid  rgb(159, 124, 253);
 }
 
 .nav-border-box .menuzord-menu > li.active > a,
 .nav-border-box .menuzord-menu > li:hover > a{
-    border:1px solid  #664FA3;
+    border:1px solid  rgb(159, 124, 253);
 }
 
 .nav-boxed-color .menuzord-menu > li.active > a,
 .nav-boxed-color .menuzord-menu > li:hover > a{
-    background:  #664FA3 ;
+    background:  rgb(159, 124, 253) ;
 }
 
 

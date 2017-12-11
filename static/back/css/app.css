@@ -8467,7 +8467,6 @@ body:before {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #1e2a31;
 }
 @media (max-width: 767px) {
   body:before {

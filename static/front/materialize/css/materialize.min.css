@@ -5564,8 +5564,8 @@ ul.tabs li.tab {
 .btn, .btn-large, .btn-flat {
   display: inline-block;
   height: 36px;
-  margin-bottom: 15px;
-  padding: 0 2rem;
+  padding: 0 0.2rem;
+  margin-bottom: -5px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
