@@ -12,7 +12,7 @@ def antisql(content):
 
 
 def sql_select(text):
-    conn=MySQLdb.connect(host='47.93.246.204',user="mint",passwd="INSCHINAisdead1",db="dimcreator",port=3306,charset='utf8')
+    conn=MySQLdb.connect(host='localhost',user="root",passwd="inslens",db="dimcreator",port=3306,charset='utf8')
     cur = conn.cursor()
     cur.execute(text)
     res=cur.fetchall()
@@ -23,7 +23,7 @@ def sql_select(text):
 
 
 def sql_write(text):
-    conn=MySQLdb.connect(host='47.93.246.204',user="mint",passwd="INSCHINAisdead1",db="dimcreator",port=3306,charset='utf8')
+    conn=MySQLdb.connect(host='localhost',user="root",passwd="inslens",db="dimcreator",port=3306,charset='utf8')
     cur = conn.cursor()
     cur.execute(text)
     

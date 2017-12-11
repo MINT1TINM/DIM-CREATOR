@@ -54,22 +54,22 @@ Top Bar
 .menuzord .menuzord-menu>li.active>a>i,
 .menuzord .menuzord-menu>li:hover>a,
 .menuzord .menuzord-menu>li:hover>a>i{
-    color: #03a9f4 !important;
+    color:  rgb(159, 124, 253) !important;
 }
 
 .nav-border-bottom .menuzord .menuzord-menu>li.active>a,
 .nav-border-bottom .menuzord .menuzord-menu>li:hover>a {
-    border-bottom: 3px solid #03a9f4;
+    border-bottom: 3px solid  rgb(159, 124, 253);
 }
 
 .nav-border-box .menuzord-menu > li.active > a,
 .nav-border-box .menuzord-menu > li:hover > a{
-    border:1px solid #03a9f4;
+    border:1px solid  rgb(159, 124, 253);
 }
 
 .nav-boxed-color .menuzord-menu > li.active > a,
 .nav-boxed-color .menuzord-menu > li:hover > a{
-    background: #03a9f4 ;
+    background:  rgb(159, 124, 253) ;
 }
 
 
@@ -200,7 +200,7 @@ Header
 
 .tt-nav .brand-header,
 .tt-nav.sticky .brand-header {
-    background: #03a9f4 !important;
+    background:  #664FA3 !important;
 }
 
 
@@ -407,7 +407,7 @@ header.sticky .menuzord-menu>li>a,
     bottom: 0;
     width: 0;
     height: 1px;
-    background-color: #03a9f4;
+    background-color:  #664FA3;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -423,7 +423,7 @@ header.sticky .menuzord-menu>li>a,
 .menuzord-menu ul.dropdown li.active>a,
 .menuzord-menu>li>.megamenu .megamenu-row li:hover>a,
 .menuzord-menu>li>.megamenu .megamenu-row li.active>a {
-    color: #03a9f4;
+    color:  #664FA3;
     background-color: #fafafa;
 }
 .menuzord-menu>li>.megamenu .megamenu-row li a {
@@ -683,7 +683,7 @@ Nav link boxed
 .nav-boxed-color .menuzord .menuzord-menu>li:hover>a,
 .nav-boxed-color .menuzord .menuzord-menu>li:hover>a>i {
     color: #fff !important;
-    background: #03a9f4;
+    background:  #664FA3;
 }
 
 .brand-header .menuzord .menuzord-menu>li.active>a,
@@ -1095,12 +1095,12 @@ Responsive Menu
     .nav-border-bottom .menuzord .menuzord-menu>li:hover>a,
     .nav-border-bottom .brand-header .menuzord .menuzord-menu>li.active>a,
     .nav-border-bottom .brand-header .menuzord .menuzord-menu>li:hover>a {
-        border-bottom: 1px solid #03a9f4;
+        border-bottom: 1px solid  #664FA3;
     }
     .brand-header .menuzord .menuzord-menu>li:hover>a,
     .brand-header .menuzord .menuzord-menu>li.active>a,
     .brand-header .menuzord .menuzord-menu>li.active>a i {
-        color: #03a9f4 !important;
+        color:  #664FA3 !important;
     }
 
 }

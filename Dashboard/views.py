@@ -12,7 +12,6 @@ import os
 import shutil
 from django.core.paginator import Paginator
 
-import qrcode  #二维码模块 pip install qrcode
 from PIL import Image  #图像处理 pip install pillow
 Image.LOAD_TRUNCATED_IMAGES = True
 
@@ -68,10 +67,10 @@ def warehouse(request):
             newware = Warehouse.objects.filter(username = request.session["username"]).get(title = title)
             workid = str(newware.workid)
 
-            folderpath = '../media/Warehouse/' + workid
+            folderpath = './media/Warehouse/' + workid
             if not os.path.exists(folderpath): 
                 os.makedirs(folderpath)
-            objpath = "../media/Warehouse/" + workid + "/obj.obj"
+            objpath = "./media/Warehouse/" + workid + "/obj.obj"
             obj = open(objpath, 'wb')
             # obj.write(request.FILES["obj"].read())   不分块
             f = request.FILES['obj']
@@ -80,7 +79,7 @@ def warehouse(request):
             obj.close()
 
             #计算物体中心并存入数据库
-            fin = open("../media/Warehouse/" + workid + "/obj.obj","r")
+            fin = open("./media/Warehouse/" + workid + "/obj.obj","r")
             arr = []
             add_sum = 0
             sum_x,sum_y,sum_z,max_x,max_y,max_z = 0,0,0,0,0,0
@@ -115,7 +114,7 @@ def warehouse(request):
         #mtl.close()
            
             jpgname = request.FILES['jpg'].name
-            jpgpath = "../media/Warehouse/" + workid + "/jpg.jpg"
+            jpgpath = "./media/Warehouse/" + workid + "/jpg.jpg"
 
             jpg = open(jpgpath, 'wb')
 
@@ -129,7 +128,7 @@ def warehouse(request):
 
             jpg = open(jpgpath)
             size = 700,700
-            im = Image.open("../media/Warehouse/" + workid + "/jpg.jpg") 
+            im = Image.open("./media/Warehouse/" + workid + "/jpg.jpg") 
             im.thumbnail(size)  
             im.save(jpgpath, 'JPEG')
             jpg.close()
@@ -188,7 +187,7 @@ def shelf(request):
             if request.POST.get('delete_id'):
                 delete_id = request.POST["delete_id"]
                 ware = Warehouse.objects.get(workid = delete_id)
-                shutil.rmtree(r'../media/Warehouse/%s'%delete_id)
+                shutil.rmtree(r'./media/Warehouse/%s'%delete_id)
                 ware.delete()
             return HttpResponseRedirect('../Dashboard/shelf.html')
         else:

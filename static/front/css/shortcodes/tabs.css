@@ -98,7 +98,7 @@ Border Bottom Tab
 .border-bottom-tab .nav-tabs.nav-justified>.active>a:focus,
 .border-bottom-tab .nav-tabs.nav-justified>.active>a:hover {
     color: #202020;
-    border-bottom: 4px solid #03a9f4!important;
+    border-bottom: 4px solid  #664FA3!important;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     border-top: 1px solid transparent;
@@ -170,7 +170,7 @@ Border Tabs
 .border-tab.primary-nav .nav-tabs>li>a, 
 .border-tab.primary-nav .nav-tabs.nav-justified>li>a {
     border: 1px solid transparent;
-    background: #03a9f4;
+    background:  #664FA3;
     color: #fff;
 }
 
@@ -188,7 +188,7 @@ Border Tabs
 }
 
 .border-tab.transparent-nav .nav-tabs>li.active::after {
-    border-bottom: 3px solid #03a9f4;
+    border-bottom: 3px solid  #664FA3;
 }
 
 .border-tab.transparent-nav .nav-tabs>li.active>a, 
@@ -197,7 +197,7 @@ Border Tabs
 .border-tab.transparent-nav .nav-tabs.nav-justified>.active>a, 
 .border-tab.transparent-nav .nav-tabs.nav-justified>.active>a:focus, 
 .border-tab.transparent-nav .nav-tabs.nav-justified>.active>a:hover {
-    color: #03a9f4;
+    color:  #664FA3;
 }
 
 
@@ -220,7 +220,7 @@ Border Box Tab
 .border-box-tab .nav-tabs.nav-justified>.active>a, 
 .border-box-tab .nav-tabs.nav-justified>.active>a:focus, 
 .border-box-tab .nav-tabs.nav-justified>.active>a:hover {
-    color: #03a9f4;
+    color:  #664FA3;
 }
 
 @media screen and (max-width: 767px) {
@@ -254,7 +254,7 @@ Icon, Round And Square Tabs
     height: 85px;
     border-radius: 6px;
     background: #F6F6F6;
-    color: #03a9f4;
+    color:  #664FA3;
     border: 1px solid #eee;
 }
 .icon-tab .nav>li>a .material-icons {
@@ -283,7 +283,7 @@ Icon, Round And Square Tabs
 .icon-tab .nav-pills>li.active>a:hover {
     color: #fff;
     border:1px solid transparent;
-    background: #03a9f4;
+    background:  #664FA3;
 }
 
 
@@ -347,7 +347,7 @@ Vertical Tab
     color: #fff;
     margin-right: 0;
     border: 0;
-    background: #03a9f4;
+    background:  #664FA3;
     text-align: center;
     font-weight: 700;
 }

@@ -150,7 +150,7 @@ flex-direction-nav icon appear on mobile devices
 .flex-direction-nav a:before {
     font-size: 25px;
     line-height: 40px;
-    color: #03a9f4;
+    color:  #664FA3;
     text-shadow: none;
 }
 
@@ -261,7 +261,7 @@ Carousel Testimonial Style Two
 
 .carousel-testimonial .carousel-control:focus, 
 .carousel-testimonial .carousel-control:hover {
-    color: #03a9f4;
+    color:  #664FA3;
     opacity: 1;
 }
 

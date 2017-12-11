@@ -255,7 +255,7 @@ xtype
   transform: translateY(-50%);
   height: 90%;
   width: 1px;
-  background-color: #03a9f4;
+  background-color:  #664FA3;
 }
 .tt-headline.type .tt-words-wrapper.waiting::after {
   -webkit-animation: tt-pulse 1s infinite;
@@ -263,7 +263,7 @@ xtype
   animation: tt-pulse 1s infinite;
 }
 .tt-headline.type .tt-words-wrapper.selected {
-  background-color: #03a9f4;
+  background-color:  #664FA3;
 }
 .tt-headline.type .tt-words-wrapper.selected::after {
   visibility: hidden;
@@ -555,7 +555,7 @@ xloading-bar
   bottom: 0;
   height: 3px;
   width: 0;
-  background: #03a9f4;
+  background:  #664FA3;
   z-index: 2;
   -webkit-transition: width 0.3s -0.1s;
   -moz-transition: width 0.3s -0.1s;

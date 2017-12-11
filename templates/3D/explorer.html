@@ -8,14 +8,14 @@
     <script src="/static/back/js/OrbitControls.js"></script>
     <script src="/static/back/js/OBJLoader.js"></script>
     <script src="/static/back/js/MTLLoader.js"></script>
-
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
     <style>
             body {
                 overflow: hidden;
                 margin: 0;
                 padding: 0;
-                background: hsl(0, 0%, 10%);
+                background: linear-gradient(to bottom, rgb(27, 27, 27), rgb(83, 83, 83));
             }
     
             p {
@@ -26,6 +26,8 @@
     </style>
     </head>
     <body>
+
+        
         <script>
     
             if (!Detector.webgl) {
@@ -49,8 +51,8 @@
                 document.body.appendChild(container);
     
                 /* Camera */
-    
-                camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+                fov = 5;
+                camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
                 
                 // Place camera on x axis
                 //camera.position.set(30,0,0);
@@ -61,35 +63,8 @@
                 camera.position.set({{cax}},{{cay}},{{caz}});
                 camera.up = new THREE.Vector3(0,1,0);
     
-                /* Scene */
-    
-                scene = new THREE.Scene();
-                lighting = true;
-                
-                ambient = new THREE.AmbientLight(0xffffff, 1.0);
-                scene.add(ambient);
-    
-                keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0, 100%)'), 0.4);
-                keyLight.position.set(-100, 100, 100);
-    
-                fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0, 100%)'), 0.4);
-                fillLight.position.set(100, 100, 100);
-    
-                backLight = new THREE.DirectionalLight(0xffffff, 1.0);
-                backLight.position.set(100, 0, -100).normalize();
 
-                /*LightHelper*/
-                /*
-                var keyLightHelper = new THREE.DirectionalLightHelper( keyLight );
-                scene.add( keyLightHelper );555
     
-                var fillLightHelper = new THREE.DirectionalLightHelper( fillLight );
-                scene.add( fillLightHelper );
-
-                var backLightHelper = new THREE.DirectionalLightHelper( backLight );
-                scene.add( backLightHelper );
-                */
-                
                 /* Model */
     
                 /*var mtlLoader = new THREE.MTLLoader();
@@ -110,12 +85,63 @@
                         scene.add(object);
     
                     });    
-                /* Renderer */
+
+
+                /* Scene */
     
-                renderer = new THREE.WebGLRenderer();
+                scene = new THREE.Scene();
+                lighting = true;
+
+                hemiLight = new THREE.HemisphereLight(0x595959, 0xffffff , 1);
+                hemiLight.position.set(0,2*{{cay}},0);
+                scene.add(hemiLight);
+
+                /*
+                
+                ambient = new THREE.AmbientLight(0xffffff, 1.0);
+                scene.add(ambient);
+    
+                keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0%, 60%)'), 0.5);
+                keyLight.position.set(-100, 100, 100);
+                keyLight.target = object;
+    
+                fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0%, 60%)'), 0.5);
+                fillLight.position.set(100, 100, 100);
+    
+                backLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                backLight.position.set(100, 0, -100).normalize();
+
+                /*LightHelper*/
+                /*
+                var keyLightHelper = new THREE.DirectionalLightHelper( keyLight );
+                scene.add( keyLightHelper );
+    
+                var fillLightHelper = new THREE.DirectionalLightHelper( fillLight );
+                scene.add( fillLightHelper );
+
+                var backLightHelper = new THREE.DirectionalLightHelper( backLight );
+                scene.add( backLightHelper );
+                */
+                
+                /* Model */
+    
+                /*var mtlLoader = new THREE.MTLLoader();
+                mtlLoader.setBaseUrl('../media/Warehouse/{{workid}}/');
+                mtlLoader.setPath('../media/Warehouse/{{workid}}/');
+                mtlLoader.load('mtl.mtl', function (materials) {
+    
+                    materials.preload();
+
+                */
+
+
+
+                /* Renderer */
+                renderer = new THREE.WebGLRenderer({alpha: true});
                 renderer.setPixelRatio(window.devicePixelRatio);
                 renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setClearColor(new THREE.Color("hsl(0, 0%, 10%)"));
+
+                renderer.setClearColor(0x000000, 0.0);
     
                 container.appendChild(renderer.domElement);
     
@@ -127,7 +153,9 @@
                 var target = new THREE.Vector3( {{cox}} , {{coy}} , {{coz}} );
                 controls = new THREE.OrbitControls(camera, renderer.domElement, target);
                 controls.enableDamping = true;
-                controls.dampingFactor = 0.25;
+                controls.dampingFactor = 0.3;
+
+                controls.enablePan = true;
                 controls.enableZoom = true;
     
                 /* Events */
@@ -168,9 +196,13 @@
                 renderer.render(scene, camera);
     
             }
-    
+            
+            function reset(){
+                window.location.reload();
+            }
         </script>
     
+
     
     </body>
 </html>

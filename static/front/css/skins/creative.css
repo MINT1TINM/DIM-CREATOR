@@ -108,7 +108,9 @@ textarea.materialize-textarea:focus:not([readonly]) + label {
     background-color: rgba(81, 52, 145, 0.7);
 }
 
-
+.overlay.dark::before {
+    background-color: rgba(0, 0, 0, 0.315);
+}
 
 /*page cover*/
 .breadcrumb li a {
