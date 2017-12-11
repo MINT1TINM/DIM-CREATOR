@@ -93,7 +93,7 @@
                 lighting = true;
 
                 hemiLight = new THREE.HemisphereLight(0x595959, 0xffffff , 1);
-                hemiLight.position.set(0,2*{{cay}},0);
+                hemiLight.position.set(0,-100000,0);
                 scene.add(hemiLight);
 
                 /*
@@ -125,6 +125,9 @@
                 scene.add( backLightHelper );
 
                 */
+
+                var helper = new THREE.HemisphereLightHelper (hemiLight);
+                scene.add( helper );
 
 
 
