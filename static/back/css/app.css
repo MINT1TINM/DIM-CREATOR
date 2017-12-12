@@ -4561,7 +4561,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   min-height: 50px;
   margin-bottom: 18px;
-  border: 1px solid transparent;
 }
 @media (min-width: 768px) {
   .navbar {
@@ -4656,12 +4655,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top {
   top: 0;
-  border-width: 0 0 1px;
 }
 .navbar-fixed-bottom {
   bottom: 0;
   margin-bottom: 0;
-  border-width: 1px 0 0;
 }
 .navbar-brand {
   float: left;
@@ -4981,8 +4978,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse {
   background-color: #222222;
-  border-color: #080808;
 }
+.navbar-explorer{
+  background: #22222200;
+}
+
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
 }
@@ -8462,26 +8462,10 @@ html {
 }
 body:before {
   content: '';
-  height: 266px;
   width: 100%;
   position: absolute;
   left: 0;
   top: 0;
-}
-@media (max-width: 767px) {
-  body:before {
-    height: 216px;
-  }
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  body:before {
-    height: 265px;
-  }
-}
-@media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 767px) {
-  body:before {
-    height: 215px;
-  }
 }
 audio,
 video {
@@ -12733,12 +12717,12 @@ div.color-picker__value {
 }
 .swal2-modal .swal2-content {
   color: #777777;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: normal;
 }
 .swal2-modal .swal2-styled {
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: 15px;
   border-radius: 2px;
   margin: 0 2px;
   text-transform: uppercase;

@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^warehouse.html$', warehouse),
     url(r'^ware.html$', ware),
     url(r'^shelf.html$', shelf),
-    
+    url(r'^ajax_dict/$', 'Dashboard.views.ajax_dict', name='ajax-dict'),    
 ]
