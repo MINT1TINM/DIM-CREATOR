@@ -44,8 +44,6 @@
                               <ul class="list-inline">
                                   <li>
                                       <i class="fa fa-user"></i><a href="#">{{ware.username.username}}</a>
-                                      &nbsp;&nbsp;
-                                      <button class="btn btn-primary" style="padding: 1px 7px; height: 30px" > + 关注 </button>
                                   </li>
 
                                   <li>
@@ -79,20 +77,6 @@
                             
                             <li>
                                 <a class="waves-effect  btn-flat"><i class="fa fa-eye"></i><span>  {{ware.view}}</span></a>
-                            </li>
-
-                            <li>
-
-                                <a class="waves-effect waves-red btn-flat red-text"><i class="fa fa-heart"></i><span>  {{ware.like}}</span></a>
-
-                                
-                            </li>
-
-                            <li>
-                                <form class="form-horizontal" role="form" method="POST" action=""> 
-                                    {% csrf_token %}                                
-                                    <a class="waves-effect waves-purple btn-flat purple-text"><i class="fa fa-share"></i><span>  {{ware.share}}</span></a>
-                                </form>
                             </li>
 
                         </ul>
@@ -203,21 +187,5 @@
         </div><!-- /.container -->
     </section>
 
-    <script type="text/javascript">
-        function like(){
-            $.ajax({
-                type:'POST',
-                url:'/Home/like',
-                dataType:'json',
-
-            });
-            
-        };
-        function reset(){
-            explorer.window.reset();
-        }
-
-
-    </script>
 
 {% endblock %}

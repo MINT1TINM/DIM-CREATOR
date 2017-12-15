@@ -105,3 +105,7 @@ def exploreresult(request):
 
 def about(request):
     return render(request, "Home/about.html")
+
+def like(request):
+    array = [1,2,3,4,5,6,7,8,9]
+    return HttpResponse(json.dumps(array), content_type='application/json')

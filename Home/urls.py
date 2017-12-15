@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^explore.html$', explore),
     url(r'^exploreresult.html$', exploreresult),
     url(r'^about.html$', about),
-
+    url(r'^like/$', 'Home.views.like', name='like'),    
     
 ]
