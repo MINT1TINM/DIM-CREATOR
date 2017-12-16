@@ -3,11 +3,12 @@
     <title>DIM CREATOR</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/static/back/js/explorer-three.js"></script>
+    <script src="/static/back/js/three.min.js"></script>
     <script src="/static/back/js/Detector.js"></script>
     <script src="/static/back/js/OrbitControls.js"></script>
-    <script src="/static/back/js/OBJLoader.js"></script>
-    <script src="/static/back/js/MTLLoader.js"></script>
+    <script src="/static/back/js/FBXLoader.js"></script>
+    <script src="/static/back/js/inflate.min.js"></script>
+
     <script src="/static/back/vendors/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/static/back/js/app.min.js"></script>
 
@@ -18,7 +19,7 @@
     
     <link href="/static/back/css/app.css" rel="stylesheet">
     <link href="/static/back/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
-    
+    <script src="/static/back/js/explorer-loader.js"></script>
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
     <style>
@@ -34,14 +35,30 @@
                 padding: 0;
             }
 
+            .container-ex {
+                width:100%;
+                padding-left:15px;
+                padding-right:15px;
+            }
 
-        }
+
+
     
     </style>
     </head>
     <body style="height: 100%">
+
+        <div class="preloader preloader--xl preloader--light" id="loader">
+            <svg viewBox="25 25 50 50">
+                <circle cx="50" cy="50" r="20" />
+            </svg>
+        </div>
+
+        
+       <!-- <div class="loader" id="loader" style="height:100%;width:100%;background-color:beige"><p id="progress"></p></div> -->
+
         <nav class="navbar navbar-explorer navbar-fixed-bottom">
-            <div class="container">
+            <div class="container-ex">
                 <button class="btn btn-default btn--icon hidden-xs" data-mae-action="fullscreen" ><i class="zmdi zmdi-fullscreen"></i></button>
                 <button class="btn btn-default btn--icon" onclick="reset()" ><i class="zmdi zmdi-refresh"></i></button>
                 <button class="btn btn-default btn--icon" onclick="tutorial();" ><i class="zmdi zmdi-help-outline"></i></button>
@@ -95,7 +112,7 @@
             var windowHalfX = window.innerWidth / 2;
             var windowHalfY = window.innerHeight / 2;
 
-            var target = new THREE.Vector3( {{cox}} , {{coy}} , {{coz}} );
+            var target = new THREE.Vector3(0,0,0);
 
             init();
             animate();
@@ -121,16 +138,16 @@
 
             function camera(){
                 /* Camera */
-                fov = 5;
+                fov = 50;
                 camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
                 
                 // Place camera on x axis
                 //camera.position.set(30,0,0);
                 //camera.up = new THREE.Vector3(0,0,1);
-                camera.lookAt(new THREE.Vector3( {{cox}} , {{coy}} , {{coz}}));
+                camera.lookAt(new THREE.Vector3(0,0,0));
                 
                 // Place camera on y axis
-                camera.position.set({{cax}},{{cay}},{{caz}});
+                camera.position.set(50,50,50);
                 camera.up = new THREE.Vector3(0,1,0);
     
             }
@@ -143,29 +160,43 @@
 
                 camera();
 
-                /* Model */
-    
-                var mtlLoader = new THREE.MTLLoader();
+				// model
+				var manager = new THREE.LoadingManager();
+				manager.onProgress = function( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				var onProgress = function( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+                        //document.getElementById("progress").innerHTML = '已加载' + Math.round( percentComplete, 2 ) + '%';
+                        if (percentComplete >= 100){
+                            var obj = document.getElementById("loader");
+                            obj.remove();
+
+
+                        }
+                        
+					}
+
+				};
+
+				var onError = function( xhr ) {
+
+					console.error( xhr );
+
+				};
+
+				var loader = new THREE.FBXLoader( manager );
+				loader.load( '../media/Warehouse/{{workid}}/fbx.fbx', function( object ) {
+					scene.add( object );
+                }, onProgress, onError );
                 
-                mtlLoader.setBaseUrl('../media/Warehouse/{{workid}}/');
-                mtlLoader.setPath('../media/Warehouse/{{workid}}/');
-                mtlLoader.load('mtl.mtl', function (materials) {
-    
-                    materials.preload();
-
-    
-                });
-    
-                var objLoader = new THREE.OBJLoader();
-                   /* objLoader.setMaterials(materials);*/
-                    objLoader.setPath('../media/Warehouse/{{workid}}/');
-                    objLoader.load('obj.obj', function (object) {
-    
-                        scene.add(object);
-    
-                    });    
-
-
                 /* Scene */
     
                 scene = new THREE.Scene();

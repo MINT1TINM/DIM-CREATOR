@@ -11,7 +11,7 @@ import datetime
 import os
 import shutil
 from django.core.paginator import Paginator
-
+import qrcode
 from PIL import Image  #图像处理 pip install pillow
 Image.LOAD_TRUNCATED_IMAGES = True
 
@@ -53,12 +53,6 @@ def warehouse(request):
                                  view = 0,
                                  like = 0,
                                  share = 0,
-                                 cox = 0,
-                                 coy = 0,
-                                 coz = 0,
-                                 cax = 0,
-                                 cay = 0,
-                                 caz = 0,
                                  status = 0,
 
             )
@@ -68,15 +62,16 @@ def warehouse(request):
             folderpath = './media/Warehouse/' + workid
             if not os.path.exists(folderpath): 
                 os.makedirs(folderpath)
-            objpath = "./media/Warehouse/" + workid + "/obj.obj"
-            obj = open(objpath, 'wb')
+            fbxpath = "./media/Warehouse/" + workid + "/fbx.fbx"
+            fbx = open(fbxpath, 'wb')
             # obj.write(request.FILES["obj"].read())   不分块
-            f = request.FILES['obj']
+            f = request.FILES['fbx']
             for chunk in f.chunks():      # 分块写入文件
-                obj.write(chunk)
-            obj.close()
+                fbx.write(chunk)
+            fbx.close()
 
             #计算物体中心并存入数据库
+            """
             fin = open("./media/Warehouse/" + workid + "/obj.obj","r")
             arr = []
             add_sum = 0
@@ -102,15 +97,16 @@ def warehouse(request):
             newware.caz = max_z
             
             newware.save()
+            
+            mtlname = request.FILES['mtl'].name
+            mtlpath = "./media/Warehouse/" + workid + "/mtl.mtl"
+            mtl = open(mtlpath, 'wb')
+            m = request.FILES['mtl']
+            for chunk in m.chunks():
+                mtl.write(chunk)
+            mtl.close()
+            """
 
-        #mtlname = request.FILES['mtl'].name
-        #mtlpath = "./media/Warehouse/" + workid + "/mtl.mtl"
-        #mtl = open(mtlpath, 'wb')
-        #m = request.FILES['mtl']
-        #for chunk in m.chunks():
-        #    mtl.write(chunk)
-        #mtl.close()
-           
             jpgname = request.FILES['jpg'].name
             jpgpath = "./media/Warehouse/" + workid + "/jpg.jpg"
 
@@ -140,7 +136,7 @@ def warehouse(request):
             qr.make(fit=True)
   
             img = qr.make_image()
-            img = img.convert("RGBA")
+            img = img.convert("RGB")
   
             icon = Image.open("./static/logo.png")
   
