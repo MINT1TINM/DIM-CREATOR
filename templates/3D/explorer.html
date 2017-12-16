@@ -87,16 +87,21 @@
                     showCloseButton: true,
                     title: "分享",
                     html:                        
-                    '<div class="col-xs-12" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h3 style="color:#595959">环游</h3>鼠标左键  单指触摸</div>',
+                    '<div class="col-xs-12" style="margin-bottom: 10px;"><img src="../media/Warehouse/{{workid}}/qrcode.jpg" style="height: 200px;"></img></br>',
                     confirmButtonText: "保存二维码"
                 }).then(function(){
-                    swal(
-                        "Deleted!",
-                        "Your imaginary file has been deleted.",
+                    
+                        download('../media/Warehouse/{{workid}}/qrcode.jpg', 'qrcode'),
                         "success"
-                    );
+                    
                 });
             };
+            function download(href, title) {
+                const a = document.createElement('a');
+                a.setAttribute('href', href);
+                a.setAttribute('download', title);
+                a.click();
+            }
         </script>
         <script>
     
