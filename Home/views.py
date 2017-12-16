@@ -15,6 +15,10 @@ import os
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+import qrcode  #二维码模块 pip install qrcode
+from PIL import Image  #图像处理 pip install pillow
+Image.LOAD_TRUNCATED_IMAGES = True
+
 def index(request):
     ware = Warehouse.objects.filter( status = 1 ).order_by('-workid')       
     paginator=Paginator(ware, 6) 
@@ -101,3 +105,7 @@ def exploreresult(request):
 
 def about(request):
     return render(request, "Home/about.html")
+
+def like(request):
+    array = [1,2,3,4,5,6,7,8,9]
+    return HttpResponse(json.dumps(array), content_type='application/json')

@@ -39,14 +39,14 @@ Slider
 
 /*Landing Pages*/
 .btn-download.app-download {
-    color: #03a9f4;
+    color:  #664FA3;
     background-color: #fff;
     height: auto;
 }
 .btn-download.app-download:focus,
 .btn-download.app-download:hover {
     color: #fff;
-    background-color: #03a9f4;
+    background-color:  #664FA3;
 }
 
 .btn-download.book-download {
@@ -84,5 +84,5 @@ Slider
     font-family: 'Raleway', sans-serif!important;
 }
 .erinyen .tp-tab-title {
-    color: #03a9f4 !important;
+    color:  #664FA3 !important;
 }

@@ -51,6 +51,9 @@ def profile(request):
             return HttpResponseRedirect('../User/profile.html')
 
         else:
-
-
             return render(request, 'User/profile.html',{"user":user})
+
+def viewprofile(request):
+    id = request.GET["id"]
+    user = User.objects.get(id = id)
+    return render(request, 'User/viewprofile.html',{"user":user})

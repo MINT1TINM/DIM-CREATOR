@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+    <div class="content--boxed-sm">
+        <header class="content__header">
+            <h1>{{user.username}} </h1>
+        </header>
+
+        <div class="card profile">
+            <div class="profile__img">
+                <img src="../../media/User/{{user.id}}/head.jpg" alt="">
+            </div>
+
+        </div>
+
+        
+
+    </div>
+    <script src="../static/back/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+{% endblock %}

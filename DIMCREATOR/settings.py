@@ -85,9 +85,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dimcreator',
-        'USER': 'mint',
-        'PASSWORD': 'INSCHINAisdead1',
-        'HOST':'47.93.246.204',
+        'USER': 'root',
+        'PASSWORD': 'inslens',
+        'HOST':'localhost',
         'PORT':3306,
     }
 

@@ -133,7 +133,7 @@ Intro CSS for Demo landing page. If you do not use it, you can remove this css
     color: #999;
 }
 .intro-page .portfolio-item:hover a {
-    color: #03a9f4;
+    color:  #664FA3;
 }
 .intro-page .card-body {
     padding: 20px 30px;
@@ -148,7 +148,7 @@ Intro CSS for Demo landing page. If you do not use it, you can remove this css
     font-size: 11px;
     font-weight: 700;
     color: #fff;
-    background: #03a9f4;
+    background:  #664FA3;
     padding: 6px 5px;
     border-radius: 2px;
     text-transform: capitalize;

@@ -11,12 +11,6 @@ class Warehouse(models.Model):
     title = models.CharField(max_length=255)
     opendate = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
-    cox = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
-    coy = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
-    coz = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
-    cax = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
-    cay = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
-    caz = models.DecimalField(max_length=65, max_digits=10, decimal_places=2)
     
     status = models.SmallIntegerField()
     type = models.CharField(max_length=200)
