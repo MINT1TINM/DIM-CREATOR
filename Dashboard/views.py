@@ -132,7 +132,7 @@ def warehouse(request):
                 box_size=10,
                 border=1
             )   
-            qr.add_data("http://dim.inslens.com/3D/explorer.html?workid={{workid}}")
+            qr.add_data("http://dim.inslens.com/3D/explorer.html?workid=" + workid)
             qr.make(fit=True)
   
             img = qr.make_image()
