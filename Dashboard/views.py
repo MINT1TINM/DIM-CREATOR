@@ -59,10 +59,10 @@ def warehouse(request):
             newware = Warehouse.objects.filter(username = request.session["username"]).get(title = title)
             workid = str(newware.workid)
 
-            folderpath = './media/Warehouse/' + workid
+            folderpath = '../media/Warehouse/' + workid
             if not os.path.exists(folderpath): 
                 os.makedirs(folderpath)
-            fbxpath = "./media/Warehouse/" + workid + "/fbx.fbx"
+            fbxpath = "../media/Warehouse/" + workid + "/fbx.fbx"
             fbx = open(fbxpath, 'wb')
             # obj.write(request.FILES["obj"].read())   不分块
             f = request.FILES['fbx']
@@ -108,7 +108,7 @@ def warehouse(request):
             """
 
             jpgname = request.FILES['jpg'].name
-            jpgpath = "./media/Warehouse/" + workid + "/jpg.jpg"
+            jpgpath = "../media/Warehouse/" + workid + "/jpg.jpg"
 
             jpg = open(jpgpath, 'wb')
 
@@ -119,13 +119,13 @@ def warehouse(request):
 
             jpg = open(jpgpath)
             size = 700,700
-            im = Image.open("./media/Warehouse/" + workid + "/jpg.jpg") 
+            im = Image.open("../media/Warehouse/" + workid + "/jpg.jpg") 
             im.thumbnail(size)  
             im.save(jpgpath, 'JPEG')
             jpg.close()
 
 
-            qrpath = "./media/Warehouse/" + workid + "/qrcode.jpg"
+            qrpath = "../media/Warehouse/" + workid + "/qrcode.jpg"
             qr = qrcode.QRCode(
                 version=2,
                 error_correction=qrcode.constants.ERROR_CORRECT_H,
@@ -138,7 +138,7 @@ def warehouse(request):
             img = qr.make_image()
             img = img.convert("RGB")
   
-            icon = Image.open("./static/logo.png")
+            icon = Image.open("../static/logo.png")
   
             img_w,img_h = img.size
             factor = 4
