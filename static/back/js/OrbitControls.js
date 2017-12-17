@@ -56,11 +56,11 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 	// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
 	// Set to false to disable zooming
 	this.enableZoom = true;
-	this.zoomSpeed = 1.0;
+	this.zoomSpeed = 0.5;
 
 	// Set to false to disable rotating
 	this.enableRotate = true;
-	this.rotateSpeed = 1.0;
+	this.rotateSpeed = 0.5;
 
 	// Set to false to disable panning
 	this.enablePan = true;
@@ -347,6 +347,8 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 				panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
 				panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
 
+				console.warn(position);
+
 			} else if ( scope.object instanceof THREE.OrthographicCamera ) {
 
 				// orthographic
@@ -360,7 +362,7 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 				scope.enablePan = false;
 
 			}
-
+			
 		};
 
 	}();
@@ -453,6 +455,8 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 		rotateStart.copy( rotateEnd );
 
 		scope.update();
+		console.warn( rotateEnd);
+		
 
 	}
 

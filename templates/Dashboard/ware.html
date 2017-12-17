@@ -9,13 +9,15 @@
     <div class="card animated fadeInUpBig">
         <div class="card__header card__header--highlight">
                 <h2>创建日期： {{opendate}}</h2>
-                <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#"><i class="zmdi zmdi-edit"></i></button>
+                <button class="btn btn--float animated zoomIn hidden-xs"  data-toggle="modal" data-target="#"><i class="zmdi zmdi-edit"></i></button>
                 
         </div>
-        <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive embed-responsive-16by9 hidden-xs">
                 <iframe class="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{workid}}"></iframe>
         </div>
-
+        <div class="visible-xs">
+                <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 230px) ;border-width: 0px" src="/3D/explorer.html?workid={{workid}}"></iframe>
+        </div>  
 
 
     </div>

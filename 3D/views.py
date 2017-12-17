@@ -9,18 +9,16 @@ def explorer(request):
     workid = request.GET["workid"]
     ware = Warehouse.objects.get(workid=workid)
     title = ware.title
-    cox = ware.cox
-    coy = ware.coy
-    coz = ware.coz
-    cax = ware.cax
-    cay = ware.cay
-    caz = ware.caz
+    px = ware.px
+    py = ware.py
+    pz = ware.pz
     
     status = ware.status
     if status == 0:   
         if request.session["username"] == ware.username.username:
-            return render(request, "3D/explorer.html",{"workid":workid,"title":title,"cox":cox,"coy":coy,"coz":coz,"cax":cax,"cay":cay,"caz":caz})
+            return render(request, "3D/explorer.html",{"workid":workid,"title":title,"px":px,"py":py,"pz":pz})
         else:
             return render(request, 'User/login.html')
     else:   
-        return render(request, "3D/explorer.html",{"workid":workid,"title":title,"cox":cox,"coy":coy,"coz":coz,"cax":cax,"cay":cay,"caz":caz})
+        return render(request, "3D/explorer.html",{"workid":workid,"title":title,"px":px,"py":py,"pz":pz})
+

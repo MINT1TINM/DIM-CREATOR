@@ -24,48 +24,27 @@
 
         <div class="list-group list-group--striped">
             <div class="list-group-item">
-                <div class="widget-past-days__chart hidden-sm">
-                    <div class="chart-sparkline-bar">6,9,5,6,3,7,5,4,6,5,6,4,2,5,8,2,6,9</div>
-                </div>
 
                 <div class="widget-past-days__info">
                     <h5>项目访问量</h5>
                     <h3>{{viewcal}}</h3>
                 </div>
             </div>
-
             <div class="list-group-item">
-                <div class="widget-past-days__chart hidden-sm">
-                    <div class="chart-sparkline-bar">5,7,2,5,2,8,6,7,6,5,3,1,9,3,5,8,2,4</div>
-                </div>
-
                 <div class="widget-past-days__info">
-                    <h5>点赞数</h5>
-                    <h3>{{likecal}}</h3>
+                    <h5>小黑屋访问量</h5>
+                    <h3>{{viewcal}}</h3>
                 </div>
             </div>
 
             <div class="list-group-item">
-                <div class="widget-past-days__chart hidden-sm">
-                    <div class="chart-sparkline-bar">5,7,2,5,2,8,6,7,6,5,3,1,9,3,5,8,2,4</div>
-                </div>
-
                 <div class="widget-past-days__info">
                     <h5>分享数</h5>
                     <h3>{{sharecal}}</h3>
                 </div>
             </div>
 
-            <div class="list-group-item">
-                <div class="widget-past-days__chart hidden-sm">
-                    <div class="chart-sparkline-bar">3,9,1,3,5,6,7,6,8,2,5,2,7,5,6,7,6,8</div>
-                </div>
 
-                <div class="widget-past-days__info">
-                    <h5>新增关注人数</h5>
-                    <h3>198</h3>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -133,10 +112,19 @@
         </div>
     </div>
 
-
 </div>
 
+<!--
+<script>
+    $(document).ready(function () {
 
+            $.getJSON('/Dashboard/ajax_dict/',function(data){
+                   $('#viewcal').html(data[0]+','+data[1]+','+data[2])
+            })
+
+    })
+</script>
+-->
 
 <!-- Main Flot library -->
 <script src="../static/back/vendors/bower_components/flot/jquery.flot.js"></script>
@@ -174,15 +162,25 @@
                 highlightLineColor: hLineColor
             });
         }
-    
+
+
+
+        //var myvalues = [10,8,5,7,4,4,1];
+
+        $.getJSON('/Dashboard/ajax_dict/',function(data){
+            var myvalues = [1,2,3,4,5];
+            return myvalues
+        })
+        
         // Function for Sparkline Bar Chart
         function sparklineBar(id, height, barWidth, barColor, barSpacing) {
-            $('.'+id).sparkline('html', {
+            $('.'+id).sparkline(myvalues, {
                 type: 'bar',
                 height: height,
                 barWidth: barWidth,
                 barColor: barColor,
-                barSpacing: barSpacing
+                barSpacing: barSpacing,
+                //value: myvalues
             })
         }
     
@@ -190,8 +188,10 @@
         //Past 7 days (Sparkline Bar Chart)
         if ($('.chart-sparkline-bar')[0]) {
             sparklineBar('chart-sparkline-bar', 55, 5, '#b4bfc3', 2);
+
         }
-    
+       // var myvalues = [10,8,5,7,4,4,1];
+        //$('.chart-sparkline-bar').sparkline(myvalues,{ type: 'bar' });
     
     });
 </script>

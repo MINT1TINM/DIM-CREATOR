@@ -1,33 +1,108 @@
 <html>
     <head>
-    <title>DIMCREATOR</title>
+    <title>DIM CREATOR</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/static/back/js/explorer-three.js"></script>
+    <script src="/static/back/js/three.min.js"></script>
     <script src="/static/back/js/Detector.js"></script>
     <script src="/static/back/js/OrbitControls.js"></script>
-    <script src="/static/back/js/OBJLoader.js"></script>
-    <script src="/static/back/js/MTLLoader.js"></script>
+    <script src="/static/back/js/FBXLoader.js"></script>
+    <script src="/static/back/js/inflate.min.js"></script>
+
+    <script src="/static/back/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/back/js/app.min.js"></script>
+
+    <link href="/static/back/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="/static/back/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+    
+    <link href="/static/back/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    
+    <link href="/static/back/css/app.css" rel="stylesheet">
+    <link href="/static/back/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <script src="/static/back/js/explorer-loader.js"></script>
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
     <style>
             body {
                 overflow: hidden;
                 margin: 0;
-                padding: 0;
                 background: linear-gradient(to bottom, rgb(27, 27, 27), rgb(83, 83, 83));
+                padding-bottom: 70px;
             }
     
             p {
                 margin: 0;
                 padding: 0;
             }
+
+            .container-ex {
+                width:100%;
+                padding-left:15px;
+                padding-right:15px;
+            }
+
+
+
     
     </style>
     </head>
-    <body>
+    <body style="height: 100%">
+
+        <div class="preloader preloader--xl preloader--light" id="loader">
+            <svg viewBox="25 25 50 50">
+                <circle cx="50" cy="50" r="20" />
+            </svg>
+        </div>
 
         
+       <!-- <div class="loader" id="loader" style="height:100%;width:100%;background-color:beige"><p id="progress"></p></div> -->
+
+        <nav class="navbar navbar-explorer navbar-fixed-bottom">
+            <div class="container-ex">
+                <button class="btn btn-default btn--icon hidden-xs" data-mae-action="fullscreen" ><i class="zmdi zmdi-fullscreen"></i></button>
+                <button class="btn btn-default btn--icon" onclick="reset()" ><i class="zmdi zmdi-refresh"></i></button>
+                <button class="btn btn-default btn--icon" onclick="tutorial();" ><i class="zmdi zmdi-help-outline"></i></button>
+                <button class="btn btn-default btn--icon pull-right" onclick="share()" ><i class="zmdi zmdi-share"></i></button>
+            </div>
+        </nav> 
+
+
+        
+
+        <script>
+            function tutorial(){
+                swal({
+                    showCloseButton: true,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    title: '操作指南',
+                    html:
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h3 style="color:#595959">环游</h3>鼠标左键  单指触摸</div>'+
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-zoom-in" style="font-size: 50px"></i></br>  <h3 style="color:#595959">缩放</h3>鼠标滚轮  双指触摸</div>'+
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-arrows" style="font-size: 50px"></i></br>  <h3 style="color:#595959">平移</h3> 鼠标中键  三指触摸</div>',                        
+                });
+            };
+            function share(){
+                swal({
+                    showCloseButton: true,
+                    title: "分享",
+                    html:                        
+                    '<div class="col-xs-12" style="margin-bottom: 10px;"><img src="../media/Warehouse/{{workid}}/qrcode.jpg" style="height: 200px;"></img></br>',
+                    confirmButtonText: "保存二维码"
+                }).then(function(){
+                    
+                        download('../media/Warehouse/{{workid}}/qrcode.jpg', 'qrcode'),
+                        "success"
+                    
+                });
+            };
+            function download(href, title) {
+                const a = document.createElement('a');
+                a.setAttribute('href', href);
+                a.setAttribute('download', title);
+                a.click();
+            }
+        </script>
         <script>
     
             if (!Detector.webgl) {
@@ -42,58 +117,102 @@
             var windowHalfX = window.innerWidth / 2;
             var windowHalfY = window.innerHeight / 2;
 
+            var target = new THREE.Vector3(0,0,0);
+
             init();
             animate();
+
+            /*explorer control*/
+            /*
+            function zoomin() {
+                camera.fov -= 5;
+                camera.updateProjectionMatrix();
+                renderer.render(scene, camera);
+            }
+
+            function zoomout() {
+                camera.fov += 5;
+                camera.updateProjectionMatrix();
+                renderer.render(scene, camera);
+            }
+            */
+            function reset(){
+                camera();
+                init();
+            }
+
+            function camera(){
+                /* Camera */
+                fov = 50;
+                camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
+                
+                // Place camera on x axis
+                camera.position.set({{px}},{{py}},{{pz}});
+                
+                // Place camera on y axis
+
+                camera.up = new THREE.Vector3(0,1,0);
+
+    
+            }
     
             function init() {
     
                 container = document.createElement('div');
                 document.body.appendChild(container);
     
-                /* Camera */
-                fov = 5;
-                camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
+
+
+                camera();
+
+				// model
+				var manager = new THREE.LoadingManager();
+				manager.onProgress = function( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+				var onProgress = function( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						var percentComplete = xhr.loaded / xhr.total * 100;
+                        console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+                        //document.getElementById("progress").innerHTML = '已加载' + Math.round( percentComplete, 2 ) + '%';
+                        if (percentComplete >= 100){
+                            var obj = document.getElementById("loader");
+                            obj.remove();
+
+
+                        }
+                        
+					}
+
+				};
+
+				var onError = function( xhr ) {
+
+					console.error( xhr );
+
+				};
+
+				var loader = new THREE.FBXLoader( manager );
+				loader.load( '../media/Warehouse/{{workid}}/fbx.fbx', function( object ) {
+
+                    scene.add( object );
+
+                    
+                }, onProgress, onError );
                 
-                // Place camera on x axis
-                //camera.position.set(30,0,0);
-                //camera.up = new THREE.Vector3(0,0,1);
-                camera.lookAt(new THREE.Vector3( {{cox}} , {{coy}} , {{coz}}));
-                
-                // Place camera on y axis
-                camera.position.set({{cax}},{{cay}},{{caz}});
-                camera.up = new THREE.Vector3(0,1,0);
-    
-
-    
-                /* Model */
-    
-                /*var mtlLoader = new THREE.MTLLoader();
-                mtlLoader.setBaseUrl('../media/Warehouse/{{workid}}/');
-                mtlLoader.setPath('../media/Warehouse/{{workid}}/');
-                mtlLoader.load('mtl.mtl', function (materials) {
-    
-                    materials.preload();
-
-    
-                });*/
-    
-                var objLoader = new THREE.OBJLoader();
-                   /* objLoader.setMaterials(materials);*/
-                    objLoader.setPath('../media/Warehouse/{{workid}}/');
-                    objLoader.load('obj.obj', function (object) {
-    
-                        scene.add(object);
-    
-                    });    
-
-
                 /* Scene */
     
                 scene = new THREE.Scene();
                 lighting = true;
 
                 hemiLight = new THREE.HemisphereLight(0x595959, 0xffffff , 1);
-                hemiLight.position.set(0,2*{{cay}},0);
+                hemiLight.position.set(0,-100000,0);
                 scene.add(hemiLight);
 
                 /*
@@ -111,6 +230,8 @@
                 backLight = new THREE.DirectionalLight(0xffffff, 0.8);
                 backLight.position.set(100, 0, -100).normalize();
 
+                */
+
                 /*LightHelper*/
                 /*
                 var keyLightHelper = new THREE.DirectionalLightHelper( keyLight );
@@ -121,19 +242,11 @@
 
                 var backLightHelper = new THREE.DirectionalLightHelper( backLight );
                 scene.add( backLightHelper );
-                */
-                
-                /* Model */
-    
-                /*var mtlLoader = new THREE.MTLLoader();
-                mtlLoader.setBaseUrl('../media/Warehouse/{{workid}}/');
-                mtlLoader.setPath('../media/Warehouse/{{workid}}/');
-                mtlLoader.load('mtl.mtl', function (materials) {
-    
-                    materials.preload();
 
                 */
 
+                var helper = new THREE.HemisphereLightHelper (hemiLight);
+                scene.add( helper );
 
 
                 /* Renderer */
@@ -145,12 +258,8 @@
     
                 container.appendChild(renderer.domElement);
     
-                /* Controls 
-                var cox = Number({{cox}});
-                var coy = Number({{coy}});
-                var coz = Number({{coz}});*/
+                /* Controls */
     
-                var target = new THREE.Vector3( {{cox}} , {{coy}} , {{coz}} );
                 controls = new THREE.OrbitControls(camera, renderer.domElement, target);
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.3;
@@ -175,12 +284,14 @@
                 renderer.setSize(window.innerWidth, window.innerHeight);
     
             }
-
+            
+            /*
             ambient.intensity = 0.25;
             scene.add(keyLight);
             scene.add(fillLight);
             scene.add(backLight);
-    
+            */
+
             function animate() {
     
                 requestAnimationFrame(animate);
