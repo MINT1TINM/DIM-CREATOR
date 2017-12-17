@@ -347,6 +347,8 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 				panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
 				panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
 
+				console.warn(position);
+
 			} else if ( scope.object instanceof THREE.OrthographicCamera ) {
 
 				// orthographic
@@ -360,7 +362,7 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 				scope.enablePan = false;
 
 			}
-
+			
 		};
 
 	}();
@@ -453,6 +455,8 @@ THREE.OrbitControls = function ( object, domElement ,target) {
 		rotateStart.copy( rotateEnd );
 
 		scope.update();
+		console.warn( rotateEnd);
+		
 
 	}
 
