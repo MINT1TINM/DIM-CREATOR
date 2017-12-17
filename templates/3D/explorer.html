@@ -147,13 +147,12 @@
                 camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
                 
                 // Place camera on x axis
-                //camera.position.set(30,0,0);
-                //camera.up = new THREE.Vector3(0,0,1);
-                camera.lookAt(new THREE.Vector3(0,0,0));
+                camera.position.set({{px}},{{py}},{{pz}});
                 
                 // Place camera on y axis
-                camera.position.set(50,50,50);
+
                 camera.up = new THREE.Vector3(0,1,0);
+
     
             }
     
@@ -162,6 +161,7 @@
                 container = document.createElement('div');
                 document.body.appendChild(container);
     
+
 
                 camera();
 
@@ -178,7 +178,8 @@
 					if ( xhr.lengthComputable ) {
 
 						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+                        console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
                         //document.getElementById("progress").innerHTML = '已加载' + Math.round( percentComplete, 2 ) + '%';
                         if (percentComplete >= 100){
                             var obj = document.getElementById("loader");
@@ -199,7 +200,10 @@
 
 				var loader = new THREE.FBXLoader( manager );
 				loader.load( '../media/Warehouse/{{workid}}/fbx.fbx', function( object ) {
-					scene.add( object );
+
+                    scene.add( object );
+
+                    
                 }, onProgress, onError );
                 
                 /* Scene */
@@ -243,7 +247,6 @@
 
                 var helper = new THREE.HemisphereLightHelper (hemiLight);
                 scene.add( helper );
-
 
 
                 /* Renderer */
