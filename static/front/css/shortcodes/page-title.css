@@ -16,7 +16,7 @@ Page title
 .page-title h1,
 .page-title h2,
 .page-title h3 {
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 .page-title span {

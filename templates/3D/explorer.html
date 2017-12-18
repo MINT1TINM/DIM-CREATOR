@@ -3,11 +3,7 @@
     <title>DIM CREATOR</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/static/back/js/three.min.js"></script>
-    <script src="/static/back/js/Detector.js"></script>
-    <script src="/static/back/js/OrbitControls.js"></script>
-    <script src="/static/back/js/FBXLoader.js"></script>
-    <script src="/static/back/js/inflate.min.js"></script>
+
 
     <script src="/static/back/vendors/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/static/back/js/app.min.js"></script>
@@ -19,21 +15,11 @@
     
     <link href="/static/back/css/app.css" rel="stylesheet">
     <link href="/static/back/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
-    <script src="/static/back/js/explorer-loader.js"></script>
-    <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
+    <script src="../static/3D/viewer.js"></script>
+    <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
+    <script src="../static/back/js/page-loader.js" ></script> 
     <style>
-            body {
-                overflow: hidden;
-                margin: 0;
-                background: linear-gradient(to bottom, rgb(27, 27, 27), rgb(83, 83, 83));
-                padding-bottom: 70px;
-            }
-    
-            p {
-                margin: 0;
-                padding: 0;
-            }
 
             .container-ex {
                 width:100%;
@@ -41,6 +27,10 @@
                 padding-right:15px;
             }
 
+            babylon {
+                width: 100%;
+                height: 100%;
+            }
 
 
     
@@ -48,12 +38,35 @@
     </head>
     <body style="height: 100%">
 
-        <div class="preloader preloader--xl preloader--light" id="loader">
-            <svg viewBox="25 25 50 50">
-                <circle cx="50" cy="50" r="20" />
-            </svg>
-        </div>
-
+        <babylon templates.loading-screen.location="#loading-screen" templates.loading-screen.html="" model="/static/1.babylon"></babylon>
+        <script language="Javascript">
+            document.oncontextmenu = function(){return false;}
+        </script>
+        <script id="loading-screen" type="text/x-babylon-viewer-template">
+            <style>
+              loading-screen {
+                  position: absolute;
+                  z-index: 100;
+                  opacity: 1;
+                  pointer-events: none;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  -webkit-transition: opacity 2s ease;
+                  -moz-transition: opacity 2s ease;
+                  transition: opacity 2s ease;
+              }
+            </style>
+      
+            <!-- Page Loader -->
+            <div id="page-loader">
+                    <div class="preloader preloader--xl preloader--light">
+                        <svg viewBox="25 25 50 50">
+                            <circle cx="50" cy="50" r="20" />
+                        </svg>
+                    </div>
+                </div>
+          </script>
         
        <!-- <div class="loader" id="loader" style="height:100%;width:100%;background-color:beige"><p id="progress"></p></div> -->
 
@@ -77,9 +90,9 @@
                     showConfirmButton: false,
                     title: '操作指南',
                     html:
-                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h3 style="color:#595959">环游</h3>鼠标左键  单指触摸</div>'+
-                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-zoom-in" style="font-size: 50px"></i></br>  <h3 style="color:#595959">缩放</h3>鼠标滚轮  双指触摸</div>'+
-                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-arrows" style="font-size: 50px"></i></br>  <h3 style="color:#595959">平移</h3> 鼠标中键  三指触摸</div>',                        
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h4 style="color:#595959">环游</h4>鼠标左键  单指触摸</div>'+
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-zoom-in" style="font-size: 50px"></i></br>  <h4 style="color:#595959">缩放</h4>鼠标滚轮  双指触摸</div>'+
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-arrows" style="font-size: 50px"></i></br>  <h4 style="color:#595959">平移</h4> 鼠标中键  三指触摸</div>',                        
                 });
             };
             function share(){
@@ -103,217 +116,17 @@
                 a.click();
             }
         </script>
-        <script>
-    
-            if (!Detector.webgl) {
-                Detector.addGetWebGLMessage();
-            }
-    
-            var container;
-    
-            var camera, controls, scene, renderer;
-            var lighting, ambient, keyLight, fillLight, backLight;
-    
-            var windowHalfX = window.innerWidth / 2;
-            var windowHalfY = window.innerHeight / 2;
-
-            var target = new THREE.Vector3(0,0,0);
-
-            init();
-            animate();
-
-            /*explorer control*/
-            /*
-            function zoomin() {
-                camera.fov -= 5;
-                camera.updateProjectionMatrix();
-                renderer.render(scene, camera);
-            }
-
-            function zoomout() {
-                camera.fov += 5;
-                camera.updateProjectionMatrix();
-                renderer.render(scene, camera);
-            }
-            */
-            function reset(){
-                camera();
-                init();
-            }
-
-            function camera(){
-                /* Camera */
-                fov = 50;
-                camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 1000);
-                
-                // Place camera on x axis
-                camera.position.set({{px}},{{py}},{{pz}});
-                
-                // Place camera on y axis
-
-                camera.up = new THREE.Vector3(0,1,0);
-
-    
-            }
-    
-            function init() {
-    
-                container = document.createElement('div');
-                document.body.appendChild(container);
-    
 
 
-                camera();
-
-				// model
-				var manager = new THREE.LoadingManager();
-				manager.onProgress = function( item, loaded, total ) {
-
-					console.log( item, loaded, total );
-
-				};
-
-				var onProgress = function( xhr ) {
-
-					if ( xhr.lengthComputable ) {
-
-						var percentComplete = xhr.loaded / xhr.total * 100;
-                        console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-
-                        //document.getElementById("progress").innerHTML = '已加载' + Math.round( percentComplete, 2 ) + '%';
-                        if (percentComplete >= 100){
-                            var obj = document.getElementById("loader");
-                            obj.remove();
 
 
-                        }
-                        
-					}
-
-				};
-
-				var onError = function( xhr ) {
-
-					console.error( xhr );
-
-				};
-
-				var loader = new THREE.FBXLoader( manager );
-				loader.load( '../media/Warehouse/{{workid}}/fbx.fbx', function( object ) {
-
-                    scene.add( object );
-
-                    
-                }, onProgress, onError );
-                
-                /* Scene */
-    
-                scene = new THREE.Scene();
-                lighting = true;
-
-                hemiLight = new THREE.HemisphereLight(0x595959, 0xffffff , 1);
-                hemiLight.position.set(0,-100000,0);
-                scene.add(hemiLight);
-
-                /*
-                
-                ambient = new THREE.AmbientLight(0xffffff, 1.0);
-                scene.add(ambient);
-    
-                keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0%, 60%)'), 0.5);
-                keyLight.position.set(-100, 100, 100);
-                keyLight.target = object;
-    
-                fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 0%, 60%)'), 0.5);
-                fillLight.position.set(100, 100, 100);
-    
-                backLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                backLight.position.set(100, 0, -100).normalize();
-
-                */
-
-                /*LightHelper*/
-                /*
-                var keyLightHelper = new THREE.DirectionalLightHelper( keyLight );
-                scene.add( keyLightHelper );
-    
-                var fillLightHelper = new THREE.DirectionalLightHelper( fillLight );
-                scene.add( fillLightHelper );
-
-                var backLightHelper = new THREE.DirectionalLightHelper( backLight );
-                scene.add( backLightHelper );
-
-                */
-
-                var helper = new THREE.HemisphereLightHelper (hemiLight);
-                scene.add( helper );
 
 
-                /* Renderer */
-                renderer = new THREE.WebGLRenderer({alpha: true});
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(window.innerWidth, window.innerHeight);
 
-                renderer.setClearColor(0x000000, 0.0);
-    
-                container.appendChild(renderer.domElement);
-    
-                /* Controls */
-    
-                controls = new THREE.OrbitControls(camera, renderer.domElement, target);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.3;
 
-                controls.enablePan = true;
-                controls.enableZoom = true;
-    
-                /* Events */
-    
-                window.addEventListener('resize', onWindowResize, false);
-    
-            }
-    
-            function onWindowResize() {
-    
-                windowHalfX = window.innerWidth / 2;
-                windowHalfY = window.innerHeight / 2;
-    
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-    
-                renderer.setSize(window.innerWidth, window.innerHeight);
-    
-            }
-            
-            /*
-            ambient.intensity = 0.25;
-            scene.add(keyLight);
-            scene.add(fillLight);
-            scene.add(backLight);
-            */
 
-            function animate() {
-    
-                requestAnimationFrame(animate);
-    
-                controls.update();
-    
-                render();
-    
-            }
-    
-            function render() {
-    
-                renderer.render(scene, camera);
-    
-            }
-            
-            function reset(){
-                window.location.reload();
-            }
-        </script>
-    
 
-    
+
+
     </body>
 </html>
