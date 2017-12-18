@@ -62,13 +62,13 @@ def warehouse(request):
             folderpath = './media/Warehouse/' + workid
             if not os.path.exists(folderpath): 
                 os.makedirs(folderpath)
-            fbxpath = "./media/Warehouse/" + workid + "/fbx.fbx"
-            fbx = open(fbxpath, 'wb')
+            modelpath = "./media/Warehouse/" + workid + "/model.babylon"
+            model = open(modelpath, 'wb')
             # obj.write(request.FILES["obj"].read())   不分块
-            f = request.FILES['fbx']
+            f = request.FILES['model']
             for chunk in f.chunks():      # 分块写入文件
-                fbx.write(chunk)
-            fbx.close()
+                model.write(chunk)
+            model.close()
 
             #计算物体中心并存入数据库
             """

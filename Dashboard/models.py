@@ -18,9 +18,6 @@ class Warehouse(models.Model):
     like = models.BigIntegerField(max_length=None)
     share = models.BigIntegerField(max_length=None)
 
-    px = models.IntegerField(max_length=None)
-    py = models.IntegerField(max_length=None)
-    pz = models.IntegerField(max_length=None)
     
 
 

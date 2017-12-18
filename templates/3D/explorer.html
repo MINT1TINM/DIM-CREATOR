@@ -18,7 +18,15 @@
 
     <script src="../static/3D/viewer.js"></script>
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
-    <script src="../static/back/js/page-loader.js" ></script> 
+
+
+    <script type='text/javascript' src='https://preview.babylonjs.com/oimo.js'></script>
+    <script type='text/javascript' src='https://preview.babylonjs.com/cannon.js'></script>
+    <script type='text/javascript' src='https://preview.babylonjs.com/babylon.js'></script>
+    <script type='text/javascript' src='https://preview.babylonjs.com/loaders/babylon.glTFFileLoader.js'></script>
+    <script type='text/javascript' src='https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js'></script>
+
+    <!--<script src="../static/back/js/page-loader.js" ></script> -->
     <style>
 
             .container-ex {
@@ -32,42 +40,76 @@
                 height: 100%;
             }
 
+            html, body, canvas {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            }
 
     
     </style>
     </head>
     <body style="height: 100%">
 
-        <babylon templates.loading-screen.location="#loading-screen" templates.loading-screen.html="" model="/static/1.babylon"></babylon>
+
+
+    
+        <canvas id='canvas'></canvas>
         <script language="Javascript">
-            document.oncontextmenu = function(){return false;}
+                document.oncontextmenu = function(){return false;}
+            </script>
+        <script type='text/javascript'>
+            var canvas = document.getElementById('canvas');
+            var engine = new BABYLON.Engine(canvas, true);
+            var newScene = new BABYLON.Scene(engine);
+
+            BABYLON.SceneLoader.Load('/media/Warehouse/{{workid}}/', 'model.babylon', engine, function (newScene) {
+    
+                // Attach camera to canvas inputs
+                if (!newScene.activeCamera || newScene.lights.length === 0) {
+                    newScene.createDefaultCameraOrLight(true);
+                    // Enable camera's behaviors
+                    newScene.activeCamera.useFramingBehavior = true;
+    
+                    var framingBehavior = newScene.activeCamera.getBehaviorByName('Framing');
+                    framingBehavior.framingTime = 0;
+                    framingBehavior.elevationReturnTime = -1;
+    
+                    if (newScene.meshes.length) {
+                        var worldExtends = newScene.getWorldExtends();
+                        newScene.activeCamera.lowerRadiusLimit = null;
+                        framingBehavior.zoomOnBoundingInfo(worldExtends.min, worldExtends.max);
+                    }
+    
+                    newScene.activeCamera.pinchPrecision = 200 / newScene.activeCamera.radius;
+                    newScene.activeCamera.upperRadiusLimit = 5 * newScene.activeCamera.radius;
+    
+                    newScene.activeCamera.wheelDeltaPercentage = 0.01;
+                    newScene.activeCamera.pinchDeltaPercentage = 0.01;
+                }
+    
+                newScene.activeCamera.attachControl(canvas);
+    
+                var keyboard = newScene.activeCamera.inputs.attached.keyboard;
+                keyboard.keysUp.push(87);
+                keyboard.keysDown.push(83);
+                keyboard.keysLeft.push(65);
+                keyboard.keysRight.push(68);
+    
+                engine.runRenderLoop(function() {
+                    newScene.render();
+                });
+    
+                window.addEventListener('resize', function () {
+                    engine.resize();
+                });
+    
+
+            });
         </script>
-        <script id="loading-screen" type="text/x-babylon-viewer-template">
-            <style>
-              loading-screen {
-                  position: absolute;
-                  z-index: 100;
-                  opacity: 1;
-                  pointer-events: none;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  -webkit-transition: opacity 2s ease;
-                  -moz-transition: opacity 2s ease;
-                  transition: opacity 2s ease;
-              }
-            </style>
-      
-            <!-- Page Loader -->
-            <div id="page-loader">
-                    <div class="preloader preloader--xl preloader--light">
-                        <svg viewBox="25 25 50 50">
-                            <circle cx="50" cy="50" r="20" />
-                        </svg>
-                    </div>
-                </div>
-          </script>
-        
+    
        <!-- <div class="loader" id="loader" style="height:100%;width:100%;background-color:beige"><p id="progress"></p></div> -->
 
         <nav class="navbar navbar-explorer navbar-fixed-bottom">
@@ -92,7 +134,7 @@
                     html:
                         '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h4 style="color:#595959">环游</h4>鼠标左键  单指触摸</div>'+
                         '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-zoom-in" style="font-size: 50px"></i></br>  <h4 style="color:#595959">缩放</h4>鼠标滚轮  双指触摸</div>'+
-                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-arrows" style="font-size: 50px"></i></br>  <h4 style="color:#595959">平移</h4> 鼠标中键  三指触摸</div>',                        
+                        '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-arrows" style="font-size: 50px"></i></br>  <h4 style="color:#595959">平移</h4> 鼠标右键  三指触摸</div>',                        
                 });
             };
             function share(){
