@@ -5,5 +5,5 @@ from views import *
 urlpatterns = [
     url(r'^editor.html$', editor),
     url(r'^explorer.html$',explorer),
-    url(r'^test.html$', test)
+    url(r'^explorer2.html$', explorer2)
 ]
