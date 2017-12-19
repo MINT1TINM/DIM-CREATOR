@@ -21,6 +21,5 @@ def explorer(request):
         return render(request, "3D/explorer.html",{"workid":workid,"title":title})
 
 def test(request):
-    workid = request.GET["workid"]
-    return render(request, "3D/test.html",{"workid":workid})
+    return render(request, "3D/test.html")
 
