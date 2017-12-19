@@ -19,11 +19,9 @@
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
 
-    <script type='text/javascript' src='/static/3D/js/oimo.js'></script>
-    <script type='text/javascript' src='/static/3D/js/cannon.js'></script>
-    <script type='text/javascript' src='/static/3D/js/babylon.min.js'></script>
-    <script type='text/javascript' src='/static/3D/js/glTFFileLoader.min.js'></script>
+    <script type='text/javascript' src='/static/3D/js/babylon.custom.js'></script>
     <script type='text/javascript' src='/static/3D/js/inspector.bundle.min.js'></script>
+    
 
     <style>
 
@@ -44,6 +42,7 @@
             padding: 0;
             margin: 0;
             overflow: hidden;
+            touch-action: none;  /*这行不能省！！！！！！！！！！！！！！！*/
             }
 
     
@@ -128,7 +127,7 @@
                     showCloseButton: true,
                     showCancelButton: false,
                     showConfirmButton: false,
-                    title: '操作指南',
+                    title: '操作向导',
                     html:
                         '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-3d-rotation" style="font-size: 50px"></i></br>  <h4 style="color:#595959">环游</h4>鼠标左键  单指触摸</div>'+
                         '<div class="col-xs-6" style="margin-bottom: 30px;"><i class="zmdi zmdi-zoom-in" style="font-size: 50px"></i></br>  <h4 style="color:#595959">缩放</h4>鼠标滚轮  双指触摸</div>'+

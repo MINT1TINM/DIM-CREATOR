@@ -1397,3 +1397,13 @@ Grid News Hover Rounded Category Style
     color: #e040fb;
     background-color: #fff;
 }
+
+.blog-section{
+    margin-top:40px;
+}
+@media( max-width: 768px){
+    .blog-section{
+        margin-top:0px;
+    }
+
+}
