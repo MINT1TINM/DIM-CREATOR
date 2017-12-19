@@ -14,10 +14,10 @@
 <div id="content__grid" data-columns>
 
 
-    <div class="card widget-past-days">
+    <div class="card widget-past-days animated fadeInUpBig">
 
         <div class="card__header">
-            <h2>概览<small>数据汇总</small></h2>
+            <h2>概览<small>今日数据汇总</small></h2>
 
         </div>        
         
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card animated fadeInUpBig">
             <div class="card__header">
                 <h2>项目排行 <small>看看哪些最受大家欢迎</small></h2>
             </div>
@@ -73,44 +73,39 @@
             </div>
     </div>
 
-    <div class="card widget-pie-grid">
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="92" data-pie-size="80">
-                <span class="chart-pie__value">92</span>
-            </div>
-            <div class="widget-pie-grid__title">二维码访问</div>
+                    <!-- Post -->
+    <div class="card animated fadeInUpBig">
+        <div class="card__header">
+            <h2>
+                最近新闻
+                <small>2017/12/17</small>
+            </h2>
         </div>
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="11" data-pie-size="80">
-                <span class="chart-pie__value">11</span>
-            </div>
-            <div class="widget-pie-grid__title">Email<br> Bounced</div>
+        <div class="card__header card__header--img" style="background-image: url(demo/img/note.png); height: 100px;"></div>
+
+        <div class="card__body">
+            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra </p>
+
+            <a href="" class="view-more text-left"><i class="zmdi zmdi-long-arrow-right"></i> 阅读全文</a>
         </div>
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="52" data-pie-size="80">
-                <span class="chart-pie__value">52</span>
-            </div>
-            <div class="widget-pie-grid__title">Email<br> Opened</div>
-        </div>
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="44" data-pie-size="80">
-                <span class="chart-pie__value">44</span>
-            </div>
-            <div class="widget-pie-grid__title">Storage<br>Remaining</div>
-        </div>
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="78" data-pie-size="80">
-                <span class="chart-pie__value">78</span>
-            </div>
-            <div class="widget-pie-grid__title">Web Page<br> Views</div>
-        </div>
-        <div class="col-xs-4 col-sm-6 col-md-4 widget-pie-grid__item">
-            <div class="chart-pie" data-percent="32" data-pie-size="80">
-                <span class="chart-pie__value">32</span>
-            </div>
-            <div class="widget-pie-grid__title">Server<br> Processing</div>
+
+        <div class="list-group">
+                {% for item in most_view_ware %}
+                <a href="/Dashboard/ware.html?workid={{item.workid}}" class="list-group-item media">
+                    <div class="pull-left">
+                        <img class="avatar-img" src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                    </div>
+
+                    <div class="media-body">
+                        <div class="list-group__heading">{{item.title}}</div>
+                        <div class="list-group__text">于{{item.opendate}}创建</div>
+                    </div>
+                </a>
+                {% endfor %}
+
         </div>
     </div>
+
 
 </div>
 

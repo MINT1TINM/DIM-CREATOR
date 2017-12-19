@@ -10,89 +10,24 @@
                     <div class="col-md-12">
                         <h2 class="white-text font-40 text-bold">维度 · 创意者</h2>
                     </div>
+                    <span class="sub-intro lead white-text">分享、发现、创造属于你的维度</span>
+                    {% if not request.session.username %}
+                      <a href="/User/login.html" class="btn btn-lg waves-effect waves-light mt-30">立即开始</a>
+                    {% endif %}
                 </div>
             </div>
         </section>
         <!--page title end-->
 
-        <section class="section-padding">
-          <div class="container">
 
-            <div class="text-center mb-80">
-                <h2 class="section-title text-uppercase">创造&查看3D内容，无论你在何处</h2>
-            </div>
 
-            <div class="row no-gutter">
-                <div class="col-md-3 col-sm-6">
-                    <div class="featured-box border-right text-center hover brand-hover">
-                      <div class="featured-wrapper">
-                        <div class="intro-header">
-                            <i class="material-icons brand-icon">&#xE53B;</i>
-                            <h2>跨平台</h2>
-                        </div>
 
-                        <div class="content">
-                          <p>支持一切移动设备或台式电脑在线查看、编辑</p>
-                        </div>
-                      </div><!-- /.featured-wrapper -->
-                    </div><!-- /.featured-box  -->
-                </div><!-- /.col-md-3 -->
 
-                <div class="col-md-3 col-sm-6">
-                    <div class="featured-box border-right text-center hover brand-hover">
-                      <div class="featured-wrapper">
-                        <div class="intro-header">
-                            <i class="material-icons brand-icon">&#xE2C3;</i>
-                            <h2>一步上传</h2>
-                        </div>
-
-                        <div class="content">
-                          <p>一键即可上传模型文件，DIM CREATOR将会自动读取与渲染。</p>
-                        </div>
-                      </div><!-- /.featured-wrapper -->
-                    </div><!-- /.featured-box  -->
-                </div><!-- /.col-md-3 -->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="featured-box border-right text-center hover brand-hover">
-                      <div class="featured-wrapper">
-                        <div class="intro-header">
-                            <i class="material-icons brand-icon">&#xE429;</i>
-                            <h2>自定义</h2>
-                        </div>
-
-                        <div class="content">
-                          <p>内置的编辑器使你能够在上传模型之后，继续添加材质，灯光。</p>
-                        </div>
-                      </div><!-- /.featured-wrapper -->
-                    </div><!-- /.featured-box  -->
-                </div><!-- /.col-md-3 -->                  
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="featured-box text-center hover brand-hover">
-                      <div class="featured-wrapper">
-                        <div class="intro-header">
-                            <i class="material-icons brand-icon">&#xE80D;</i>
-                            <h2>轻松分享</h2>
-                        </div>
-
-                        <div class="content">
-                          <p>添加至货架的模型将会自动生成一个二维码，扫描即可查看模型。</p>
-                        </div>
-                      </div><!-- /.featured-wrapper -->
-                    </div><!-- /.featured-box  -->
-                </div><!-- /.col-md-3 -->
-
-            </div><!-- /.row -->
-          </div><!-- /.container -->
-      </section>
-
-        <section class="section-padding gray-bg">
+        <section class="section-padding ">
             <div class="container">
               <div class="text-center mb-80">
-                <h2 class="section-title text-uppercase">最新发布</h2>
+                <h2 class="section-title text-uppercase">随时随地发掘3D内容</h2>
               </div>
-
 
               <div class="portfolio-container text-center">
 

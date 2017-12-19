@@ -8490,7 +8490,7 @@ p {
 }
 @media (max-width: 767px) {
   #main {
-    padding: 0;
+    padding: 10px;
   }
 }
 .content--boxed {
@@ -12717,7 +12717,7 @@ div.color-picker__value {
 }
 .swal2-modal .swal2-content {
   color: #777777;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
 }
 .swal2-modal .swal2-styled {

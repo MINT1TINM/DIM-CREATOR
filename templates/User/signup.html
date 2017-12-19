@@ -15,31 +15,29 @@
         <div class="login-wrapper">
           <div class="card-wrapper"></div>
           <div class="card-wrapper">
-            <h1 class="title">登录</h1>
-            <form role="form" method="post" action="/User/login.html">
-                {% csrf_token %}
-              <div class="input-container">
-                <input type="text" id="username" name="username" required="required" class="form-control" autocomplete="off" />
-                <label for="username">用户名</label>
-                <div class="bar"></div>
-              </div>
-              <div class="input-container">
-                <input type="password" id="password" name="password" required="required" class="form-control" autocomplete="off" />
-                <label for="password">密码</label>
-                <div class="bar"></div>
-              </div>
-              <h4 class="text-center"><b>{{notice}}</b></h4>
-              <div class="button-container">
-                <button type="submit" class="btn btn-lg btn-block waves-effect waves-light">登录</button>
-              </div>
-              <div class="footer">
-
-                  <a href="/User/signup.html">注册新账号</a>
-
-              
-              </div>
-
-            </form>
+              <h1 class="title" ><a href="/User/login.html"><i class="material-icons">&#xE5C4;</i></a> 注册</h1>
+              <form role="form" method="post" id="signup" name="signup" action="/User/signup.html">
+                    {% csrf_token %}
+                  <div class="input-container">
+                    <input type="text" id="newusername" name="newusername" required="required"/>
+                    <label for="newusername">用户名</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="input-container">
+                    <input type="password" id="newpassword" name="newpassword" required="required"/>
+                    <label for="newpassword">密码</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="input-container">
+                    <input type="password" id="repeat_password" name="repeat_password" required="required"/>
+                    <label for="repeat-password">确认密码</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="button-container">
+                    <button onclick="check()" class="btn btn-lg btn-block waves-effect ">注册</button>
+                  </div>
+              </form>
+  
           </div>
 
         </div>
