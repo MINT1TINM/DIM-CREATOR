@@ -16,17 +16,15 @@
     <link href="/static/back/css/app.css" rel="stylesheet">
     <link href="/static/back/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
 
-    <script src="../static/3D/viewer.js"></script>
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
 
-    <script type='text/javascript' src='https://preview.babylonjs.com/oimo.js'></script>
-    <script type='text/javascript' src='https://preview.babylonjs.com/cannon.js'></script>
-    <script type='text/javascript' src='https://preview.babylonjs.com/babylon.js'></script>
-    <script type='text/javascript' src='https://preview.babylonjs.com/loaders/babylon.glTFFileLoader.js'></script>
-    <script type='text/javascript' src='https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js'></script>
+    <script type='text/javascript' src='/static/3D/js/oimo.js'></script>
+    <script type='text/javascript' src='/static/3D/js/cannon.js'></script>
+    <script type='text/javascript' src='/static/3D/js/babylon.min.js'></script>
+    <script type='text/javascript' src='/static/3D/js/glTFFileLoader.min.js'></script>
+    <script type='text/javascript' src='/static/3D/js/inspector.bundle.min.js'></script>
 
-    <!--<script src="../static/back/js/page-loader.js" ></script> -->
     <style>
 
             .container-ex {
@@ -52,21 +50,18 @@
     </style>
     </head>
     <body style="height: 100%">
-
-
-
     
         <canvas id='canvas'></canvas>
         <script language="Javascript">
-                document.oncontextmenu = function(){return false;}
-            </script>
+            document.oncontextmenu = function(){return false;}
+        </script>
         <script type='text/javascript'>
             var canvas = document.getElementById('canvas');
             var engine = new BABYLON.Engine(canvas, true);
             var newScene = new BABYLON.Scene(engine);
 
             BABYLON.SceneLoader.Load('/media/Warehouse/{{workid}}/', 'model.babylon', engine, function (newScene) {
-    
+
                 // Attach camera to canvas inputs
                 if (!newScene.activeCamera || newScene.lights.length === 0) {
                     newScene.createDefaultCameraOrLight(true);
@@ -114,7 +109,7 @@
 
         <nav class="navbar navbar-explorer navbar-fixed-bottom">
             <div class="container-ex">
-                <button class="btn btn-default btn--icon hidden-xs" data-mae-action="fullscreen" ><i class="zmdi zmdi-fullscreen"></i></button>
+                <button class="btn btn-default btn--icon " data-mae-action="fullscreen" ><i class="zmdi zmdi-fullscreen"></i></button>
                 <button class="btn btn-default btn--icon" onclick="reset()" ><i class="zmdi zmdi-refresh"></i></button>
                 <button class="btn btn-default btn--icon" onclick="tutorial();" ><i class="zmdi zmdi-help-outline"></i></button>
                 <button class="btn btn-default btn--icon pull-right" onclick="share()" ><i class="zmdi zmdi-share"></i></button>
@@ -125,6 +120,9 @@
         
 
         <script>
+            function reset(){
+                window.location.reload();
+            }
             function tutorial(){
                 swal({
                     showCloseButton: true,
