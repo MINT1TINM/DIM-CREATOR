@@ -62,7 +62,7 @@ def warehouse(request):
             folderpath = '../media/Warehouse/' + workid
             if not os.path.exists(folderpath): 
                 os.makedirs(folderpath)
-            modelpath = "./media/Warehouse/" + workid + "/model.babylon"
+            modelpath = "../media/Warehouse/" + workid + "/model.babylon"
             model = open(modelpath, 'wb')
             # obj.write(request.FILES["obj"].read())   不分块
             f = request.FILES['model']
