@@ -20,3 +20,6 @@ def explorer(request):
     else:   
         return render(request, "3D/explorer.html",{"workid":workid,"title":title})
 
+def test(request):
+    return render(request, "3D/test.html")
+
