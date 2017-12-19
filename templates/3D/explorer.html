@@ -58,43 +58,14 @@
         <script type='text/javascript'>
             var canvas = document.getElementById('canvas');
             var engine = new BABYLON.Engine(canvas, true);
-            var newScene = new BABYLON.Scene(engine);
+            var scene = new BABYLON.Scene(engine);
 
-            BABYLON.SceneLoader.Load('/media/Warehouse/{{workid}}/', 'model.babylon', engine, function (newScene) {
+            BABYLON.SceneLoader.Load('/media/Warehouse/{{workid}}/', 'model.babylon', engine, function (scene) {
 
-                // Attach camera to canvas inputs
-                if (!newScene.activeCamera || newScene.lights.length === 0) {
-                    newScene.createDefaultCameraOrLight(true);
-                    // Enable camera's behaviors
-                    newScene.activeCamera.useFramingBehavior = true;
-    
-                    var framingBehavior = newScene.activeCamera.getBehaviorByName('Framing');
-                    framingBehavior.framingTime = 0;
-                    framingBehavior.elevationReturnTime = -1;
-    
-                    if (newScene.meshes.length) {
-                        var worldExtends = newScene.getWorldExtends();
-                        newScene.activeCamera.lowerRadiusLimit = null;
-                        framingBehavior.zoomOnBoundingInfo(worldExtends.min, worldExtends.max);
-                    }
-    
-                    newScene.activeCamera.pinchPrecision = 200 / newScene.activeCamera.radius;
-                    newScene.activeCamera.upperRadiusLimit = 5 * newScene.activeCamera.radius;
-    
-                    newScene.activeCamera.wheelDeltaPercentage = 0.01;
-                    newScene.activeCamera.pinchDeltaPercentage = 0.01;
-                }
-    
-                newScene.activeCamera.attachControl(canvas);
-    
-                var keyboard = newScene.activeCamera.inputs.attached.keyboard;
-                keyboard.keysUp.push(87);
-                keyboard.keysDown.push(83);
-                keyboard.keysLeft.push(65);
-                keyboard.keysRight.push(68);
+                scene.createDefaultCameraOrLight(true, true, true);
     
                 engine.runRenderLoop(function() {
-                    newScene.render();
+                    scene.render();
                 });
     
                 window.addEventListener('resize', function () {
