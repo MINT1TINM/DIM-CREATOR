@@ -1,166 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-        <title>Babylon.js sample code</title>
-        <!-- Babylon.js -->
-        <script src="https://www.babylonjs.com/hand.minified-1.2.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/oimo.js"></script>
-        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>BabylonJS Viewer - Basic usage</title>
         <style>
-            html, body {
-                overflow: hidden;
+            babylon {
+                max-width: 800px;
+                max-height: 500px;
                 width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
+                height: 600px;
             }
         </style>
     </head>
-<body>
-    <canvas id="renderCanvas"></canvas>
-    <script>
-        var canvas = document.getElementById("renderCanvas");
-        var engine = new BABYLON.Engine(canvas, true);
 
-        var createScene = function() {
-          var scene = new BABYLON.Scene(engine);
-        
-          // camera
-          var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-            camera.attachControl(canvas, true);
-        
-        	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-        	
-        	
-        	var corner = function (x, y) {
-        		return new BABYLON.Vector3(x, 0, y);
-        	}
-        	
-        	
-        	var wall = function(corner) {
-        		this.corner = corner;
-        	}
-        	
-        	var buildFromPlan = function(walls, ply, height, scene) {
-        	
-        		var outerData = [];
-        		var angle = 0;
-        		var direction = 0;
-        		var line = BABYLON.Vector3.Zero();
-        		walls[1].corner.subtractToRef(walls[0].corner, line);
-        		var nextLine = BABYLON.Vector3.Zero();
-        		walls[2].corner.subtractToRef(walls[1].corner, nextLine);
-        		var nbWalls = walls.length;
-        		for(var w = 0; w <= nbWalls; w++) {	
-        			angle = Math.acos(BABYLON.Vector3.Dot(line, nextLine)/(line.length() * nextLine.length()));
-        			direction = BABYLON.Vector3.Cross(nextLine, line).normalize().y;
-        			lineNormal = new BABYLON.Vector3(line.z, 0, -1 * line.x).normalize();
-        			line.normalize();
-        			outerData[(w + 1) % nbWalls] = walls[(w + 1) % nbWalls].corner.add(lineNormal.scale(ply)).add(line.scale(direction * ply/Math.tan(angle/2)));		
-        			line = nextLine.clone();		
-        			walls[(w + 3) % nbWalls].corner.subtractToRef(walls[(w + 2) % nbWalls].corner, nextLine);	
-        		}
-        	
-        		var positions = [];
-        		var indices = [];
-        	
-        		for(var w = 0; w < nbWalls; w++) {
-        			positions.push(walls[w].corner.x, walls[w].corner.y, walls[w].corner.z); // inner corners base
-        		}
-        	
-        		for(var w = 0; w < nbWalls; w++) {
-        			positions.push(outerData[w].x, outerData[w].y, outerData[w].z); // outer corners base
-        		}
-        	
-        		for(var w = 0; w <nbWalls; w++) {
-        			indices.push(w, (w + 1) % nbWalls, nbWalls + (w + 1) % nbWalls, w, nbWalls + (w + 1) % nbWalls, w + nbWalls); // base indices
-        		}
-        
-        		var currentLength = positions.length;  // inner and outer top corners
-        		for(var w = 0; w < currentLength/3; w++) {
-        			positions.push(positions[3*w]);
-        			positions.push(height);
-        			positions.push(positions[3*w + 2]);
-        		}
-        	
-        		currentLength = indices.length;
-        		for(var i = 0; i <currentLength/3; i++) {
-        			indices.push(indices[3*i + 2] + 2*nbWalls, indices[3*i + 1] + 2*nbWalls, indices[3*i] + 2*nbWalls ); // top indices
-        		}
-        	
-        		for(var w = 0; w <nbWalls; w++) {
-        			indices.push(w, w + 2 *nbWalls, (w + 1) % nbWalls + 2*nbWalls, w, (w + 1) % nbWalls + 2*nbWalls, (w + 1) % nbWalls); // inner wall indices
-        			indices.push((w + 1) % nbWalls + 3*nbWalls, w + 3 *nbWalls, w + nbWalls, (w + 1) % nbWalls + nbWalls, (w + 1) % nbWalls + 3*nbWalls, w + nbWalls); // outer wall indices
-        		}		
-        	
-        		var normals = [];
-        		var uvs = [];
-        	
-        		BABYLON.VertexData.ComputeNormals(positions, indices, normals);
-        		BABYLON.VertexData._ComputeSides(BABYLON.Mesh.FRONTSIDE, positions, indices, normals, uvs);
-        	
-        		
-        		//Create a custom mesh  
-        		var customMesh = new BABYLON.Mesh("custom", scene);
-        
-        		//Create a vertexData object
-        		var vertexData = new BABYLON.VertexData();
-        
-        		//Assign positions and indices to vertexData
-        		vertexData.positions = positions;
-        		vertexData.indices = indices;
-        		vertexData.normals = normals;
-        		vertexData.uvs = uvs;	
-        
-        		//Apply vertexData to custom mesh
-        		vertexData.applyToMesh(customMesh);
-        		
-        		return customMesh;
-        		
-        	}
-        	
-        	var baseData = [-5, 0, 5, 0, 5, 6, 2, 6, 2, 9, -5, 9];
-        	
-        	var corners = [];
-        	for(b = 0; b < baseData.length/2; b++) {
-        		corners.push(new corner(baseData[2*b], baseData[2*b + 1]));
-        	}
-        	
-        	var walls = [];
-        	for(c=0; c<corners.length; c++) {
-        		walls.push(new wall(corners[c]));
-        	}
-        	
-        	var ply = 0.3;
-        	var height = 5;
-        			  
-        	var build = buildFromPlan(walls, ply, height, scene)
-        	
-            return scene;
-        
-        }
-        
-        var scene = createScene()
+    <body>
+        <babylon model="https://playground.babylonjs.com/scenes/Rabbit.babylon"></babylon>
+        <script src="https://viewer.babylonjs.com/viewer.min.js"></script>
+    </body>
 
-        engine.runRenderLoop(function () {
-            scene.render();
-        });
-
-        // Resize
-        window.addEventListener("resize", function () {
-            engine.resize();
-        });
-    </script>
-</body>
 </html>
