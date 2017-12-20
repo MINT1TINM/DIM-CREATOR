@@ -20,8 +20,8 @@
     <link rel="shortcut icon" type="image/png" href="/static/favicon.ico"/>
 
 
-    <script type='text/javascript' src='/static/3D/js/babylon.custom.js'></script>
-    <script type='text/javascript' src='/static/3D/js/inspector.bundle.min.js'></script>
+    <script src="/static/3D/js/pep.js"></script>
+    <script src="/static/3D/js/babylon.custom.js"></script>
     
 
     <style>
@@ -43,7 +43,6 @@
             padding: 0;
             margin: 0;
             overflow: hidden;
-            touch-action: none;  /*这行不能省！！！！！！！！！！！！！！！*/
             }
 
     
@@ -51,7 +50,7 @@
     </head>
     <body style="height: 100%">
     
-        <canvas id='canvas'></canvas>
+        <canvas id='canvas' touch-action="none"></canvas>
         <script language="Javascript">
             document.oncontextmenu = function(){return false;}
         </script>
@@ -62,7 +61,14 @@
 
             BABYLON.SceneLoader.Load('/media/Warehouse/{{workid}}/', 'model.babylon', engine, function (scene) {
 
-                scene.createDefaultCameraOrLight(true, true, true);
+                scene.createDefaultCameraOrLight(true);
+                scene.activeCamera.attachControl(canvas)
+                scene.activeCamera.pinchPrecision = 200 / scene.activeCamera.radius;
+                scene.activeCamera.upperRadiusLimit = 5 * scene.activeCamera.radius;
+
+                scene.activeCamera.wheelDeltaPercentage = 0.005;
+                scene.activeCamera.pinchDeltaPercentage = 0.005;
+
     
                 engine.runRenderLoop(function() {
                     scene.render();
