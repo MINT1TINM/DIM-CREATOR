@@ -41,3 +41,14 @@ class Share_Product(models.Model):
     class Meta:
         managed = False
         db_table = 'share'        
+
+class News(models.Model):
+    id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    content = models.TextField()
+    publishdate = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'news'
