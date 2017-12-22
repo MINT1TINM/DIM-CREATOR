@@ -1,0 +1,97 @@
+{% extends 'homemaster.html' %}
+
+{% block content %}
+{% include 'homenav.html' %}
+
+<link href="../static/front/css/shortcodes/login.css" rel="stylesheet">
+
+<link href="../static/back/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="../static/back/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+
+
+<section class="section-padding banner-wrapper parallax-bg banner-login fullscreen-banner valign-wrapper overlay dark-5">
+    <div class="container">
+
+        <div class="login-wrapper">
+          <div class="card-wrapper"></div>
+          <div class="card-wrapper">
+              <h1 class="title" ><a href="/User/login.html"><i class="material-icons">&#xE5C4;</i></a> 注册</h1>
+              <form role="form" method="post" id="signup" name="signup" action="/User/signup.html">
+                    {% csrf_token %}
+                  <div class="input-container">
+                    <input type="text" id="newusername" name="newusername" required="required"/>
+                    <label for="newusername">用户名</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="input-container">
+                    <input type="password" id="newpassword" name="newpassword" required="required"/>
+                    <label for="newpassword">密码</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="input-container">
+                    <input type="password" id="repeat_password" name="repeat_password" required="required"/>
+                    <label for="repeat-password">确认密码</label>
+                    <div class="bar"></div>
+                  </div>
+                  <div class="button-container">
+                    <button onclick="check()" class="btn btn-lg btn-block waves-effect ">注册</button>
+                  </div>
+              </form>
+  
+          </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $('.toggle').on('click', function() {
+      $('.login-wrapper').stop().addClass('active');
+    });
+
+    $('.close').on('click', function() {
+      $('.login-wrapper').stop().removeClass('active');
+    });
+    function check(){ 
+      with(document.all){
+        if(document.forms.signup.newusername.value==''){
+          return false;
+        }
+        if(document.forms.signup.newpassword.value==''){
+          return false;
+        }
+        if(document.forms.signup.repeat_password.value==''){
+          return false;
+        }        
+
+        if(newpassword.value!=repeat_password.value){
+          swal(
+            "注册失败",
+            "两次密码输入不一致",
+            "warning"
+          )
+          newpassword.value = "";
+          repeat_password.value = "";
+        }
+        
+        else {
+          document.forms.signup.submit();
+        }
+
+      }
+      
+    }
+</script>
+
+
+
+
+
+
+
+<!-- Javascript Libraries -->
+
+<!-- jQuery -->
+
+{% endblock %}

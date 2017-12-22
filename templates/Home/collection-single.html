@@ -3,35 +3,23 @@
 {% block content %}
 {% include 'homenav2.html' %}
 
-        <!--page title start-->
-<section class="page-title ptb-50 hidden-xs">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>{{ware.title}}</h2>
-                    <ol class="breadcrumb">
-                        <li><a href="/Home/collection.html"  style="color:grey">陈列</a></li>
-                        <li class="active">详情</li>
-                    </ol>
-                </div>
-        </div>
-    </div>
-</section>
 
 <div class="visible-xs" style="margin-top: 46px">
-    <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 160px) ;border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
+    <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 130px) ;border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
 </div>  
     
 
-<section class="blog-section section-padding" style="padding-top:40px;">
+<section class="blog-section section-padding" style="padding-top:10px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                   <div class="posts-content single-post">
 
                     <article class="post-wrapper">
-
-                      <header class="entry-header-wrapper clearfix">
+                        <div class="embed-responsive embed-responsive-4by3 hidden-xs" >
+                            <iframe class="explorer" name="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
+                        </div>  
+                      <header class="entry-header-wrapper clearfix" style="padding-top:15px;padding-bottom:0px">
 
                         <div class="author-thumb waves-effect waves-light">
                           <a href="#"><img src="../../media/User/{{ware.username.id}}/head.jpg" alt=""></a>                
@@ -57,9 +45,7 @@
                         </div>
 
                       </header><!-- /.entry-header-wrapper -->
-                      <div class="embed-responsive embed-responsive-4by3 hidden-xs" >
-                            <iframe class="explorer" name="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
-                        </div>  
+
                     </br>
                        {% if ware.description != "NULL" %} 
                       <div class="entry-content">
@@ -84,9 +70,8 @@
 
                     </article><!-- /.post-wrapper -->
 
-                    <button class="btn btn-primary" style="padding: 1px 7px; height: 30px" onclick="reset()"> reset </button>
                     
-                    <div class="comments-wrapper"  style="margin-top: 100px ">
+                    <div class="comments-wrapper"  style="margin-top: 50px ">
                         <h2>{{comment_count}}条评论</h2>
                             {% if request.session.username %}
                             <div class="comments-tab">

@@ -2,7 +2,7 @@
 Standard blog
 -----------------------------------------------------------------*/
 .post-wrapper {
-	padding: 16px;
+	padding: 10px;
 	border: 1px solid #eee;
     background-color: #fff;
     -webkit-transition: all .25s;
@@ -547,7 +547,6 @@ Single Blog Post
 }
 .single-post .entry-header {
     overflow: hidden;
-    margin-bottom: 10px;
 }
 .single-post .author-thumb img{
     padding: 0;
@@ -1396,4 +1395,14 @@ Grid News Hover Rounded Category Style
 .grid-news-hover.rounded-category .posted-in a:hover {
     color: #e040fb;
     background-color: #fff;
+}
+
+.blog-section{
+    margin-top:40px;
+}
+@media( max-width: 768px){
+    .blog-section{
+        margin-top:0px;
+    }
+
 }
