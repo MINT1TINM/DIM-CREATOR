@@ -2,7 +2,7 @@
 Standard blog
 -----------------------------------------------------------------*/
 .post-wrapper {
-	padding: 5px;
+	padding: 10px;
 	border: 1px solid #eee;
     background-color: #fff;
     -webkit-transition: all .25s;

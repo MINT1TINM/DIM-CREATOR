@@ -4654,7 +4654,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-fixed-top {
-  top: 0;
+  top: 15px;
 }
 .navbar-fixed-bottom {
   bottom: 0;

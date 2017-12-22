@@ -30,11 +30,16 @@ def index(request):
         sharecal = Share_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
 
         ware = Warehouse.objects.filter( username = request.session["username"] , status=1 ).order_by('-view') 
-        paginator=Paginator(ware, 5) 
+        paginator = Paginator(ware, 5) 
         page = request.GET.get('page','1')
         most_view_ware = paginator.page(page)
 
-        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal, "most_view_ware":most_view_ware})
+        news = News.objects.all().order_by('-id')
+        paginator2 = Paginator(news, 5)
+        page2 = request.GET.get('page','1')
+        latest_news = paginator2.page(page2)
+
+        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal, "most_view_ware":most_view_ware,"latest_news":latest_news})
 
 def warehouse(request):
 
@@ -49,7 +54,7 @@ def warehouse(request):
             Warehouse.objects.create(username = User.objects.get(username = request.session["username"]),
                                  title = title,
                                  opendate = str(opendate.year) + '/' + str(opendate.month) + '/' + str(opendate.day),
-                                 description = "NULL",
+                                 description = "...",
                                  view = 0,
                                  like = 0,
                                  share = 0,

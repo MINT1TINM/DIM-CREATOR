@@ -90,7 +90,7 @@
         </div>
 
         <div class="list-group">
-                {% for item in most_view_ware %}
+                {% for item in latest_news %}
                 <a href="/Dashboard/ware.html?workid={{item.workid}}" class="list-group-item media">
                     <div class="pull-left">
                         <img class="avatar-img" src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
@@ -98,7 +98,7 @@
 
                     <div class="media-body">
                         <div class="list-group__heading">{{item.title}}</div>
-                        <div class="list-group__text">于{{item.opendate}}创建</div>
+                        <div class="list-group__text">于{{item.publishdate}}创建</div>
                     </div>
                 </a>
                 {% endfor %}
