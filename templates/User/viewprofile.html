@@ -9,6 +9,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="white-text font-40 text-bold">{{user.username}}  的主页</h2>
+                        <a class="btn btn-lg blue waves-effect waves-light mt-30"><i class="fa fa-plus"></i> 关注</a>
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                           <div role="tabpanel" class="tab-pane fade  active in" id="tab-1">
 
                                 <div class="portfolio-container text-center">
-                                        <div class="portfolio portfolio-with-title col-4 gutter mtb-20">
+                                        <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
                                             
                                         {%  for item in ware %}
                                                     <!-- item -->
@@ -73,11 +74,33 @@
                             
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab-2">
-                              <img class="alignleft" src="assets/img/busy_man.png" alt="">
-                              <p>Duis senectus mus condimentum nunc ac habitasse duis consectetur a arcu a accumsan cras et metus ultricies justo cum a bibendum. <a href="#">Egestas vestibulum blandit sem vestibulum curabitur</a> a vel aliquet gravida ullamcorper amet dictumst vestibulum a elementum proin id volutpat magna parturient. Id ac dui libero a ullamcorper euismod himenaeos a nam condimentum a adipiscing dapibus lobortis iaculis morbi.</p>
+                            <div class="widget widget_tt_popular_post">
+                                <div class="tt-popular-post">
 
-                              <p>Himenaeos a vestibulum morbi. <a href="#">Ullamcorper cras scelerisque</a> taciti lorem metus feugiat est lacinia facilisis id nam leo condimentum praesent id diam. Vestibulum amet porta odio elementum convallis parturient tempor tortor tempus a mi ad parturient ad nulla mus amet in penatibus nascetur at vulputate euismod a est tristique scelerisque. Aliquet facilisis nisl vel vestibulum dignissim gravida ullamcorper hac quisque ad at nisl egestas adipiscing vel blandit.</p>
-                          </div>
+    
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- latest post tab -->
+                                        <div id="tt-popular-post-tab1" class="tab-pane fade active in">
+    
+                                          <div class="media">
+                                            <a class="media-left" href="#">
+                                              <img src="/media/User/1/head.jpg" alt="">
+                                            </a>
+    
+                                            <div class="media-body">
+                                              <h3><a href="#">MINT</a></h3>
+                                              <p>INSLENS DESIGN 首席设计师</p>
+                                            </div> <!-- /.media-body -->
+                                          </div> <!-- /.media -->
+    
+
+    
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.tt-popular-post -->
+                              </div>                          </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab-3">
                               <img class="alignleft" src="assets/img/mission.png" alt="">
                               <p>Duis senectus mus condimentum nunc ac habitasse duis consectetur a arcu a accumsan cras et metus ultricies justo cum a bibendum. <a href="#">Egestas vestibulum blandit sem vestibulum curabitur</a> a vel aliquet gravida ullamcorper amet dictumst vestibulum a elementum proin id volutpat magna parturient. Id ac dui libero a ullamcorper euismod himenaeos a nam condimentum a adipiscing dapibus lobortis iaculis morbi.</p>
@@ -133,9 +156,11 @@
                                         <h2>{{user.username}}</h2>
                                         <span>{{user.job}}</span>
                                     </div>
-          
-                                    <p>{{user.description}}</p>
-          
+                                    <p>企业：{{user.company}}</p>
+                                    <p>网站：{{user.website}}</p>
+                                    <p>简介：{{user.description}}</p>
+                                    
+
                                 </div> <!-- /author-info-wrapper -->
                             </div><!-- /.widget_tt_author_widget -->
           
@@ -147,12 +172,11 @@
                         <div class="widget widget_categories">
                             <h3 class="widget-title">数据</h3>   
                             <ul>
-                              <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{view}}</li>
-                              <li><a href="#">Media</a></li>
-                              <li><a href="#">Video</a></li>
-                              <li><a href="#">Audio</a></li>
-                              <li><a href="#">Design</a></li>
-                              <li><a href="#">Material</a></li>
+                              <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{view}}  项目查看</li>
+                              <li><i class="fa fa-users"></i> &nbsp;&nbsp;{{view}}  关注者</li>
+                              <li><i class="fa fa-heart"></i> &nbsp;&nbsp;{{view}}  喜欢</li>
+                              <li><i class="fa fa-share"></i> &nbsp;&nbsp;{{view}}  分享</li>
+                              
                             </ul>
                         </div>
                     </div><!-- /.col-md-4 -->

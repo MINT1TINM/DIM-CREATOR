@@ -31,11 +31,11 @@
                           <div class="entry-meta">
                               <ul class="list-inline">
                                   <li>
-                                      <i class="fa fa-user"></i><a href="/User/viewprofile.html?id={{ware.username.id}}">{{ware.username.username}}</a>
-                                  </li>
-
-                                  <li>
                                       <i class="fa fa-clock-o"></i><a href="#">{{ware.opendate}}</a>
+                                  </li>                                  
+                                  <li>
+                                      <i class="fa fa-user"></i><a href="/User/viewprofile.html?id={{ware.username.id}}">{{ware.username.username}}</a>
+
                                   </li>
 
 
@@ -62,7 +62,15 @@
                         <ul class="list-inline right share-post">
                             
                             <li>
-                                <a class="waves-effect  btn-flat"><i class="fa fa-eye"></i><span>  {{ware.view}}</span></a>
+                                <a class="waves-effect  btn-flat"  style="float: left; " ><i class="fa fa-eye"></i></a><span style="float: right; line-height: 36px">&nbsp;{{ware.view}}</span>
+                            </li>
+
+                            <li>
+                                {% if liked %}
+                                    <a class="waves-effect btn-flat " style="float: left; color:crimson" id="like"><i class="fa fa-heart"></i></a><span id="like_count" style="float: right; line-height: 36px">&nbsp;{{ware.like}}</span>
+                                {% else %}
+                                    <a class="waves-effect btn-flat " style="float: left;" onclick="like()" id="like"><i class="fa fa-heart"></i></a><span id="like_count" style="float: right; line-height: 36px">&nbsp;{{ware.like}}</span>
+                                {% endif %}
                             </li>
 
                         </ul>
@@ -172,5 +180,23 @@
         </div><!-- /.container -->
     </section>
 
+<script type="text/javascript">
+    function like(){
+        $.ajax(
+            {
+                url: './like',
+                type: 'POST',
+                data: {workid: "{{ware.workid}}"},
+                dataType: 'json',
+                success: function(result) {
+                    if ( result.result == "post_success" ) {
+                        $("#like").html('<a class="waves-effect btn-flat " style="float: left; color:crimson" ><i class="fa fa-heart"></i></a>');
+                        $("#like_count").text(result.count)
+                    }
+                }                
+            }
+        );
+    }
 
+</script>
 {% endblock %}

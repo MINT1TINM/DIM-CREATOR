@@ -372,8 +372,8 @@ Popular/Rrecent Post Tab Widget
     border-bottom: 0;
 }
 .tt-popular-post .media img{
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
 }
 .tt-popular-post .media-body {

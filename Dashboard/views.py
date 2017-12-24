@@ -222,6 +222,3 @@ def shelf(request):
             ware = Warehouse.objects.filter( username = request.session["username"] ).order_by('-workid')        
             return render(request, "Dashboard/shelf.html",{"ware": ware , "count":count})
 
-def ajax_dict(request):
-    array = [1,2,3,4,5,6,7,8,9]
-    return HttpResponse(json.dumps(array), content_type='application/json')

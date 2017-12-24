@@ -37,18 +37,19 @@ def collectionsingle(request):
     comment_count = comment.count()
     ware.view +=1
     ware.save()
-
     if "username" not in request.session:            
         View_Product.objects.create(
             username = 'Tourist',
             workid = Warehouse.objects.get(workid = workid),
         )
     else: 
+        liked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
         View_Product.objects.create(
             username = User.objects.get(username = request.session["username"]).username,
             workid = Warehouse.objects.get(workid = workid),
         )
 
+    
     if ware.status == 1:
         if request.method == "POST":
             content = request.POST["comment"]
@@ -62,8 +63,7 @@ def collectionsingle(request):
 
             return HttpResponseRedirect('/Home/collection-single.html?workid=%s'%workid)
         else:
-
-            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count})
+            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count,"liked":liked})
     else:
         HttpResponseServerError()
 
@@ -106,6 +106,29 @@ def exploreresult(request):
 def about(request):
     return render(request, "Home/about.html")
 
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def like(request):
-    array = [1,2,3,4,5,6,7,8,9]
-    return HttpResponse(json.dumps(array), content_type='application/json')
+    if "username" not in request.session:            
+        return render(request, 'User/login.html')
+    else: 
+        workid = json.loads(request.POST["workid"])
+        ware = Warehouse.objects.get(workid=workid)        
+        liked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
+        if liked == 1:
+            like = {}
+            like["result"] = "fail"
+        else:
+            ware.like +=1
+            ware.save()
+            Like_Product.objects.create(
+                username = User.objects.get(username = request.session["username"]),
+                workid = Warehouse.objects.get(workid = workid),
+            )
+            like = {}
+            like["result"] = "post_success"
+            like["count"] = ware.like
+        return HttpResponse(json.dumps(like), content_type='application/json')
+    

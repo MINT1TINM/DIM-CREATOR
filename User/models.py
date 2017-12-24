@@ -18,6 +18,7 @@ class User(models.Model):
     count = models.IntegerField(blank=True, null=True)
     role = models.CharField(max_length=1, blank=True, null=True)
     description = models.CharField(max_length=10000)
+    website = models.CharField(max_length=255)
 
     class Meta:
         managed = False
