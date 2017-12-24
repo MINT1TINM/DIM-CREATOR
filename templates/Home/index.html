@@ -51,8 +51,10 @@
                           </div>
 
                           <div class="portfolio-title">
-                              <h4></a>{{item.title}}</h4>
-                              <p><a href="#">{{item.username.username}}</a> </p>
+                              <h5></a>{{item.title}}</h5>
+                              <p><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a> </p>
+                              <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
+
                           </div>
 
                         </div><!-- /.portfolio-wrapper -->

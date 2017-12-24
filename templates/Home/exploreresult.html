@@ -3,7 +3,7 @@
 {% block content %}
 {% include 'homenav2.html' %}
 
-<div class="full-width promo-box gray-bg mb-50">
+<div class="full-width promo-box gray-bg mb-20">
         <div class="container">
             <div class="col-md-12">
                 <form method="POST"  action="/Home/exploreresult.html" enctype="multipart/form-data">
@@ -20,18 +20,18 @@
         </div>
     </div>
 
-<section class="section-padding" style="padding: 50px 0; ">
+<section class="section-padding" style="padding-top: 20px">
         <div class="container">
  
           <div class="row">
             <div class="col-md-12">
-                <div class="round-tab text-center">
+                <div class="border-bottom-tab">
 
                   <!-- Nav tabs -->
-                  <ul class="nav nav-pills" role="tablist">
-                    <li role="presentation" class="active"><a href="#tab-22" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="true"> <i class="fa fa-folder"></i> 创意项目</a></li>
-                    <li role="presentation" class=""><a href="#tab-23" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false"> <i class="fa fa-user"></i> 创意者</a></li>
-                    <li role="presentation" class=""><a href="#tab-24" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false"> <i class="fa fa-file-text"></i> 博客</a></li>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#tab-22" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="true"> 创意项目</a></li>
+                    <li role="presentation" class=""><a href="#tab-23" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false">  创意者</a></li>
+                    <li role="presentation" class=""><a href="#tab-24" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false"> 博客</a></li>
                   </ul>
 
                   <!-- Tab panes -->
@@ -39,49 +39,53 @@
                     <div class="tab-content">
                       <div role="tabpanel" class="tab-pane fade active in" id="tab-22">
 
-                                    
-                            <div class="portfolio portfolio-with-title col-5 gutter mtb-50">
+                        <div class="portfolio-container text-center">
+                            <div class="portfolio portfolio-with-title col-5 gutter mtb-20">
                                 
                                 {%  for item in ware %}
+
+
                                                             <!-- item -->
                                     <div class="portfolio-item"> 
                                         <div class="portfolio-wrapper">
                                     
                                             <div class="thumb">
-                                                <div class="bg-overlay"></div>
-                                                <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
-                                    
-                                            <div class="portfolio-intro">
-                                                <div class="action-btn">
-                                                    <a href="#"> <i class="material-icons">&#xE8B6;</i></a>
+
+                                                <a href="/Home/collection-single.html?workid={{item.workid}}">
+                                                    <div class="bg-overlay"></div>
+                                                    <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                                                </a>
+                                                <div class="portfolio-intro">
+                                                    <div class="action-btn">
+                                                        <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                                    </div>
                                                 </div>
+                                    
                                             </div>
                                     
-                                        </div>
-                                    
-                                        <div class="portfolio-title">
-                                            <h2></a>{{item.title}}</h2>
-                                            <p><a href="#">{{item.username.username}}</a> </p>
-                                        </div>
-                                    
+                                            <div class="portfolio-title">
+                                                    <h5></a>{{item.title}}</h5>
+                                                    <p><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a> </p>
+                                                    <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
+                                            </div>
+                                        
                                         </div><!-- /.portfolio-wrapper -->
                                     </div><!-- /.portfolio-item -->
-                                                        <!-- item -->
                                                         
                                 {% endfor %}
                                     
-                                
+                            </div>
                                     
                                     
                                     
                                     
                                     
                                     
-                            </div><!-- portfolio-container -->
+                        </div><!-- portfolio-container -->
 
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab-23">
-                            <div class="portfolio portfolio-with-title col-5 gutter mtb-50">
+                            <div class="portfolio portfolio-with-title col-5 gutter mtb-20">
 
 
                                         {% for item in user %}

@@ -31,7 +31,7 @@
                           <div class="entry-meta">
                               <ul class="list-inline">
                                   <li>
-                                      <i class="fa fa-user"></i><a href="#">{{ware.username.username}}</a>
+                                      <i class="fa fa-user"></i><a href="/User/viewprofile.html?id={{ware.username.id}}">{{ware.username.username}}</a>
                                   </li>
 
                                   <li>
@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="media-body">
                                             <div class="comment-info">
-                                                <h4 class="author-name">{{item.username.username}}</h4>
+                                                <h4 class="author-name"><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a></h4>
         
                                                 <div class="comment-meta">
                                                     {{item.time}}

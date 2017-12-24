@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from DIMCREATOR.public_function import *
 from models import *
+from Dashboard.models import *
+from Home.models import *
+from django.db.models import Sum
 
 def login(request):
     if request.method == 'GET':
@@ -88,4 +91,8 @@ def profile(request):
 def viewprofile(request):
     id = request.GET["id"]
     user = User.objects.get(id = id)
-    return render(request, 'User/viewprofile.html',{"user":user})
+    ware = Warehouse.objects.filter(username = user.username).order_by('-workid')
+    view = Warehouse.objects.filter(username = user.username).aggregate(Sum('view'))
+    viewcal = view['view__sum']
+    
+    return render(request, 'User/viewprofile.html',{"user":user,"ware":ware,"view":viewcal})
