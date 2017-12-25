@@ -67,20 +67,6 @@ def collectionsingle(request):
     else:
         HttpResponseServerError()
 
-def like(request):
-    workid = request.GET["workid"]
-    if "username" not in request.session:            
-        Like_Product.objects.create(
-            username = 'Tourist',
-            workid = Warehouse.objects.get(workid = workid),
-        )
-    else: 
-        Like_Product.objects.create(
-            username = User.objects.get(username = request.session["username"]),
-            workid = Warehouse.objects.get(workid = workid),
-        )
-
-    return JsonResponse(ret) 
 
 def explore(request):
     return render(request, "Home/explore.html")
@@ -117,18 +103,22 @@ def like(request):
         workid = json.loads(request.POST["workid"])
         ware = Warehouse.objects.get(workid=workid)        
         liked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
-        if liked == 1:
+        if liked >= 1:
+            ware.like -= 1
+            ware.save()
+            delete_like = Like_Product.objects.get(workid = workid, username = request.session["username"])
+            delete_like.delete()
             like = {}
-            like["result"] = "fail"
-        else:
-            ware.like +=1
+            like["result"] = "unlike"
+        elif liked == 0:
+            ware.like += 1
             ware.save()
             Like_Product.objects.create(
                 username = User.objects.get(username = request.session["username"]),
                 workid = Warehouse.objects.get(workid = workid),
             )
             like = {}
-            like["result"] = "post_success"
-            like["count"] = ware.like
+            like["result"] = "like"
+        like["count"] = ware.like
         return HttpResponse(json.dumps(like), content_type='application/json')
     

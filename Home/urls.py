@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^about.html$', about),
     
     url(r'^like', Home.views.like, name='like'),    
-    
+        
 ]

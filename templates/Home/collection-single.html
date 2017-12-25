@@ -62,15 +62,23 @@
                         <ul class="list-inline right share-post">
                             
                             <li>
-                                <a class="waves-effect  btn-flat"  style="float: left; " ><i class="fa fa-eye"></i></a><span style="float: right; line-height: 36px">&nbsp;{{ware.view}}</span>
+                                <a class="waves-effect  btn-flat"  style="float: left; " ><i class="fa fa-eye"></i><span>&nbsp;{{ware.view}}</span></a>
                             </li>
 
                             <li>
+                                
                                 {% if liked %}
-                                    <a class="waves-effect btn-flat " style="float: left; color:crimson" id="like"><i class="fa fa-heart"></i></a><span id="like_count" style="float: right; line-height: 36px">&nbsp;{{ware.like}}</span>
+                                    <div id="like">
+                                        <a class="waves-effect btn-flat " style="color:crimson" onclick="like()"><i class="fa fa-heart"></i><span id="like_count">&nbsp;{{ware.like}}</span></a>
+                                    <div>
+                                    
                                 {% else %}
-                                    <a class="waves-effect btn-flat " style="float: left;" onclick="like()" id="like"><i class="fa fa-heart"></i></a><span id="like_count" style="float: right; line-height: 36px">&nbsp;{{ware.like}}</span>
+                                    <div id="like">
+                                        <a class="waves-effect btn-flat " onclick="like()"><i class="fa fa-heart"></i><span id="like_count">&nbsp;{{ware.like}}</span></a>
+                                    <div>
+                                    
                                 {% endif %}
+                                </div>
                             </li>
 
                         </ul>
@@ -189,14 +197,19 @@
                 data: {workid: "{{ware.workid}}"},
                 dataType: 'json',
                 success: function(result) {
-                    if ( result.result == "post_success" ) {
-                        $("#like").html('<a class="waves-effect btn-flat " style="float: left; color:crimson" ><i class="fa fa-heart"></i></a>');
-                        $("#like_count").text(result.count)
+                    if ( result.result == "like" ) {
+                        $("#like").html('<a class="waves-effect btn-flat " onclick="like()" style="color:crimson" ><i class="fa fa-heart"></i><span id="like_count" style="margin-left:5px">{{ware.like}}</span></a>');
                     }
+                    else{
+                        $("#like").html('<a class="waves-effect btn-flat " onclick="like()" ><i class="fa fa-heart"><span id="like_count"  style="margin-left:5px">{{ware.like}}</span></i></a>');
+                    }
+                    $("#like_count").text(result.count)
+                    
                 }                
             }
         );
     }
+
 
 </script>
 {% endblock %}
