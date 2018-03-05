@@ -67,7 +67,7 @@
 
                             <li>
                                 
-                                {% if liked %}
+                                {% if iliked %}
                                     <div id="like">
                                         <a class="waves-effect btn-flat " style="color:crimson" onclick="like()"><i class="fa fa-heart"></i><span id="like_count">&nbsp;{{ware.like}}</span></a>
                                     <div>
@@ -142,14 +142,6 @@
                       
                         </div>
 
-
-
-
-
-
-
-
-
                   </div><!-- /.posts-content -->
                 </div><!-- /.col-md-8 -->
 
@@ -163,7 +155,7 @@
                         <div class="author-info-wrapper">
 
                             <div class="author-cover">
-                                <img src="../static/front/img/blog/author-large-thumb.jpg" alt="">
+                                <img src="../../media/User/{{ware.username.id}}/thumb.jpg" alt="">
                             </div>
 
                             <div class="author-avatar">
@@ -209,7 +201,6 @@
             }
         );
     }
-
 
 </script>
 {% endblock %}

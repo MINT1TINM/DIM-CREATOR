@@ -37,18 +37,22 @@ def collectionsingle(request):
     comment_count = comment.count()
     ware.view +=1
     ware.save()
-    if "username" not in request.session:            
+    if "username" not in request.session: 
+        iliked = 0
         View_Product.objects.create(
             username = 'Tourist',
             workid = Warehouse.objects.get(workid = workid),
+            host = Warehouse.objects.get(workid = workid).username.username
         )
     else: 
-        liked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
+        iliked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
         View_Product.objects.create(
             username = User.objects.get(username = request.session["username"]).username,
             workid = Warehouse.objects.get(workid = workid),
+            host = Warehouse.objects.get(workid = workid).username.username
         )
 
+    liked = Like_Product.objects.filter(workid = workid).count()
     
     if ware.status == 1:
         if request.method == "POST":
@@ -58,12 +62,13 @@ def collectionsingle(request):
                 username = User.objects.get(username = request.session["username"]),
                 content = content,
                 time = str(time.year) + '/' + str(time.month) + '/' + str(time.day),
-                workid = Warehouse.objects.get(workid = workid)
+                workid = Warehouse.objects.get(workid = workid),
+                host = Warehouse.objects.get(workid = workid).username.username
             )      
 
             return HttpResponseRedirect('/Home/collection-single.html?workid=%s'%workid)
         else:
-            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count,"liked":liked})
+            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count,"iliked":iliked,"liked":liked})
     else:
         HttpResponseServerError()
 
@@ -116,6 +121,7 @@ def like(request):
             Like_Product.objects.create(
                 username = User.objects.get(username = request.session["username"]),
                 workid = Warehouse.objects.get(workid = workid),
+                host = Warehouse.objects.get(workid = workid).username.username
             )
             like = {}
             like["result"] = "like"

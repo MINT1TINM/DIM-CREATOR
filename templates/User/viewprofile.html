@@ -9,7 +9,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="white-text font-40 text-bold">{{user.username}}  的主页</h2>
-                        <a class="btn btn-lg blue waves-effect waves-light mt-30"><i class="fa fa-plus"></i> 关注</a>
+                        {% if followed %}
+                        <div id="follow">
+                            <a class="btn btn-lg red waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-times"></i> 取消关注</a>
+                        </div>
+                        {% else %}
+                        <div id="follow">
+                            <a class="btn btn-lg blue waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-plus"></i> 关注</a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -25,8 +33,9 @@
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#tab-1" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="false">全部项目</a></li>
-                        <li role="presentation" ><a href="#tab-2" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">关注者</a></li>
-                        <li role="presentation"><a href="#tab-3" role="tab" class="waves-effect waves-dark" data-toggle="tab">已关注</a></li>
+                        <li role="presentation" ><a href="#tab-2" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">喜欢的</a></li>                        
+                        <li role="presentation" ><a href="#tab-3" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">关注者</a></li>
+                        <li role="presentation"><a href="#tab-4" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">已关注</a></li>
                       </ul><div class="panel-group visible-xs" id="undefined-accordion"></div>
 
                       <!-- Tab panes -->
@@ -35,7 +44,7 @@
                           <div role="tabpanel" class="tab-pane fade  active in" id="tab-1">
 
                                 <div class="portfolio-container text-center">
-                                        <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
+                                    <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
                                             
                                         {%  for item in ware %}
                                                     <!-- item -->
@@ -67,13 +76,50 @@
                                                 
                                         {% endfor %}
                                 
-                                        </div>
                                     </div>
+                                </div>
 
 
                             
                           </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab-2">
+                        <div role="tabpanel" class="tab-pane fade" id="tab-2">
+                               <div class="portfolio-container text-center">
+                                    <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
+                                            
+                                        {%  for item in likedware %}
+                                                    <!-- item -->
+                                        <div class="portfolio-item"> 
+                                            <div class="portfolio-wrapper">
+                            
+                                            <div class="thumb">
+                                                    <a href="/Home/collection-single.html?workid={{item.workid.workid}}">
+                                                        <div class="bg-overlay"></div>
+                                                        <img src="../media/Warehouse/{{item.workid.workid}}/jpg.jpg" alt="">
+                                                    </a>                                                
+                                                <div class="portfolio-intro">
+                                                    <div class="action-btn">
+                                                        <a href="/Home/collection-single.html?workid={{item.workid.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                                    </div>
+                                                </div>
+                            
+                                            </div>
+                            
+                                            <div class="portfolio-title">
+                                                <h5></a>{{item.workid.title}}</h5>
+                                                <p><a href="/User/viewprofile.html?id={{item.workid.username.id}}">{{item.username.username}}</a> </p>
+                                                <p><i class="fa fa-eye"></i>  {{item.workid.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.workid.like}}</p>
+                                            </div>
+                            
+                                            </div><!-- /.portfolio-wrapper -->
+                                        </div><!-- /.portfolio-item -->
+                                       <!-- item -->
+                                                
+                                        {% endfor %}
+                                
+                                    </div>
+                                </div>                       
+                            </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab-3">
                             <div class="widget widget_tt_popular_post">
                                 <div class="tt-popular-post">
 
@@ -100,8 +146,9 @@
 
                                     </div>
                                 </div><!-- /.tt-popular-post -->
-                              </div>                          </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab-3">
+                              </div>                          
+                            </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab-4">
                               <img class="alignleft" src="assets/img/mission.png" alt="">
                               <p>Duis senectus mus condimentum nunc ac habitasse duis consectetur a arcu a accumsan cras et metus ultricies justo cum a bibendum. <a href="#">Egestas vestibulum blandit sem vestibulum curabitur</a> a vel aliquet gravida ullamcorper amet dictumst vestibulum a elementum proin id volutpat magna parturient. Id ac dui libero a ullamcorper euismod himenaeos a nam condimentum a adipiscing dapibus lobortis iaculis morbi.</p>
 
@@ -112,30 +159,6 @@
                       </div>
 
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                     <div class="col-md-4">
                         <div class="tt-sidebar-wrapper" role="complementary">
@@ -172,10 +195,10 @@
                         <div class="widget widget_categories">
                             <h3 class="widget-title">数据</h3>   
                             <ul>
-                              <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{view}}  项目查看</li>
-                              <li><i class="fa fa-users"></i> &nbsp;&nbsp;{{view}}  关注者</li>
-                              <li><i class="fa fa-heart"></i> &nbsp;&nbsp;{{view}}  喜欢</li>
-                              <li><i class="fa fa-share"></i> &nbsp;&nbsp;{{view}}  分享</li>
+                              <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{viewcal}}  项目查看</li>
+                              <li id="follow_count"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;{{user.follower}}  关注者</li>
+                              <li><i class="fa fa-heart"></i> &nbsp;&nbsp;{{likecal}}  喜欢</li>
+                              <li><i class="fa fa-share"></i> &nbsp;&nbsp;{{viewcal}}  分享</li>
                               
                             </ul>
                         </div>
@@ -183,12 +206,28 @@
                 </div>
             </div>
         </section>
-            
-                
-                
-                
-                
-                
-                
-        </div><!-- portfolio-container -->
+
+<script>
+    function follow(){
+        $.ajax(
+            {
+                url: './follow',
+                type: 'POST',
+                data: {toid: "{{user.id}}"},
+                dataType: 'json',
+                success: function(result) {
+                    if ( result.result == "follow" ) {
+                        $("#follow").html('<a class="btn btn-lg red waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-times"></i> 取消关注</a>');
+                    }
+                    else{
+                        $("#follow").html('<a class="btn btn-lg blue waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-plus"></i> 关注</a>');
+                    }
+                    $("#follow_count").text(result.count)
+                    
+                }                
+            }
+        );
+
+    }
+</script>
 {% endblock %}

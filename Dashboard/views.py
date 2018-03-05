@@ -28,6 +28,8 @@ def index(request):
         viewcal = View_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
         likecal = Like_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
         sharecal = Share_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
+        
+        newfollowercal = Follow.objects.filter(touser = request.session["username"], time__year=date.year , time__month=date.month , time__day=date.day).count()
 
         ware = Warehouse.objects.filter( username = request.session["username"] , status=1 ).order_by('-view') 
         paginator = Paginator(ware, 5) 
@@ -39,7 +41,7 @@ def index(request):
         page2 = request.GET.get('page','1')
         latest_news = paginator2.page(page2)
 
-        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal, "most_view_ware":most_view_ware,"latest_news":latest_news})
+        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal,"newfollowercal":newfollowercal,"most_view_ware":most_view_ware,"latest_news":latest_news})
 
 def warehouse(request):
 
@@ -177,12 +179,11 @@ def ware(request):
     if "username" not in request.session:            
         return render(request, 'User/login.html')
     else:   
+        date = datetime.datetime.now()
         workid = request.GET["workid"]
         ware = Warehouse.objects.get(workid=workid)
-        title = ware.title
-        opendate = ware.opendate
-        description = ware.description
-
+        today_view = View_Product.objects.filter(workid = workid, time__year=date.year , time__month=date.month , time__day=date.day).count()
+        today_like = Like_Product.objects.filter(workid = workid, time__year=date.year , time__month=date.month , time__day=date.day).count()
 
         if request.method == "POST":
             if request.POST.get('description'):
@@ -196,7 +197,7 @@ def ware(request):
             
             return HttpResponseRedirect('../Dashboard/ware.html?workid=%s'%workid)
         else:               
-            return render(request, "Dashboard/ware.html",{"workid":workid , "title":title , "opendate":opendate , "description":description})
+            return render(request, "Dashboard/ware.html",{"ware":ware,"today_view":today_view,"today_like":today_like})
 
 def shelf(request):
     if "username" not in request.session:            
