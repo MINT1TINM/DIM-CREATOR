@@ -1,0 +1,57 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<header class="content__header">
+    <h1>项目数据</h1>
+</header>
+<div class="card">
+
+    <div class="card__body">
+        <div class="tab">
+                <ul class="tab-nav">
+                    <li class="active"><a href="#tab-glance" data-toggle="tab">概览</a></li>
+                    <li><a href="#tab-detail" data-toggle="tab">详细</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-glance">
+                        <p>Morbi mattis ullamcorper velit. Etiam rhoncus. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Cras id dui. Curabitur turpis.
+Etiam ut purus mattis mauris sodales aliquam. Aenean viverra rhoncus pede. Nulla sit amet est. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi. Praesent ac sem eget est egestas volutpat.
+Cras varius. Morbi mollis tellus ac sapien. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Fusce vel dui.</p>
+                    </div>                    
+                    <div class="tab-pane" id="tab-detail">
+                            <div class="list-group list-group--striped">
+                                    <div class="list-group-item media">
+                                        <div class="pull-left">
+                                            <div class="avatar-char">P</div>
+                                        </div>
+                        
+                                        <div class="pull-right">
+                                            <div class="actions">
+                                                <div class="dropdown">
+                                                    <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+                        
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li><a href="">Refresh</a></li>
+                                                        <li><a href="">Listview Settings</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="media-body">
+                                            <div class="list-group__heading">Per an error perpetua, fierent fastidii recteque ad pro. Mei id brute intellegam</div>
+                                            <small class="list-group__text">Quisque non tortor ultricies, posuere elit id, lacinia purus curabitur.</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                    </div>
+
+                </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

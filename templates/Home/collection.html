@@ -39,9 +39,10 @@
                         <div class="portfolio-wrapper">
 
                           <div class="thumb">
-                              <div class="bg-overlay"></div>
-                              <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
-
+                                <a href="/Home/collection-single.html?workid={{item.workid}}">
+                                    <div class="bg-overlay"></div>
+                                    <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                                </a>
                               <div class="portfolio-intro">
                                 <div class="action-btn">
                                     <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
@@ -51,8 +52,8 @@
                           </div>
 
                           <div class="portfolio-title">
-                            <h4></a>{{item.title}}</h4>
-                            <p><a href="#">{{item.username.username}}</a> </p>
+                            <h5></a>{{item.title}}</h5>
+                            <p><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a> </p>
                             <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
                           </div>
 

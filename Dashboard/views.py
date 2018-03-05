@@ -28,13 +28,20 @@ def index(request):
         viewcal = View_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
         likecal = Like_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
         sharecal = Share_Product.objects.filter(workid__username = request.session["username"] , time__year=date.year , time__month=date.month , time__day=date.day).count()
+        
+        newfollowercal = Follow.objects.filter(touser = request.session["username"], time__year=date.year , time__month=date.month , time__day=date.day).count()
 
         ware = Warehouse.objects.filter( username = request.session["username"] , status=1 ).order_by('-view') 
-        paginator=Paginator(ware, 5) 
+        paginator = Paginator(ware, 5) 
         page = request.GET.get('page','1')
         most_view_ware = paginator.page(page)
 
-        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal, "most_view_ware":most_view_ware})
+        news = News.objects.all().order_by('-id')
+        paginator2 = Paginator(news, 5)
+        page2 = request.GET.get('page','1')
+        latest_news = paginator2.page(page2)
+
+        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal,"newfollowercal":newfollowercal,"most_view_ware":most_view_ware,"latest_news":latest_news})
 
 def warehouse(request):
 
@@ -49,7 +56,7 @@ def warehouse(request):
             Warehouse.objects.create(username = User.objects.get(username = request.session["username"]),
                                  title = title,
                                  opendate = str(opendate.year) + '/' + str(opendate.month) + '/' + str(opendate.day),
-                                 description = "NULL",
+                                 description = "...",
                                  view = 0,
                                  like = 0,
                                  share = 0,
@@ -172,12 +179,11 @@ def ware(request):
     if "username" not in request.session:            
         return render(request, 'User/login.html')
     else:   
+        date = datetime.datetime.now()
         workid = request.GET["workid"]
         ware = Warehouse.objects.get(workid=workid)
-        title = ware.title
-        opendate = ware.opendate
-        description = ware.description
-
+        today_view = View_Product.objects.filter(workid = workid, time__year=date.year , time__month=date.month , time__day=date.day).count()
+        today_like = Like_Product.objects.filter(workid = workid, time__year=date.year , time__month=date.month , time__day=date.day).count()
 
         if request.method == "POST":
             if request.POST.get('description'):
@@ -191,7 +197,7 @@ def ware(request):
             
             return HttpResponseRedirect('../Dashboard/ware.html?workid=%s'%workid)
         else:               
-            return render(request, "Dashboard/ware.html",{"workid":workid , "title":title , "opendate":opendate , "description":description})
+            return render(request, "Dashboard/ware.html",{"ware":ware,"today_view":today_view,"today_like":today_like})
 
 def shelf(request):
     if "username" not in request.session:            
@@ -217,6 +223,3 @@ def shelf(request):
             ware = Warehouse.objects.filter( username = request.session["username"] ).order_by('-workid')        
             return render(request, "Dashboard/shelf.html",{"ware": ware , "count":count})
 
-def ajax_dict(request):
-    array = [1,2,3,4,5,6,7,8,9]
-    return HttpResponse(json.dumps(array), content_type='application/json')

@@ -2,42 +2,43 @@
 
 {% block content %}
 <header class="content__header">
-    <h1>{{title}}</h1>
+    <h1>{{ware.title}}</h1>
         
 </header>
 <div class="col-sm-12">
     <div class="card animated fadeInUpBig">
         <div class="card__header card__header--highlight">
-                <h2>创建日期： {{opendate}}</h2>
+                <h2>创建日期： {{ware.opendate}}</h2>
                 <button class="btn btn--float animated zoomIn hidden-xs"  data-toggle="modal" data-target="#"><i class="zmdi zmdi-edit"></i></button>
                 
         </div>
         <div class="embed-responsive embed-responsive-16by9 hidden-xs">
-                <iframe class="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{workid}}"></iframe>
+                <iframe class="explorer" style="width:100% ;  border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
         </div>
         <div class="visible-xs">
-                <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 230px) ;border-width: 0px" src="/3D/explorer.html?workid={{workid}}"></iframe>
+                <iframe class="explorer" style="width:100% ;  height:calc(100vh - 40px - 230px) ;border-width: 0px" src="/3D/explorer.html?workid={{ware.workid}}"></iframe>
         </div>  
 
 
     </div>
 </div>
+
 <div class="col-sm-6">
-    <div class="card animated fadeInUpBig">
+    <div class="card animated fadeInUpBig"  style="height:220px">
         <div class="card__header card__header--highlight">
             <h2>项目名称</h2>
-            
+            <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#editTitle" ><i class="zmdi zmdi-edit"></i></button>
         </div>
 
         <div class="card__body">
                 
-            <p>{{title}}</p>
+            <p id="title">{{ware.title}}</p>
 
         </div>
     </div>
 </div>
 <div class="col-sm-6">
-    <div class="card animated fadeInUpBig">
+    <div class="card animated fadeInUpBig" style="height:220px">
         <div class="card__header card__header--highlight">
             <h2>项目简介</h2>
             <button class="btn btn--float animated zoomIn"  data-toggle="modal" data-target="#editDescription" ><i class="zmdi zmdi-edit"></i></button>
@@ -45,29 +46,101 @@
         </div>
 
         <div class="card__body">
-                {% ifequal description NULL %}
+                {% ifequal description "NULL" %} 
                         <p>未填写简介（可能导致商品难以被发现）</p>
                 {% else %}                        
-                        <p>{{description}}</p>
+                        <p id="description">{{ware.description}}</p>
                 {% endifequal %}
         </div>
     </div>
 </div>
+<div class="col-sm-6">
+        <div class="card animated fadeInUpBig">
+            <div class="card__header card__header--highlight">
+                <h2>{{ware.title}} 的今日概览</h2>
+                
+            </div>
+    
+            <div class="list-group list-group--striped">
+                    <div class="list-group-item">
+        
+                        <div class="widget-past-days__info">
+                            <h5>项目访问量</h5>
+                            <h3>{{today_view}}</h3>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="widget-past-days__info">
+                            <h5>点赞</h5>
+                            <h3>{{today_like}}</h3>
+                        </div>
+                    </div>
+        
+                    <div class="list-group-item">
+                        <div class="widget-past-days__info">
+                            <h5>分享</h5>
+                            <h3>1</h3>
+                        </div>
+                    </div>
+        
+        
+                </div>
+        </div>
+</div>
+<div class="col-sm-6">
+    <div class="card animated fadeInUpBig">
+            <div class="card__header card__header--highlight">
+                <h2>看客</h2>
+                
+            </div>
+            <div class="card__body">
+                    <div id="chart-pie" class="flot-chart flot-chart--lg"></div>
+                    <div class="flot-chart-legend flot-chart-legend--pie"></div>
+            </div>
 
+    </div>
+</div>
+<div class="modal fade" id="editTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                    
+            <div class="modal-header">
+                <h4 class="modal-title">项目名称</h4>
+            </div>
+                       <!--  <input type="text" id="delete_id" name="delete_id" style="display:none"> -->
+            <div class="modal-body">
+                <form class="edit-event__form" role="form" method="POST" action="" id="edit_title" enctype="multipart/form-data"> 
+                                    {% csrf_token %}                                
+                    <div class="form-group form-group--light ">
+                        <textarea class="form-control textarea-autosize"  name="title" id="title" style="overflow: hidden; word-wrap: break-word; height: 38px;">{{ware.title}}</textarea>
+                        <i class="form-group__bar"></i>
+                    </div>
+        
+                    <div class="modal-footer" id="modal-footer">
+                        <button id="close" type="button" class="btn btn-link" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-link" name="delete_Button">确定</button>
+                    </div>
+                                
+                </form>
+        
+            </div>
+        
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 <div class="modal fade" id="editDescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
                     
             <div class="modal-header">
-                <h4 class="modal-title">项目简介</h4>
+                <h4 class="modal-title">项目简介（140字以内）</h4>
             </div>
                        <!--  <input type="text" id="delete_id" name="delete_id" style="display:none"> -->
             <div class="modal-body">
-                <form class="edit-event__form" role="form" method="POST" action="" enctype="multipart/form-data"> 
+                <form class="edit-event__form" role="form" method="POST" action="" id="edit_description" enctype="multipart/form-data"> 
                                     {% csrf_token %}                                
-                                
                     <div class="form-group form-group--light ">
-                        <textarea class="form-control textarea-autosize"  name="description" id="description" style="overflow: hidden; word-wrap: break-word; height: 38px;">{{description}}</textarea>
+                        <textarea class="form-control textarea-autosize"  name="description" id="description" style="overflow: hidden; word-wrap: break-word; height: 80px;">{{ware.description}}</textarea>
                         <i class="form-group__bar"></i>
                     </div>
         
@@ -85,4 +158,50 @@
 </div><!-- /.modal -->
         
 <script src="../static/back/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+<!-- Main Flot library -->
+<script src="../static/back/vendors/bower_components/flot/jquery.flot.js"></script>
+
+<!-- Responsive charts -->
+<script src="../static/back/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+
+<!-- tooltips -->
+<script src="../static/back/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="../static/back/vendors/bower_components/flot/jquery.flot.pie.js"></script>
+
+<script>
+$(document).ready(function(){
+    // Make some sample data
+    var pieData = [
+        {data: 0.3, color: '#4caf50', label: '男'},
+        {data: 0.7, color: '#1e88e5', label: '女'},
+        {data: 0.1, color: '#edeff0', label: '未填写'}
+    ]
+    
+    // Pie Chart
+    if($('#chart-pie')[0]){
+        $.plot('#chart-pie', pieData, {
+            series: {
+                pie: {
+                    show: true,
+                    stroke: { 
+                        width: 0
+                    },
+                    label: {
+                    show: true,
+                    radius: 1,
+                    background: {
+                    opacity: 0
+                    }
+            }
+                }
+            },
+            legend: {
+                container: '.flot-chart-legend--pie',
+                noColumns: 5
+            }
+        });
+    }
+    
+});
+</script>
 {% endblock %}

@@ -37,18 +37,23 @@ def collectionsingle(request):
     comment_count = comment.count()
     ware.view +=1
     ware.save()
-
-    if "username" not in request.session:            
+    if "username" not in request.session: 
+        iliked = 0
         View_Product.objects.create(
             username = 'Tourist',
             workid = Warehouse.objects.get(workid = workid),
+            host = Warehouse.objects.get(workid = workid).username.username
         )
     else: 
+        iliked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
         View_Product.objects.create(
             username = User.objects.get(username = request.session["username"]).username,
             workid = Warehouse.objects.get(workid = workid),
+            host = Warehouse.objects.get(workid = workid).username.username
         )
 
+    liked = Like_Product.objects.filter(workid = workid).count()
+    
     if ware.status == 1:
         if request.method == "POST":
             content = request.POST["comment"]
@@ -57,30 +62,16 @@ def collectionsingle(request):
                 username = User.objects.get(username = request.session["username"]),
                 content = content,
                 time = str(time.year) + '/' + str(time.month) + '/' + str(time.day),
-                workid = Warehouse.objects.get(workid = workid)
+                workid = Warehouse.objects.get(workid = workid),
+                host = Warehouse.objects.get(workid = workid).username.username
             )      
 
             return HttpResponseRedirect('/Home/collection-single.html?workid=%s'%workid)
         else:
-
-            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count})
+            return render(request, "Home/collection-single.html" ,{"ware":ware,"comment":comment,"comment_count":comment_count,"iliked":iliked,"liked":liked})
     else:
         HttpResponseServerError()
 
-def like(request):
-    workid = request.GET["workid"]
-    if "username" not in request.session:            
-        Like_Product.objects.create(
-            username = 'Tourist',
-            workid = Warehouse.objects.get(workid = workid),
-        )
-    else: 
-        Like_Product.objects.create(
-            username = User.objects.get(username = request.session["username"]),
-            workid = Warehouse.objects.get(workid = workid),
-        )
-
-    return JsonResponse(ret) 
 
 def explore(request):
     return render(request, "Home/explore.html")
@@ -106,6 +97,34 @@ def exploreresult(request):
 def about(request):
     return render(request, "Home/about.html")
 
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
 def like(request):
-    array = [1,2,3,4,5,6,7,8,9]
-    return HttpResponse(json.dumps(array), content_type='application/json')
+    if "username" not in request.session:            
+        return render(request, 'User/login.html')
+    else: 
+        workid = json.loads(request.POST["workid"])
+        ware = Warehouse.objects.get(workid=workid)        
+        liked = Like_Product.objects.filter(workid = workid, username = request.session["username"]).count()
+        if liked >= 1:
+            ware.like -= 1
+            ware.save()
+            delete_like = Like_Product.objects.get(workid = workid, username = request.session["username"])
+            delete_like.delete()
+            like = {}
+            like["result"] = "unlike"
+        elif liked == 0:
+            ware.like += 1
+            ware.save()
+            Like_Product.objects.create(
+                username = User.objects.get(username = request.session["username"]),
+                workid = Warehouse.objects.get(workid = workid),
+                host = Warehouse.objects.get(workid = workid).username.username
+            )
+            like = {}
+            like["result"] = "like"
+        like["count"] = ware.like
+        return HttpResponse(json.dumps(like), content_type='application/json')
+    

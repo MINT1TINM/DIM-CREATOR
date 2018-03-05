@@ -31,11 +31,11 @@
                           <div class="entry-meta">
                               <ul class="list-inline">
                                   <li>
-                                      <i class="fa fa-user"></i><a href="#">{{ware.username.username}}</a>
-                                  </li>
-
-                                  <li>
                                       <i class="fa fa-clock-o"></i><a href="#">{{ware.opendate}}</a>
+                                  </li>                                  
+                                  <li>
+                                      <i class="fa fa-user"></i><a href="/User/viewprofile.html?id={{ware.username.id}}">{{ware.username.username}}</a>
+
                                   </li>
 
 
@@ -62,7 +62,23 @@
                         <ul class="list-inline right share-post">
                             
                             <li>
-                                <a class="waves-effect  btn-flat"><i class="fa fa-eye"></i><span>  {{ware.view}}</span></a>
+                                <a class="waves-effect  btn-flat"  style="float: left; " ><i class="fa fa-eye"></i><span>&nbsp;{{ware.view}}</span></a>
+                            </li>
+
+                            <li>
+                                
+                                {% if iliked %}
+                                    <div id="like">
+                                        <a class="waves-effect btn-flat " style="color:crimson" onclick="like()"><i class="fa fa-heart"></i><span id="like_count">&nbsp;{{ware.like}}</span></a>
+                                    <div>
+                                    
+                                {% else %}
+                                    <div id="like">
+                                        <a class="waves-effect btn-flat " onclick="like()"><i class="fa fa-heart"></i><span id="like_count">&nbsp;{{ware.like}}</span></a>
+                                    <div>
+                                    
+                                {% endif %}
+                                </div>
                             </li>
 
                         </ul>
@@ -106,7 +122,7 @@
                                         </div>
                                         <div class="media-body">
                                             <div class="comment-info">
-                                                <h4 class="author-name">{{item.username.username}}</h4>
+                                                <h4 class="author-name"><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a></h4>
         
                                                 <div class="comment-meta">
                                                     {{item.time}}
@@ -126,14 +142,6 @@
                       
                         </div>
 
-
-
-
-
-
-
-
-
                   </div><!-- /.posts-content -->
                 </div><!-- /.col-md-8 -->
 
@@ -147,7 +155,7 @@
                         <div class="author-info-wrapper">
 
                             <div class="author-cover">
-                                <img src="../static/front/img/blog/author-large-thumb.jpg" alt="">
+                                <img src="../../media/User/{{ware.username.id}}/thumb.jpg" alt="">
                             </div>
 
                             <div class="author-avatar">
@@ -172,5 +180,27 @@
         </div><!-- /.container -->
     </section>
 
+<script type="text/javascript">
+    function like(){
+        $.ajax(
+            {
+                url: './like',
+                type: 'POST',
+                data: {workid: "{{ware.workid}}"},
+                dataType: 'json',
+                success: function(result) {
+                    if ( result.result == "like" ) {
+                        $("#like").html('<a class="waves-effect btn-flat " onclick="like()" style="color:crimson" ><i class="fa fa-heart"></i><span id="like_count" style="margin-left:5px">{{ware.like}}</span></a>');
+                    }
+                    else{
+                        $("#like").html('<a class="waves-effect btn-flat " onclick="like()" ><i class="fa fa-heart"><span id="like_count"  style="margin-left:5px">{{ware.like}}</span></i></a>');
+                    }
+                    $("#like_count").text(result.count)
+                    
+                }                
+            }
+        );
+    }
 
+</script>
 {% endblock %}

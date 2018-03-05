@@ -128,7 +128,7 @@ Border Bottom Tab
         max-width: 100%;
     }
     .border-bottom-tab .panel-body {
-        padding: 30px;
+        padding: 0px;
     }
 }
 

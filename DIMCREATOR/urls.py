@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^Dashboard/', include('Dashboard.urls')),
     url(r'^3D/', include('3D.urls')),
     url(r'^Forum/', include('Forum.urls')),    
+    url(r'^Analysis/', include('Analysis.urls')),    
+    
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT },name='static'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT },name='media'),
 ]

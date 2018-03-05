@@ -1,21 +1,233 @@
-{% extends 'master.html' %}
+{% extends 'homemaster.html' %}
 
 {% block content %}
+{% include 'homenav.html' %}
 
-    <div class="content--boxed-sm">
-        <header class="content__header">
-            <h1>{{user.username}} </h1>
-        </header>
-
-        <div class="card profile">
-            <div class="profile__img">
-                <img src="../../media/User/{{user.id}}/head.jpg" alt="">
+        <!--page title start-->
+        <section class="page-title page-title-center cover-2 padding-top-220 padding-bottom-120 overlay purple-5 fixed-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="white-text font-40 text-bold">{{user.username}}  的主页</h2>
+                        {% if followed %}
+                        <div id="follow">
+                            <a class="btn btn-lg red waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-times"></i> 取消关注</a>
+                        </div>
+                        {% else %}
+                        <div id="follow">
+                            <a class="btn btn-lg blue waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-plus"></i> 关注</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
+        </section>
+        <!--page title end-->
 
-        </div>
+        <section class="section-padding" style="padding-top: 20px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="border-bottom-tab">
 
-        
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab-1" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="false">全部项目</a></li>
+                        <li role="presentation" ><a href="#tab-2" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">喜欢的</a></li>                        
+                        <li role="presentation" ><a href="#tab-3" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">关注者</a></li>
+                        <li role="presentation"><a href="#tab-4" role="tab" class="waves-effect waves-dark" data-toggle="tab" aria-expanded="true">已关注</a></li>
+                      </ul><div class="panel-group visible-xs" id="undefined-accordion"></div>
 
-    </div>
-    <script src="../static/back/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+                      <!-- Tab panes -->
+                      <div class="panel-body">
+                        <div class="tab-content">
+                          <div role="tabpanel" class="tab-pane fade  active in" id="tab-1">
+
+                                <div class="portfolio-container text-center">
+                                    <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
+                                            
+                                        {%  for item in ware %}
+                                                    <!-- item -->
+                                        <div class="portfolio-item"> 
+                                            <div class="portfolio-wrapper">
+                            
+                                            <div class="thumb">
+                                                    <a href="/Home/collection-single.html?workid={{item.workid}}">
+                                                        <div class="bg-overlay"></div>
+                                                        <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                                                    </a>                                                
+                                                <div class="portfolio-intro">
+                                                    <div class="action-btn">
+                                                        <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                                    </div>
+                                                </div>
+                            
+                                            </div>
+                            
+                                            <div class="portfolio-title">
+                                                <h5></a>{{item.title}}</h5>
+                                                <p><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a> </p>
+                                                <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
+                                            </div>
+                            
+                                            </div><!-- /.portfolio-wrapper -->
+                                        </div><!-- /.portfolio-item -->
+                                       <!-- item -->
+                                                
+                                        {% endfor %}
+                                
+                                    </div>
+                                </div>
+
+
+                            
+                          </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab-2">
+                               <div class="portfolio-container text-center">
+                                    <div class="portfolio portfolio-with-title col-3 gutter mtb-20">
+                                            
+                                        {%  for item in likedware %}
+                                                    <!-- item -->
+                                        <div class="portfolio-item"> 
+                                            <div class="portfolio-wrapper">
+                            
+                                            <div class="thumb">
+                                                    <a href="/Home/collection-single.html?workid={{item.workid.workid}}">
+                                                        <div class="bg-overlay"></div>
+                                                        <img src="../media/Warehouse/{{item.workid.workid}}/jpg.jpg" alt="">
+                                                    </a>                                                
+                                                <div class="portfolio-intro">
+                                                    <div class="action-btn">
+                                                        <a href="/Home/collection-single.html?workid={{item.workid.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
+                                                    </div>
+                                                </div>
+                            
+                                            </div>
+                            
+                                            <div class="portfolio-title">
+                                                <h5></a>{{item.workid.title}}</h5>
+                                                <p><a href="/User/viewprofile.html?id={{item.workid.username.id}}">{{item.username.username}}</a> </p>
+                                                <p><i class="fa fa-eye"></i>  {{item.workid.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.workid.like}}</p>
+                                            </div>
+                            
+                                            </div><!-- /.portfolio-wrapper -->
+                                        </div><!-- /.portfolio-item -->
+                                       <!-- item -->
+                                                
+                                        {% endfor %}
+                                
+                                    </div>
+                                </div>                       
+                            </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab-3">
+                            <div class="widget widget_tt_popular_post">
+                                <div class="tt-popular-post">
+
+    
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- latest post tab -->
+                                        <div id="tt-popular-post-tab1" class="tab-pane fade active in">
+    
+                                          <div class="media">
+                                            <a class="media-left" href="#">
+                                              <img src="/media/User/1/head.jpg" alt="">
+                                            </a>
+    
+                                            <div class="media-body">
+                                              <h3><a href="#">MINT</a></h3>
+                                              <p>INSLENS DESIGN 首席设计师</p>
+                                            </div> <!-- /.media-body -->
+                                          </div> <!-- /.media -->
+    
+
+    
+                                        </div>
+
+                                    </div>
+                                </div><!-- /.tt-popular-post -->
+                              </div>                          
+                            </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab-4">
+                              <img class="alignleft" src="assets/img/mission.png" alt="">
+                              <p>Duis senectus mus condimentum nunc ac habitasse duis consectetur a arcu a accumsan cras et metus ultricies justo cum a bibendum. <a href="#">Egestas vestibulum blandit sem vestibulum curabitur</a> a vel aliquet gravida ullamcorper amet dictumst vestibulum a elementum proin id volutpat magna parturient. Id ac dui libero a ullamcorper euismod himenaeos a nam condimentum a adipiscing dapibus lobortis iaculis morbi.</p>
+
+                              <p>Himenaeos a vestibulum morbi. <a href="#">Ullamcorper cras scelerisque</a> taciti lorem metus feugiat est lacinia facilisis id nam leo condimentum praesent id diam. Vestibulum amet porta odio elementum convallis parturient tempor tortor tempus a mi ad parturient ad nulla mus amet in penatibus nascetur at vulputate euismod a est tristique scelerisque. Aliquet facilisis nisl vel vestibulum dignissim gravida ullamcorper hac quisque ad at nisl egestas adipiscing vel blandit.</p>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="tt-sidebar-wrapper" role="complementary">
+          
+          
+          
+                            <div class="widget widget_tt_author_widget">
+          
+                                <div class="author-info-wrapper">
+          
+                                    <div class="author-cover">
+                                        <img src="../../media/User/{{user.id}}/thumb.jpg" alt="">
+                                    </div>
+          
+                                    <div class="author-avatar">
+                                        <img src="../../media/User/{{user.id}}/head.jpg" alt="">
+          
+                                        <h2>{{user.username}}</h2>
+                                        <span>{{user.job}}</span>
+                                    </div>
+                                    <p>企业：{{user.company}}</p>
+                                    <p>网站：{{user.website}}</p>
+                                    <p>简介：{{user.description}}</p>
+                                    
+
+                                </div> <!-- /author-info-wrapper -->
+                            </div><!-- /.widget_tt_author_widget -->
+          
+          
+          
+              
+                        </div><!-- /.tt-sidebar-wrapper -->
+
+                        <div class="widget widget_categories">
+                            <h3 class="widget-title">数据</h3>   
+                            <ul>
+                              <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{viewcal}}  项目查看</li>
+                              <li id="follow_count"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;{{user.follower}}  关注者</li>
+                              <li><i class="fa fa-heart"></i> &nbsp;&nbsp;{{likecal}}  喜欢</li>
+                              <li><i class="fa fa-share"></i> &nbsp;&nbsp;{{viewcal}}  分享</li>
+                              
+                            </ul>
+                        </div>
+                    </div><!-- /.col-md-4 -->
+                </div>
+            </div>
+        </section>
+
+<script>
+    function follow(){
+        $.ajax(
+            {
+                url: './follow',
+                type: 'POST',
+                data: {toid: "{{user.id}}"},
+                dataType: 'json',
+                success: function(result) {
+                    if ( result.result == "follow" ) {
+                        $("#follow").html('<a class="btn btn-lg red waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-times"></i> 取消关注</a>');
+                    }
+                    else{
+                        $("#follow").html('<a class="btn btn-lg blue waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-plus"></i> 关注</a>');
+                    }
+                    $("#follow_count").text(result.count)
+                    
+                }                
+            }
+        );
+
+    }
+</script>
 {% endblock %}
