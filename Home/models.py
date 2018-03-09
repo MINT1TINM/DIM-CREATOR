@@ -50,8 +50,9 @@ class Share_Product(models.Model):
 class News(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
+    author = models.ForeignKey(User, models.CASCADE, db_column='author', blank=True, null=True,to_field="username")
     content = models.TextField()
+    summary = models.TextField()
     publishdate = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -39,9 +39,10 @@ def index(request):
         news = News.objects.all().order_by('-id')
         paginator2 = Paginator(news, 5)
         page2 = request.GET.get('page','1')
-        latest_news = paginator2.page(page2)
+        news = paginator2.page(page2)
+        latest_new = News.objects.latest('id')
 
-        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal,"newfollowercal":newfollowercal,"most_view_ware":most_view_ware,"latest_news":latest_news})
+        return render(request, "Dashboard/index.html",{"now":now, "past":past, "viewcal":viewcal, "likecal":likecal, "sharecal":sharecal,"newfollowercal":newfollowercal,"most_view_ware":most_view_ware,"news":news,"latest_new":latest_new})
 
 def warehouse(request):
 
