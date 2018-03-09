@@ -78,27 +78,25 @@
         <div class="card__header">
             <h2>
                 最近新闻
-                <small>2017/12/17</small>
+                <small>{{latest_new.publishdate.year}}/{{latest_new.publishdate.month}}/{{latest_new.publishdate.day}}</small>
             </h2>
         </div>
-        <div class="card__header card__header--img" style="background-image: url(demo/img/note.png); height: 100px;"></div>
+        <div class="card__header card__header--img" style="background-image: url(../media/News/{{latest_new.id}}/title.jpg); height: 300px;"></div>
 
-        <div class="card__body">
-            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra </p>
-
-            <a href="" class="view-more text-left"><i class="zmdi zmdi-long-arrow-right"></i> 阅读全文</a>
+        <div class="card__body" style="padding-top:20px;">
+            <p>{{latest_new.summary}} </p>
         </div>
 
         <div class="list-group">
-                {% for item in latest_news %}
+                {% for item in news %}
                 <a href="/Dashboard/ware.html?workid={{item.workid}}" class="list-group-item media">
                     <div class="pull-left">
-                        <img class="avatar-img" src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                        <img class="avatar-img" src="../media/User/{{item.author.id}}/head.jpg" alt="">
                     </div>
 
                     <div class="media-body">
                         <div class="list-group__heading">{{item.title}}</div>
-                        <div class="list-group__text">于{{item.publishdate}}创建</div>
+                        <div class="list-group__text">于{{item.publishdate.year}}/{{item.publishdate.month}}/{{item.publishdate.day}}创建</div>
                     </div>
                 </a>
                 {% endfor %}
