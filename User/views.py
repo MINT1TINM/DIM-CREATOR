@@ -1,4 +1,7 @@
 # coding=utf-8
+import sys  
+reload(sys)  
+sys.setdefaultencoding('utf8')  
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from DIMCREATOR.public_function import *
