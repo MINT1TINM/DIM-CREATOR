@@ -196,7 +196,7 @@
                             <h3 class="widget-title">数据</h3>   
                             <ul>
                               <li><i class="fa fa-eye"></i> &nbsp;&nbsp;{{viewcal}}  项目查看</li>
-                              <li id="follow_count"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;{{user.follower}}  关注者</li>
+                                <li id="follow_count"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;{{user.follower}}  关注者</li>
                               <li><i class="fa fa-heart"></i> &nbsp;&nbsp;{{likecal}}  喜欢</li>
                               <li><i class="fa fa-share"></i> &nbsp;&nbsp;{{viewcal}}  分享</li>
                               
@@ -208,6 +208,12 @@
         </section>
 
 <script>
+    $(document).ready(function(){  
+        getdata()
+    });
+    function getdata(){
+        
+    };
     function follow(){
         $.ajax(
             {
@@ -218,12 +224,12 @@
                 success: function(result) {
                     if ( result.result == "follow" ) {
                         $("#follow").html('<a class="btn btn-lg red waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-times"></i> 取消关注</a>');
+
                     }
                     else{
                         $("#follow").html('<a class="btn btn-lg blue waves-effect waves-light mt-30" onclick="follow()"><i class="fa fa-plus"></i> 关注</a>');
                     }
-                    $("#follow_count").text(result.count)
-                    
+                    $("#follow_count").html('<li id="follow_count"><i class="fa fa-user"></i> &nbsp;&nbsp;&nbsp;' + result.count + '  关注者</li>')
                 }                
             }
         );

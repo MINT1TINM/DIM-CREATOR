@@ -97,20 +97,23 @@ def profile(request):
             return render(request, 'User/profile.html',{"user":user})
 
 def viewprofile(request):
-    id = request.GET["id"]
-    user = User.objects.get(id = id)    
-    ware = Warehouse.objects.filter(username = user.username).order_by('-workid')
-    likedware = Like_Product.objects.filter(username = user.username).order_by('-workid')
+    if "username" not in request.session:            
+        return render(request, 'User/login.html')
+    else: 
+        id = request.GET["id"]
+        user = User.objects.get(id = id)    
+        ware = Warehouse.objects.filter(username = user.username, status = 1).order_by('-workid')
+        likedware = Like_Product.objects.filter(username = user.username).order_by('-workid')
 
-    fromid = User.objects.get(username = request.session["username"]).id
-    likecal = Like_Product.objects.filter(host = user.username).count()
+        fromid = User.objects.get(username = request.session["username"]).id
+        likecal = Like_Product.objects.filter(host = user.username).count()
 
-    view = Warehouse.objects.filter(username = user.username).aggregate(Sum('view'))
-    viewcal = view['view__sum']
+        view = Warehouse.objects.filter(username = user.username).aggregate(Sum('view'))
+        viewcal = view['view__sum']
 
-    followed = Follow.objects.filter(fromuser = request.session["username"],touser = user.username).count()
+        followed = Follow.objects.filter(fromuser = request.session["username"],touser = user.username).count()
 
-    return render(request, 'User/viewprofile.html',{"user":user,"ware":ware,"viewcal":viewcal,"likecal":likecal, "likedware":likedware,"followed":followed})
+        return render(request, 'User/viewprofile.html',{"user":user,"ware":ware,"viewcal":viewcal,"likecal":likecal, "likedware":likedware,"followed":followed})
 
 from django.views.decorators.csrf import csrf_exempt
 
