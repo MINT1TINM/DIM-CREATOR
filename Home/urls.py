@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^exploreresult.html$', exploreresult),
     url(r'^about.html$', about),
     
-    url(r'^like', Home.views.like, name='like'),    
+    url(r'^like', Home.views.like, name='like'),
+    url(r'^comment', Home.views.comment, name='comment'),    
+    url(r'^exploreajax', Home.views.exploreajax, name='exploreajax'),    
         
 ]

@@ -1,134 +1,102 @@
-{% extends 'homemaster.html' %}
-
-{% block content %}
-{% include 'homenav2.html' %}
+{% extends 'homemaster.html' %} {% block content %} {% include 'homenav2.html' %}
 
 <div class="full-width promo-box gray-bg mb-20">
-        <div class="container">
-            <div class="col-md-12">
-                <form method="POST"  action="/Home/exploreresult.html" enctype="multipart/form-data">
-                    {% csrf_token %} 
-                    <div class="promo-info">
-                        <h2 class="text-uppercase text-bold">我们搜索到了一些东西，你可以继续探索...</h2>
-                        <input type="text" class="form-control" name="search" id="search" required="required" placeholder="输入以探索">
-                    </div>
-                    <div class="promo-btn">
-                        <button class="btn pink btn-lg waves-effect waves-light" type="submit"> <i class="fa fa-search"></i> 探索</button>                               
-                    </div>
-                </form>
-            </div>
+    <div class="container">
+        <div class="col-md-12">
+
+            <form onsubmit="return false" action="#">
+                <div class="promo-info">
+                    <h2 class="text-uppercase text-bold">我们搜索到了一些东西，你可以继续探索...</h2>
+                    <input type="text" name="explore" id="explore" required="required" placeholder="输入以探索">
+                </div>
+                <div class="promo-btn">
+                    <button class="btn pink btn-lg waves-effect waves-light" id="searchbutton">
+                        <i class="fa fa-search"></i> 探索</button>
+                </div>
+            </form>
+
+
         </div>
     </div>
+</div>
 
 <section class="section-padding" style="padding-top: 20px">
-        <div class="container">
- 
-          <div class="row">
+    <div class="container">
+
+        <div class="row">
             <div class="col-md-12">
-                <div class="border-bottom-tab">
 
-                  <!-- Nav tabs -->
-                  <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#tab-22" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="true"> 创意项目</a></li>
-                    <li role="presentation" class=""><a href="#tab-23" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false">  创意者</a></li>
-                    <li role="presentation" class=""><a href="#tab-24" class="waves-effect waves-light" role="tab" data-toggle="tab" aria-expanded="false"> 博客</a></li>
-                  </ul>
+                <div class="portfolio-container text-center">
+                    <div class="portfolio portfolio-with-title col-5 gutter mtb-20" id="itemexplore">
+                        {% for item in ware %}
+                        <!-- item -->
+                        <div class="portfolio-item" data-groups='["全部", "{{item.type}}"]'>
+                            <div class="portfolio-wrapper">
 
-                  <!-- Tab panes -->
-                  <div class="panel-body">
-                    <div class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade active in" id="tab-22">
+                                <div class="thumb">
+                                    <a href="/Home/collection-single.html?workid={{item.workid}}">
+                                        <div class="bg-overlay"></div>
+                                        <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
+                                    </a>
+                                    <div class="portfolio-intro">
+                                        <div class="action-btn">
+                                            <a href="/Home/collection-single.html?workid={{item.workid}}">
+                                                <i class="material-icons">&#xE8B6;</i>
+                                            </a>
+                                        </div>
+                                    </div>
 
-                        <div class="portfolio-container text-center">
-                            <div class="portfolio portfolio-with-title col-5 gutter mtb-20">
-                                
-                                {%  for item in ware %}
+                                </div>
 
+                                <div class="portfolio-title">
+                                    <h5>
+                                        </a>{{item.title}}</h5>
+                                    <p>
+                                        <a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-eye"></i> {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="fa fa-heart"></i> {{item.like}}</p>
+                                </div>
 
-                                                            <!-- item -->
-                                    <div class="portfolio-item"> 
-                                        <div class="portfolio-wrapper">
-                                    
-                                            <div class="thumb">
-
-                                                <a href="/Home/collection-single.html?workid={{item.workid}}">
-                                                    <div class="bg-overlay"></div>
-                                                    <img src="../media/Warehouse/{{item.workid}}/jpg.jpg" alt="">
-                                                </a>
-                                                <div class="portfolio-intro">
-                                                    <div class="action-btn">
-                                                        <a href="/Home/collection-single.html?workid={{item.workid}}"> <i class="material-icons">&#xE8B6;</i></a>
-                                                    </div>
-                                                </div>
-                                    
-                                            </div>
-                                    
-                                            <div class="portfolio-title">
-                                                    <h5></a>{{item.title}}</h5>
-                                                    <p><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a> </p>
-                                                    <p><i class="fa fa-eye"></i>  {{item.view}}&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  {{item.like}}</p>
-                                            </div>
-                                        
-                                        </div><!-- /.portfolio-wrapper -->
-                                    </div><!-- /.portfolio-item -->
-                                                        
-                                {% endfor %}
-                                    
                             </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                        </div><!-- portfolio-container -->
-
+                            <!-- /.portfolio-wrapper -->
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab-23">
-                            <div class="portfolio portfolio-with-title col-5 gutter mtb-20">
-
-
-                                        {% for item in user %}
-                                        <div class="portfolio-item"> 
-                                                <div class="portfolio-wrapper">
-                                            
-                                                    <div class="thumb">
-                                                        <div class="bg-overlay"></div>
-                                                        <img src="../media/User/{{ item.id }}/head.jpg" alt="">
-                                                        
-                                                    
-                                                    <div class="portfolio-intro">
-                                                        <div class="action-btn">
-                                                            <a href="#"> <i class="material-icons">&#xE8B6;</i></a>
-                                                        </div>
-                                                    </div>
-                                            
-                                                </div>
-                                            
-                                                <div class="portfolio-title">
-                                                    <h2></a>{{item.username}}</h2>
-                                                    <p><a href="#">{{item.job}}</a> </p>
-                                                </div>
-                                            
-                                                </div><!-- /.portfolio-wrapper -->
-                                        </div><!-- /.portfolio-item -->
-                                        {% endfor %}
-                               
-                            </div><!-- /.row -->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab-24">
-                            <p>这里什么都没有</p>
-                        </div>
+                        <!-- /.portfolio-item -->
+                        <!-- item -->
+                        {% endfor %}
                     </div>
-                  </div>
-                  
-                </div><!-- /.border-bottom-tab -->
+                </div>
+                <!-- portfolio-container -->
 
-            </div><!-- /.col-md-12 -->
-          </div><!-- /.row -->
+            </div>
+            <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
 
-          <hr>
+        <hr>
 
-        </div><!-- /.container -->
+    </div>
+    <!-- /.container -->
 </section>
-{% endblock %}
+
+
+
+<script type="text/javascript">
+    $("#searchbutton").click(function () {
+        var explorecontent = $("#explore").val()
+        $.ajax({
+            url: './exploreajax',
+            type: 'POST',
+            data: { explorecontent: explorecontent },
+            dataType: 'json',
+            success: function (result) {
+                $('#itemexplore').html("")
+                $.each(result, function (index, ware) {
+                    $('#itemexplore').append('<div class="portfolio-item"> <div class="portfolio-wrapper"><div class="thumb"><a href="/Home/collection-single.html?workid=' + ware.pk + '"><div class="bg-overlay"></div><img src="../media/Warehouse/' + ware.pk + '/jpg.jpg" alt=""></a><div class="portfolio-intro"><div class="action-btn"><a href="/Home/collection-single.html?workid=' + ware.pk + '"> <i class="material-icons">&#xE8B6;</i></a></div></div></div><div class="portfolio-title"><h5></a>' + ware.fields.title + '</h5><p><a href="/User/viewprofile.html?id={{item.username.id}}">' + ware.fields.username + '</a> </p><p><i class="fa fa-eye"></i>  ' + ware.fields.view + '&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-heart"></i>  ' + ware.fields.like + '</p></div></div></div>');
+                })
+
+            }
+        })
+    })
+</script> {% endblock %}

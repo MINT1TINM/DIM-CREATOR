@@ -94,23 +94,31 @@
                       
                                 <div class="comment-respond">
                       
-                                    <form action="" method="post" id="commentform" novalidate="" role="form">
-                                        {% csrf_token %}
-                      
+                                    <form action="#" onsubmit="return false" id="commentform">                      
                                         <div class="form-group comment-form-comment">
-                                            <textarea class="form-control" id="comment" name="comment" placeholder="填写评论" rows="8" aria-required="true"></textarea>
+                                            <textarea class="form-control" id="commentarea" name="comment" placeholder="填写评论" rows="8" aria-required="true"></textarea>
                                         </div>
                       
                                         <div class="form-submit">
-                                            <button class="btn btn-lg pink waves-effect waves-light" name="submit" type="submit" id="submit" value="">评论</button>
+                                            <button class="btn btn-lg pink waves-effect waves-light" name="submit" type="submit" id="commentsubmit" value="">评论</button>
                                         </div>
                                     </form>
                       
                                 </div>
                                                   
                             </div><!-- /.comments-tab -->
+                            {% else %}
+                            <div class="comments-tab">
+                      
+                                <div class="comment-respond">
+                      
+                                    <p><a href="/User/login.html">登录</a> & <a href="/User/signup.html">注册</a> 以撰写评论</p>
+                      
+                                </div>
+                                                  
+                            </div><!-- /.comments-tab -->                            
                             {% endif %}
-                            <ul class="media-list comment-list mt-30">
+                            <ul class="media-list comment-list mt-30" id="commentlist">
                                     {% for item in comment %}
                                       <!-- Comment Item start-->
                                     <li class="media">
@@ -125,7 +133,7 @@
                                                 <h4 class="author-name"><a href="/User/viewprofile.html?id={{item.username.id}}">{{item.username.username}}</a></h4>
         
                                                 <div class="comment-meta">
-                                                    {{item.time}}
+                                                    {{item.time|date:"Y/m/d H:i:s"}}
                                                 </div>
                                             </div>
         
@@ -200,7 +208,23 @@
                 }                
             }
         );
-    }
+    };
 
+    $("#commentsubmit").click(function (){
+        var comment = $('#commentarea').val()
+        $.ajax(
+            {
+                url: './comment',
+                type: 'POST',
+                data: {comment: comment, workid: "{{ware.workid}}"},
+                dataType: 'json',
+                success: function(result){
+                    $("#commentlist").prepend('<li class="media"><div class="media-left"><a href="#"><img class="avatar" src="../../media/User/'+result.userid+'/head.jpg"></a></div><div class="media-body"><div class="comment-info"><h4 class="author-name"><a href="/User/viewprofile.html?id='+result.userid+'">'+ result.username +'</a></h4><div class="comment-meta">'+ result.time +'</div></div><p>'+ result.comment +'</p></div></li>');
+                    $('#commentarea').val("")
+                }
+            }
+        )
+    }
+    )
 </script>
 {% endblock %}

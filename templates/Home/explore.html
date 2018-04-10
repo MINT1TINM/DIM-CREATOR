@@ -15,20 +15,20 @@
                     <span class="tt-words-wrapper">
                         <b class="is-visible">创意项目</b>
                         <b>创意者</b>
-                        <b>博客</b>
+                        <b>创意活动</b>
                     </span>
                 </h1>
 
             </div>
             <div class="promo-box gray-bg mb-50">
 
-                <form method="POST" action="/Home/exploreresult.html" enctype="multipart/form-data">
+                <form method="POST" action="exploreresult.html" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="promo-info">
-                        <input type="text" class="form-control" name="search" id="explore" required="required" placeholder="输入以探索">
+                        <input type="text" class="form-control" name="explorecontent" id="explore" required="required" placeholder="输入以探索">
                     </div>
                     <div class="promo-btn">
-                        <button class="btn pink btn-lg waves-effect waves-light" type="submit" style="width:100%">
+                        <button class="btn pink btn-lg waves-effect waves-light" id="searchbutton" type="submit" style="width:100%">
                             <i class="fa fa-search"></i> 探索</button>
                     </div>
                 </form>
@@ -46,18 +46,4 @@
 </section>
 <!-- Hero Section End -->
 
-<script type="text/javascript">
-    function explore() {
-        var explorecontent = document.getElementById('explore').value
-        $.ajax({
-            url: './exploreresult',
-            type: 'POST',
-            data: { explorecontent: explorecontent },
-            dataType: 'json',
-            success:function(result){
-                window.location.href = '/Home/exploreresult.html';
-            }
-        })
-    }
-</script> 
 {% endblock %}
